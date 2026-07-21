@@ -1,0 +1,20 @@
+build/
+.gradle/
+.kotlin/
+.idea/
+local.properties
+*.apk
+*.iml
+.DS_Store
+
+# Archive de travail (site aspire par l'utilisateur, dump brut) et dossier de photos sources
+# non traitees -- volumineux, non necessaires au depot (seules les photos retenues dans
+# app/src/main/assets/catalog_photos/ sont embarquees avec l'app).
+/Sources infos WCF/
+/photos/
+/images/
+
+# Base SQLite locale utilisee par les tests manuels du scraper (celle du workflow CI
+# est generee/committee automatiquement par .github/workflows/scrape.yml)
+scripts/*.sqlite3
+!scripts/wcf_news.sqlite3

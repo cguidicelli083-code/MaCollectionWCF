@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Auto Backup (Google Drive, lié au compte Google) — API < 31.
+  On sauvegarde uniquement la base Room (collection, souhaits, fiches perso) et les préférences.
+  Les PHOTOS (domaine "file") sont volontairement EXCLUES : trop lourdes pour Auto Backup
+  (limite ~25 Mo) et déjà couvertes par la sauvegarde .zip manuelle.
+-->
+<full-backup-content>
+    <include domain="database" path="." />
+    <include domain="sharedpref" path="." />
+</full-backup-content>

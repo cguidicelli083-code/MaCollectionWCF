@@ -1,0 +1,34 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Fond sombre (thème de l'app). -->
+    <path
+        android:fillColor="#15102B"
+        android:pathData="M0,0h108v108H0z" />
+
+    <!-- Capsule gashapon générique (jouet en capsule) : demi-sphère haute rouge... -->
+    <path
+        android:fillColor="#E6483C"
+        android:pathData="M28,54 a26,26 0 0 1 52,0 z" />
+    <!-- ...et demi-sphère basse crème, séparées par une fine ligne. -->
+    <path
+        android:fillColor="#F2E9D8"
+        android:pathData="M28,54 a26,26 0 0 0 52,0 z" />
+    <path
+        android:fillColor="#15102B"
+        android:pathData="M28,53 h52 v2 h-52 z" />
+
+    <!-- Reflet (brillance) sur la capsule. -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:fillAlpha="0.55"
+        android:pathData="M37,44 a5,7 0 1 1 -0.2,0 z" />
+
+    <!-- Petit socle d'exposition sous la capsule (évoque une figurine sur présentoir). -->
+    <path
+        android:fillColor="#8A7CD8"
+        android:pathData="M38,84 h32 a4,4 0 0 1 4,4 v4 h-40 v-4 a4,4 0 0 1 4,-4 z" />
+</vector>

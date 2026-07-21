@@ -1,0 +1,8 @@
+<resources>
+    <!-- Thème système sombre (évite le flash blanc au lancement) ; l'UI réelle est gérée par Compose. -->
+    <style name="Theme.MaCollectionWcf" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@color/deep_bg</item>
+        <item name="android:statusBarColor">@color/deep_bg</item>
+        <item name="android:navigationBarColor">@color/deep_bg</item>
+    </style>
+</resources>
