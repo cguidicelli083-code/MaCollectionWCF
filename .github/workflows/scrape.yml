@@ -46,5 +46,17 @@ jobs:
             echo "Aucune nouveaute WCF, rien a committer."
           else
             git commit -m "chore: mise a jour automatique des nouveautes WCF"
-            git push
+            # rebase avant push : si main a avance entre-temps (ex. push manuel concurrent),
+            # evite un rejet non-fast-forward plutot que de faire echouer le job pour ca.
+            pushed=false
+            for attempt in 1 2 3; do
+              if git push; then
+                pushed=true
+                break
+              fi
+              echo "Push rejete (tentative $attempt/3), rebase sur origin/main et nouvel essai..."
+              git fetch origin main
+              git rebase origin/main
+            done
+            $pushed || { echo "Echec du push apres 3 tentatives."; exit 1; }
           fi
