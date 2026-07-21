@@ -19,6 +19,8 @@ private data class TranslationDto(
 private data class WcfNewsDto(
     val id: String,
     val series: String,
+    /** Voir `classify_licence()` dans le scraper — nom d'enum Kotlin `Licence` ou "AUTRE". */
+    val licence: String?,
     val characters: List<String>?,
     val releaseDateRaw: String?,
     val priceRaw: String?,
@@ -60,6 +62,7 @@ object NewsRepository {
             WcfNewsEntry(
                 id = it.id,
                 series = it.series,
+                licence = it.licence?.let { name -> runCatching { Licence.valueOf(name) }.getOrNull() } ?: Licence.AUTRE,
                 characters = (it.characters ?: emptyList()).joinToString("|"),
                 releaseDateRaw = it.releaseDateRaw ?: "",
                 priceRaw = it.priceRaw ?: "",

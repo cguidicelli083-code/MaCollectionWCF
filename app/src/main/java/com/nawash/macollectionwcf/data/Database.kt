@@ -242,9 +242,16 @@ private val MIGRATION_6_7 = object : Migration(6, 7) {
     }
 }
 
+/** Ajoute [WcfNewsEntry.licence] (filtre par licence, onglet Actu) — aucune table recréée, aucune perte de données. */
+private val MIGRATION_7_8 = object : Migration(7, 8) {
+    override fun migrate(db: SupportSQLiteDatabase) {
+        db.execSQL("ALTER TABLE `wcf_news` ADD COLUMN `licence` TEXT NOT NULL DEFAULT 'AUTRE'")
+    }
+}
+
 @Database(
     entities = [CollectionItem::class, PriceHistory::class, ItemPhoto::class, CustomFigurePreset::class, PresetPhotoOverride::class, FigureCatalogEntry::class, WcfNewsEntry::class],
-    version = 7,
+    version = 8,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
@@ -266,7 +273,7 @@ abstract class AppDatabase : RoomDatabase() {
                 AppDatabase::class.java,
                 "macollectionwcf.db"
             )
-                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7)
+                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8)
                 .fallbackToDestructiveMigration()
                 .build().also { instance = it }
         }

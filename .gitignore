@@ -18,3 +18,4 @@ local.properties
 # est generee/committee automatiquement par .github/workflows/scrape.yml)
 scripts/*.sqlite3
 !scripts/wcf_news.sqlite3
+scripts/__pycache__/

@@ -20,17 +20,22 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.nawash.macollectionwcf.data.Licence
 import com.nawash.macollectionwcf.data.WcfNewsEntry
 import com.nawash.macollectionwcf.ui.theme.NeonCyan
 import com.nawash.macollectionwcf.ui.theme.NeonPurple
@@ -90,12 +95,41 @@ fun ActuScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
         return
     }
 
-    LazyColumn(
-        modifier = modifier.fillMaxSize(),
-        contentPadding = androidx.compose.foundation.layout.PaddingValues(12.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
-    ) {
-        items(news, key = { it.id }) { entry -> NewsCard(entry) }
+    var licenceFilter by remember { mutableStateOf<Licence?>(null) }
+    val availableLicences = remember(news) {
+        news.map { it.licence }.distinct().sortedBy { it.label }
+    }
+    val filtered = remember(news, licenceFilter) {
+        if (licenceFilter == null) news else news.filter { it.licence == licenceFilter }
+    }
+
+    Column(modifier.fillMaxSize()) {
+        ThemedChoiceDropdown(
+            leading = "Licence",
+            selectedLabel = licenceFilter?.let { "${licenceEmoji(it)} ${it.label}" } ?: "Toutes les licences",
+            options = listOf(null) + availableLicences,
+            optionLabel = { it?.let { l -> "${licenceEmoji(l)} ${l.label}" } ?: "Toutes les licences" },
+            onSelect = { licenceFilter = it },
+            modifier = Modifier.fillMaxWidth().padding(12.dp)
+        )
+        if (filtered.isEmpty()) {
+            Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Text(
+                    "Aucune actu pour cette licence pour le moment.",
+                    fontSize = 13.sp,
+                    color = Color(0xFFB5B5CC),
+                    textAlign = TextAlign.Center
+                )
+            }
+        } else {
+            LazyColumn(
+                modifier = Modifier.fillMaxSize(),
+                contentPadding = androidx.compose.foundation.layout.PaddingValues(start = 12.dp, end = 12.dp, bottom = 12.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                items(filtered, key = { it.id }) { entry -> NewsCard(entry) }
+            }
+        }
     }
 }
 

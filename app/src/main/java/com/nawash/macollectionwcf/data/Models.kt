@@ -199,6 +199,8 @@ data class WcfNewsEntry(
     @PrimaryKey val id: String,
     /** Nom de série japonais original (voir `scripts/scrape_wcf_news.py`). */
     val series: String,
+    /** Classée par mots-clés côté scraper (`classify_licence()`) — `AUTRE` si non reconnue (collabs, licences hors catalogue). */
+    val licence: Licence,
     /** Personnages/variantes listés par le site officiel, séparés par "|" (vide si non détaillé), japonais original. */
     val characters: String,
     val releaseDateRaw: String,

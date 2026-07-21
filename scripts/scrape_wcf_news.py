@@ -69,6 +69,31 @@ SEARCH_URL = f"{BASE_URL}/search/"
 # Memes 11 langues que MaCollection (retrogaming) : (cle JSON/app, code deep-translator).
 # "ja" = original, jamais traduit (recopie telle quelle). "zh" utilise le code deep-translator
 # "zh-CN" mais est expose sous la cle "zh" (correspond a Locale.getDefault().language sur Android).
+# Classification en licence (memes valeurs que l'enum Kotlin `Licence` de l'app) a partir de
+# mots-cles japonais/anglais reperes dans le nom de serie original -- une simple categorisation
+# d'affichage (filtre dans l'onglet Actu), pas une donnee inventee. "AUTRE" si aucun mot-cle ne
+# correspond (ex. HUNTER×HUNTER, Chainsaw Man, Ken Shimura, collaborations...).
+LICENCE_KEYWORDS = [
+    ("ONE_PIECE", ["ワンピース", "ONE PIECE"]),
+    ("BLEACH", ["ブリーチ", "BLEACH"]),
+    ("DRAGON_BALL", ["ドラゴンボール", "DRAGON BALL"]),
+    ("NARUTO", ["ナルト", "NARUTO", "BORUTO"]),
+    ("DEMON_SLAYER", ["鬼滅の刃", "キメツ", "DEMON SLAYER"]),
+    ("JUJUTSU_KAISEN", ["呪術廻戦", "JUJUTSU KAISEN"]),
+    ("MY_HERO_ACADEMIA", ["ヒーローアカデミア", "ヒロアカ", "MY HERO ACADEMIA"]),
+    ("DISNEY", ["ディズニー", "DISNEY"]),
+    ("MARVEL", ["マーベル", "MARVEL"]),
+]
+
+
+def classify_licence(series: str) -> str:
+    upper = series.upper()
+    for licence, keywords in LICENCE_KEYWORDS:
+        if any(kw.upper() in upper for kw in keywords):
+            return licence
+    return "AUTRE"
+
+
 TARGET_LANGS = [
     ("fr", "fr"), ("en", "en"), ("es", "es"), ("it", "it"), ("de", "de"),
     ("pt", "pt"), ("ru", "ru"), ("el", "el"), ("tr", "tr"), ("zh", "zh-CN"),
@@ -123,6 +148,7 @@ HEADERS = {
 class NewsItem:
     item_id: str
     series: str
+    licence: str  # voir classify_licence() -- meme valeurs que l'enum Kotlin `Licence`
     characters: list  # liste de noms de personnages/variantes (peut etre vide), japonais
     release_date_raw: str
     price_raw: str
@@ -272,6 +298,7 @@ def init_db(db_path: Path) -> sqlite3.Connection:
         CREATE TABLE IF NOT EXISTS wcf_news (
             item_id TEXT PRIMARY KEY,
             series TEXT NOT NULL,
+            licence TEXT,
             characters_json TEXT NOT NULL,
             release_date_raw TEXT,
             price_raw TEXT,
@@ -283,12 +310,14 @@ def init_db(db_path: Path) -> sqlite3.Connection:
         )
         """
     )
-    # Migration douce pour une base existante creee avant l'ajout des traductions multilingues
-    # (colonnes series_fr/characters_fr_json/... d'une version anterieure : plus utilisees,
-    # laissees telles quelles si presentes, remplacees par translations_json).
+    # Migration douce pour une base existante creee avant l'ajout des traductions multilingues/de
+    # la licence (colonnes series_fr/characters_fr_json/... d'une version anterieure : plus
+    # utilisees, laissees telles quelles si presentes, remplacees par translations_json/licence).
     existing_cols = {row[1] for row in conn.execute("PRAGMA table_info(wcf_news)")}
     if "translations_json" not in existing_cols:
         conn.execute("ALTER TABLE wcf_news ADD COLUMN translations_json TEXT")
+    if "licence" not in existing_cols:
+        conn.execute("ALTER TABLE wcf_news ADD COLUMN licence TEXT")
     conn.commit()
     return conn
 
@@ -298,18 +327,29 @@ def item_exists(conn: sqlite3.Connection, item_id: str) -> bool:
     return cur.fetchone() is not None
 
 
+def backfill_licence(conn: sqlite3.Connection) -> int:
+    """Classe en licence les lignes deja en base d'avant l'ajout de ce champ (aucun appel
+    reseau, juste une re-lecture du nom de serie deja stocke)."""
+    rows = conn.execute("SELECT item_id, series FROM wcf_news WHERE licence IS NULL").fetchall()
+    for item_id, series in rows:
+        conn.execute("UPDATE wcf_news SET licence = ? WHERE item_id = ?", (classify_licence(series), item_id))
+    conn.commit()
+    return len(rows)
+
+
 def insert_item(conn: sqlite3.Connection, item: NewsItem) -> None:
     # INSERT OR IGNORE : ne jamais ecraser/dupliquer un item deja present (dedup).
     conn.execute(
         """
         INSERT OR IGNORE INTO wcf_news
-            (item_id, series, characters_json, release_date_raw, price_raw,
+            (item_id, series, licence, characters_json, release_date_raw, price_raw,
              translations_json, image_url, item_url, local_image_path, scraped_at)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """,
         (
             item.item_id,
             item.series,
+            item.licence,
             json.dumps(item.characters, ensure_ascii=False),
             item.release_date_raw,
             item.price_raw,
@@ -326,7 +366,7 @@ def insert_item(conn: sqlite3.Connection, item: NewsItem) -> None:
 def export_json(conn: sqlite3.Connection, out_path: Path) -> int:
     cur = conn.execute(
         """
-        SELECT item_id, series, characters_json, release_date_raw, price_raw,
+        SELECT item_id, series, licence, characters_json, release_date_raw, price_raw,
                translations_json, image_url, item_url, local_image_path, scraped_at
         FROM wcf_news
         ORDER BY item_id DESC
@@ -337,14 +377,15 @@ def export_json(conn: sqlite3.Connection, out_path: Path) -> int:
         {
             "id": r[0],
             "series": r[1],
-            "characters": json.loads(r[2]),
-            "releaseDateRaw": r[3],
-            "priceRaw": r[4],
-            "translations": json.loads(r[5]) if r[5] else {},
-            "imageUrl": r[6],
-            "itemUrl": r[7],
-            "localImagePath": r[8],
-            "scrapedAt": r[9],
+            "licence": r[2] or "AUTRE",
+            "characters": json.loads(r[3]),
+            "releaseDateRaw": r[4],
+            "priceRaw": r[5],
+            "translations": json.loads(r[6]) if r[6] else {},
+            "imageUrl": r[7],
+            "itemUrl": r[8],
+            "localImagePath": r[9],
+            "scrapedAt": r[10],
         }
         for r in rows
     ]
@@ -399,6 +440,7 @@ def main() -> int:
         item = NewsItem(
             item_id=item_id,
             series=name,
+            licence=classify_licence(name),
             characters=detail["characters"],
             release_date_raw=detail["release_date_raw"],
             price_raw=detail["price_raw"],
@@ -411,10 +453,13 @@ def main() -> int:
         insert_item(conn, item)
         new_count += 1
 
+    backfilled = backfill_licence(conn)
     total = export_json(conn, args.out)
     conn.close()
 
     print(f"\nTermine : {new_count} nouveaute(s) ajoutee(s), {skipped_count} deja connue(s) ignoree(s).")
+    if backfilled:
+        print(f"Licence retro-appliquee sur {backfilled} ancienne(s) entree(s).")
     print(f"Export JSON : {args.out} ({total} entrees au total)")
     return 0
 
