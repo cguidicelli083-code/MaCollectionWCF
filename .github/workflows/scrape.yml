@@ -34,7 +34,7 @@ jobs:
             --db scripts/wcf_news.sqlite3 \
             --out docs/wcf_news.json \
             --images-dir docs/images/wcf \
-            --max-pages 10 \
+            --max-pages 15 \
             --delay 2
 
       - name: Commit and push changes

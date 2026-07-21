@@ -1,25 +1,32 @@
 #!/usr/bin/env python3
 """
 Scraper de nouveautes WCF (World Collectable Figure, Banpresto/Bandai Spirits)
-depuis le site officiel bsp-prize.jp (planning de sorties, page /schedule/).
+depuis le site officiel bsp-prize.jp.
 
 Usage:
     python scrape_wcf_news.py [--db wcf_news.sqlite3] [--out wcf_news.json]
-                               [--images-dir images/wcf] [--max-pages 6]
+                               [--images-dir images/wcf] [--max-pages 15]
                                [--delay 1.5]
 
-Le script :
-  1. Parcourt les pages du planning bsp-prize.jp/schedule/ (pagination mensuelle).
-  2. Ne garde que les produits dont le nom contient "ワールドコレクタブルフィギュア"
-     (World Collectable Figure) -- le site couvre TOUTES les gammes Banpresto/prize,
-     pas seulement WCF.
-  3. Visite la fiche produit de chaque nouveaute WCF pour recuperer le detail
-     (liste des personnages/variantes, prix, images additionnelles).
-  4. Insere en base SQLite locale (dedup sur l'identifiant produit, extrait de
-     l'URL /item/<id>/) pour ne jamais retelecharger/re-traiter un produit deja vu.
-  5. Telecharge l'image principale dans images/wcf/<id>.jpg (une seule fois).
-  6. Exporte l'integralite de la table dans un JSON structure (wcf_news.json),
-     utilise ensuite par l'app Android (onglet "Actu") via GitHub Pages.
+Le script combine deux sources bsp-prize.jp (memes structure/markup HTML) :
+  1. /schedule/ : planning de sortie a court terme (utile pour la date precise).
+  2. /search/?kw=<mot-cle WCF> : recherche plein texte sur TOUT le catalogue
+     (~400 produits, toutes licences confondues -- One Piece, Dragon Ball,
+     HUNTER×HUNTER, Chainsaw Man, etc. -- bien plus large que le seul planning
+     a court terme, qui ne remonte que 1-2 boites a la fois).
+Les deux sources sont fusionnees (dedup sur l'identifiant produit dans l'URL
+/item/<id>/) avant traitement, pour ne jamais visiter deux fois la meme fiche.
+
+Pour chaque produit WCF trouve (nom contenant "ワールドコレクタブルフィギュア" --
+le site couvre TOUTES les gammes Banpresto/prize, pas seulement WCF) :
+  1. Visite la fiche produit pour recuperer le detail (personnages/variantes,
+     prix, date de sortie precise, images additionnelles).
+  2. Insere en base SQLite locale (dedup sur l'identifiant produit) pour ne
+     jamais retraiter un produit deja vu lors d'une execution precedente.
+  3. Telecharge l'image principale dans images/wcf/<id>.jpg (une seule fois).
+  4. Traduit dans les 11 langues de l'app (voir translate_item()).
+Exporte l'integralite de la table dans un JSON structure (wcf_news.json),
+utilise ensuite par l'app Android (onglet "Actu") via GitHub Pages.
 
 Aucune donnee n'est inventee : tout ce qui est exporte provient directement du HTML
 du site officiel. Si un champ est absent/ambigu sur la fiche produit, il est laisse
@@ -28,6 +35,7 @@ vide plutot que devine.
 from __future__ import annotations
 
 import argparse
+import itertools
 import json
 import re
 import sqlite3
@@ -37,7 +45,7 @@ import unicodedata
 from dataclasses import dataclass, asdict
 from datetime import datetime, timezone
 from pathlib import Path
-from urllib.parse import urljoin
+from urllib.parse import quote, urljoin
 
 import requests
 from bs4 import BeautifulSoup
@@ -54,6 +62,9 @@ if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
 BASE_URL = "https://bsp-prize.jp"
 SCHEDULE_URL = f"{BASE_URL}/schedule/"
 WCF_KEYWORD = "ワールドコレクタブルフィギュア"
+# Recherche plein texte sur tout le catalogue (~400 produits, toutes licences confondues) --
+# bien plus large que /schedule/ qui ne montre que les 1-2 boites en cours de precommande.
+SEARCH_URL = f"{BASE_URL}/search/"
 
 # Memes 11 langues que MaCollection (retrogaming) : (cle JSON/app, code deep-translator).
 # "ja" = original, jamais traduit (recopie telle quelle). "zh" utilise le code deep-translator
@@ -153,12 +164,14 @@ def clean_text(s: str) -> str:
     return re.sub(r"\s+", " ", s).strip()
 
 
-def list_schedule_items(session: requests.Session, max_pages: int, delay: float):
-    """Parcourt le planning (pagination mensuelle via ?p=N) et yield (item_id, name, url, thumb_url)."""
-    seen_ids = set()
+def list_products(session: requests.Session, label: str, page_url_fn, max_pages: int, delay: float, seen_ids: set):
+    """Parcourt une liste paginee bsp-prize.jp (planning OU resultats de recherche, meme markup
+    HTML) et yield (item_id, name, url, thumb_url) pour chaque produit WCF non deja vu dans
+    `seen_ids` (partage entre les differentes sources pour eviter les doublons). `page_url_fn(page)`
+    construit l'URL de la page N (1-indexe)."""
     for page in range(1, max_pages + 1):
-        url = SCHEDULE_URL if page == 1 else f"{SCHEDULE_URL}?page={page}"
-        print(f"[schedule] page {page}: {url}")
+        url = page_url_fn(page)
+        print(f"[{label}] page {page}: {url}")
         soup = fetch(session, url, delay)
         if soup is None:
             break
@@ -188,7 +201,7 @@ def list_schedule_items(session: requests.Session, max_pages: int, delay: float)
             yield item_id, name, item_url, thumb
 
         if new_on_page == 0 and page > 1:
-            # plus rien de nouveau (pagination bouclee ou epuisee)
+            # plus rien de nouveau sur cette source (pagination bouclee ou epuisee)
             break
 
 
@@ -345,7 +358,7 @@ def main() -> int:
     parser.add_argument("--db", default="wcf_news.sqlite3", type=Path)
     parser.add_argument("--out", default="wcf_news.json", type=Path)
     parser.add_argument("--images-dir", default="images/wcf", type=Path)
-    parser.add_argument("--max-pages", default=6, type=int, help="nb de pages du planning a parcourir")
+    parser.add_argument("--max-pages", default=15, type=int, help="nb de pages max par source a parcourir")
     parser.add_argument("--delay", default=1.5, type=float, help="delai (s) entre deux requetes")
     args = parser.parse_args()
 
@@ -355,7 +368,19 @@ def main() -> int:
     new_count = 0
     skipped_count = 0
 
-    for item_id, name, item_url, thumb in list_schedule_items(session, args.max_pages, args.delay):
+    seen_ids: set = set()
+    schedule_items = list_products(
+        session, "schedule", lambda p: SCHEDULE_URL if p == 1 else f"{SCHEDULE_URL}?page={p}",
+        args.max_pages, args.delay, seen_ids,
+    )
+    search_kw = quote(WCF_KEYWORD)
+    search_items = list_products(
+        session, "search",
+        lambda p: f"{SEARCH_URL}?kw={search_kw}" if p == 1 else f"{SEARCH_URL}?kw={search_kw}&page={p}",
+        args.max_pages, args.delay, seen_ids,
+    )
+
+    for item_id, name, item_url, thumb in itertools.chain(schedule_items, search_items):
         if item_exists(conn, item_id):
             skipped_count += 1
             continue
