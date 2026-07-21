@@ -59,6 +59,7 @@ import com.nawash.macollectionwcf.data.CustomFigurePreset
 import com.nawash.macollectionwcf.data.FigurePreset
 import com.nawash.macollectionwcf.data.Licence
 import com.nawash.macollectionwcf.data.MediaUtils
+import com.nawash.macollectionwcf.data.upcomingReleaseLabel
 import com.nawash.macollectionwcf.ui.theme.NeonCyan
 import com.nawash.macollectionwcf.ui.theme.NeonPurple
 import com.nawash.macollectionwcf.data.toFigurePreset
@@ -145,8 +146,17 @@ fun FigureEncyclopediaScreen(
                                     style = MaterialTheme.typography.titleSmall,
                                     fontWeight = FontWeight.Bold,
                                     color = androidx.compose.ui.graphics.Color.White,
-                                    modifier = Modifier.padding(top = 4.dp, bottom = 4.dp)
+                                    modifier = Modifier.padding(top = 4.dp, bottom = if (upcomingReleaseLabel(entry.preset.series) != null) 0.dp else 4.dp)
                                 )
+                                upcomingReleaseLabel(entry.preset.series)?.let { label ->
+                                    Text(
+                                        label,
+                                        style = MaterialTheme.typography.labelMedium,
+                                        fontWeight = FontWeight.Bold,
+                                        color = NeonCyan,
+                                        modifier = Modifier.padding(bottom = 4.dp)
+                                    )
+                                }
                             }
                             FigureRow(
                                 entry.preset,
@@ -305,6 +315,15 @@ private fun FigureDetailDialog(
                         preset.heightCm?.let { "${if (it == it.toInt().toDouble()) it.toInt().toString() else it.toString()} cm" }
                     ).joinToString(" • ")
                 )
+                upcomingReleaseLabel(preset.series)?.let { label ->
+                    Spacer(Modifier.height(6.dp))
+                    Text(
+                        "$label — coffret pas encore commercialisé, visuel officiel à venir.",
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = NeonCyan
+                    )
+                }
                 preset.priceCents?.let {
                     Spacer(Modifier.height(6.dp))
                     Text(
