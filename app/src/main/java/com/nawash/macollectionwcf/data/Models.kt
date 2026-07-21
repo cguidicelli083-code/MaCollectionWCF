@@ -15,6 +15,9 @@ enum class Licence(val label: String) {
     MY_HERO_ACADEMIA("My Hero Academia"),
     DISNEY("Disney"),
     MARVEL("Marvel"),
+    HUNTER_X_HUNTER("Hunter x Hunter"),
+    CHAINSAW_MAN("Chainsaw Man"),
+    KEN_SHIMURA("Ken Shimura"),
     AUTRE("Autre")
 }
 

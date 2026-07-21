@@ -424,6 +424,9 @@ fun licenceEmoji(l: Licence): String = when (l) {
     Licence.MY_HERO_ACADEMIA -> "💥"
     Licence.DISNEY -> "🏰"
     Licence.MARVEL -> "🦸"
+    Licence.HUNTER_X_HUNTER -> "🕸️"
+    Licence.CHAINSAW_MAN -> "🪚"
+    Licence.KEN_SHIMURA -> "🎭"
     Licence.AUTRE -> "🎎"
 }
 

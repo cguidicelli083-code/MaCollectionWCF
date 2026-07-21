@@ -119,6 +119,9 @@ object FigureCatalogSeeder {
         Licence.MY_HERO_ACADEMIA -> "MH"
         Licence.DISNEY -> "DI"
         Licence.MARVEL -> "MV"
+        Licence.HUNTER_X_HUNTER -> "HH"
+        Licence.CHAINSAW_MAN -> "CM"
+        Licence.KEN_SHIMURA -> "KS"
         Licence.AUTRE -> "AU"
     }
 }

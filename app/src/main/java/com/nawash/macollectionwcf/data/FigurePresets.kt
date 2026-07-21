@@ -30,4 +30,5 @@ data class FigurePreset(
  * reste pleinement utilisable via les fiches perso [CustomFigurePreset] en attendant).
  */
 val figurePresets: List<FigurePreset> = figurePresetsOnePiece + figurePresetsOnePieceExtra + figurePresetsDragonBall +
-    figurePresetsDemonSlayer + figurePresetsMyHeroAcademia + figurePresetsMarvel + figurePresetsNaruto
+    figurePresetsDemonSlayer + figurePresetsMyHeroAcademia + figurePresetsMarvel + figurePresetsNaruto +
+    figurePresetsHunterHunter + figurePresetsChainsawMan + figurePresetsKenShimura
