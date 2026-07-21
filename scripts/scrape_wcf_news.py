@@ -61,6 +61,13 @@ if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
 
 BASE_URL = "https://bsp-prize.jp"
 SCHEDULE_URL = f"{BASE_URL}/schedule/"
+
+# bsp-prize.jp est derriere Cloudflare et renvoie 403 Forbidden sur les images sans les en-tetes
+# Referer/User-Agent adequats (voir download_image()) - Coil (chargeur d'images de l'app Android)
+# ne les fournit pas, donc les URLs bsp-prize.jp brutes echouent silencieusement dans l'app. On
+# publie donc les images telechargees localement (docs/images/wcf/<id>.jpg, sans restriction) sur
+# GitHub Pages et on exporte CETTE URL dans le JSON plutot que l'originale bsp-prize.jp.
+IMAGE_BASE_URL = "https://cguidicelli083-code.github.io/MaCollectionWCF/images/wcf/"
 WCF_KEYWORD = "ワールドコレクタブルフィギュア"
 # Recherche plein texte sur tout le catalogue (~400 produits, toutes licences confondues) --
 # bien plus large que /schedule/ qui ne montre que les 1-2 boites en cours de precommande.
@@ -400,7 +407,10 @@ def export_json(conn: sqlite3.Connection, out_path: Path) -> int:
             "releaseDateRaw": r[4],
             "priceRaw": r[5],
             "translations": json.loads(r[6]) if r[6] else {},
-            "imageUrl": r[7],
+            # Image hebergee sur GitHub Pages si le telechargement local a reussi (r[9] non vide) -
+            # l'URL bsp-prize.jp brute (r[7]) est gardee seulement en dernier repli, meme si elle
+            # echouera probablement dans l'app (403 Cloudflare sans les en-tetes adequats).
+            "imageUrl": f"{IMAGE_BASE_URL}{r[0]}.jpg" if r[9] else r[7],
             "itemUrl": r[8],
             "localImagePath": r[9],
             "scrapedAt": r[10],
