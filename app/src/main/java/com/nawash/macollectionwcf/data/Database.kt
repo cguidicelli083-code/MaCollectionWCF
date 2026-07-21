@@ -197,9 +197,19 @@ private val MIGRATION_4_5 = object : Migration(4, 5) {
     }
 }
 
+/** Ajoute les traductions FR des actus WCF (seriesFr/charactersFr/releaseDateFr/priceFr) — aucune table recréée, aucune perte de données. */
+private val MIGRATION_5_6 = object : Migration(5, 6) {
+    override fun migrate(db: SupportSQLiteDatabase) {
+        db.execSQL("ALTER TABLE `wcf_news` ADD COLUMN `seriesFr` TEXT NOT NULL DEFAULT ''")
+        db.execSQL("ALTER TABLE `wcf_news` ADD COLUMN `charactersFr` TEXT NOT NULL DEFAULT ''")
+        db.execSQL("ALTER TABLE `wcf_news` ADD COLUMN `releaseDateFr` TEXT NOT NULL DEFAULT ''")
+        db.execSQL("ALTER TABLE `wcf_news` ADD COLUMN `priceFr` TEXT NOT NULL DEFAULT ''")
+    }
+}
+
 @Database(
     entities = [CollectionItem::class, PriceHistory::class, ItemPhoto::class, CustomFigurePreset::class, PresetPhotoOverride::class, FigureCatalogEntry::class, WcfNewsEntry::class],
-    version = 5,
+    version = 6,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
@@ -221,7 +231,7 @@ abstract class AppDatabase : RoomDatabase() {
                 AppDatabase::class.java,
                 "macollectionwcf.db"
             )
-                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5)
+                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6)
                 .fallbackToDestructiveMigration()
                 .build().also { instance = it }
         }

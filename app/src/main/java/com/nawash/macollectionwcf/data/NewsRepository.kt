@@ -1,5 +1,6 @@
 package com.nawash.macollectionwcf.data
 
+import android.util.Log
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -9,9 +10,13 @@ import retrofit2.http.Url
 private data class WcfNewsDto(
     val id: String,
     val series: String,
+    val seriesFr: String?,
     val characters: List<String>?,
+    val charactersFr: List<String>?,
     val releaseDateRaw: String?,
+    val releaseDateFr: String?,
     val priceRaw: String?,
+    val priceFr: String?,
     val imageUrl: String?,
     val itemUrl: String,
     val scrapedAt: String
@@ -47,15 +52,20 @@ object NewsRepository {
             WcfNewsEntry(
                 id = it.id,
                 series = it.series,
+                seriesFr = it.seriesFr ?: it.series,
                 characters = (it.characters ?: emptyList()).joinToString("|"),
+                charactersFr = (it.charactersFr ?: it.characters ?: emptyList()).joinToString("|"),
                 releaseDateRaw = it.releaseDateRaw ?: "",
+                releaseDateFr = it.releaseDateFr ?: it.releaseDateRaw ?: "",
                 priceRaw = it.priceRaw ?: "",
+                priceFr = it.priceFr ?: it.priceRaw ?: "",
                 imageUrl = it.imageUrl ?: "",
                 itemUrl = it.itemUrl,
                 scrapedAt = it.scrapedAt
             )
         }
     } catch (e: Exception) {
+        Log.w("NewsRepository", "Échec récupération actus WCF : ${e::class.simpleName}: ${e.message}")
         null
     }
 }

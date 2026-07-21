@@ -42,6 +42,11 @@ from urllib.parse import urljoin
 import requests
 from bs4 import BeautifulSoup
 
+try:
+    from deep_translator import GoogleTranslator
+except ImportError:
+    GoogleTranslator = None  # traduction desactivee si le paquet n'est pas installe
+
 if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
     sys.stdout.reconfigure(encoding="utf-8")
     sys.stderr.reconfigure(encoding="utf-8")
@@ -49,6 +54,25 @@ if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
 BASE_URL = "https://bsp-prize.jp"
 SCHEDULE_URL = f"{BASE_URL}/schedule/"
 WCF_KEYWORD = "ワールドコレクタブルフィギュア"
+
+_translate_cache: dict[str, str] = {}
+
+
+def translate_ja_fr(text: str) -> str:
+    """Traduction japonais -> francais, best-effort (jamais bloquant : renvoie le texte
+    original si le service de traduction est indisponible/en erreur). Mise en cache pour
+    ne pas re-traduire deux fois la meme chaine dans une meme execution."""
+    if not text or GoogleTranslator is None:
+        return text
+    if text in _translate_cache:
+        return _translate_cache[text]
+    try:
+        translated = GoogleTranslator(source="ja", target="fr").translate(text)
+    except Exception as exc:
+        print(f"  [erreur traduction] {text[:40]}... : {exc}", file=sys.stderr)
+        translated = text
+    _translate_cache[text] = translated or text
+    return _translate_cache[text]
 
 HEADERS = {
     "User-Agent": (
@@ -63,9 +87,13 @@ HEADERS = {
 class NewsItem:
     item_id: str
     series: str
-    characters: list  # liste de noms de personnages/variantes (peut etre vide)
+    series_fr: str
+    characters: list  # liste de noms de personnages/variantes (peut etre vide), japonais
+    characters_fr: list  # traduction best-effort, meme ordre que `characters`
     release_date_raw: str
+    release_date_fr: str
     price_raw: str
+    price_fr: str
     image_url: str
     item_url: str
     local_image_path: str
@@ -209,9 +237,13 @@ def init_db(db_path: Path) -> sqlite3.Connection:
         CREATE TABLE IF NOT EXISTS wcf_news (
             item_id TEXT PRIMARY KEY,
             series TEXT NOT NULL,
+            series_fr TEXT,
             characters_json TEXT NOT NULL,
+            characters_fr_json TEXT,
             release_date_raw TEXT,
+            release_date_fr TEXT,
             price_raw TEXT,
+            price_fr TEXT,
             image_url TEXT,
             item_url TEXT NOT NULL,
             local_image_path TEXT,
@@ -219,6 +251,11 @@ def init_db(db_path: Path) -> sqlite3.Connection:
         )
         """
     )
+    # Migration douce pour une base existante creee avant l'ajout des champs traduits.
+    existing_cols = {row[1] for row in conn.execute("PRAGMA table_info(wcf_news)")}
+    for col in ("series_fr", "characters_fr_json", "release_date_fr", "price_fr"):
+        if col not in existing_cols:
+            conn.execute(f"ALTER TABLE wcf_news ADD COLUMN {col} TEXT")
     conn.commit()
     return conn
 
@@ -233,16 +270,21 @@ def insert_item(conn: sqlite3.Connection, item: NewsItem) -> None:
     conn.execute(
         """
         INSERT OR IGNORE INTO wcf_news
-            (item_id, series, characters_json, release_date_raw, price_raw,
+            (item_id, series, series_fr, characters_json, characters_fr_json,
+             release_date_raw, release_date_fr, price_raw, price_fr,
              image_url, item_url, local_image_path, scraped_at)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """,
         (
             item.item_id,
             item.series,
+            item.series_fr,
             json.dumps(item.characters, ensure_ascii=False),
+            json.dumps(item.characters_fr, ensure_ascii=False),
             item.release_date_raw,
+            item.release_date_fr,
             item.price_raw,
+            item.price_fr,
             item.image_url,
             item.item_url,
             item.local_image_path,
@@ -255,7 +297,8 @@ def insert_item(conn: sqlite3.Connection, item: NewsItem) -> None:
 def export_json(conn: sqlite3.Connection, out_path: Path) -> int:
     cur = conn.execute(
         """
-        SELECT item_id, series, characters_json, release_date_raw, price_raw,
+        SELECT item_id, series, series_fr, characters_json, characters_fr_json,
+               release_date_raw, release_date_fr, price_raw, price_fr,
                image_url, item_url, local_image_path, scraped_at
         FROM wcf_news
         ORDER BY item_id DESC
@@ -266,13 +309,17 @@ def export_json(conn: sqlite3.Connection, out_path: Path) -> int:
         {
             "id": r[0],
             "series": r[1],
-            "characters": json.loads(r[2]),
-            "releaseDateRaw": r[3],
-            "priceRaw": r[4],
-            "imageUrl": r[5],
-            "itemUrl": r[6],
-            "localImagePath": r[7],
-            "scrapedAt": r[8],
+            "seriesFr": r[2] or r[1],
+            "characters": json.loads(r[3]),
+            "charactersFr": json.loads(r[4]) if r[4] else json.loads(r[3]),
+            "releaseDateRaw": r[5],
+            "releaseDateFr": r[6] or r[5],
+            "priceRaw": r[7],
+            "priceFr": r[8] or r[7],
+            "imageUrl": r[9],
+            "itemUrl": r[10],
+            "localImagePath": r[11],
+            "scrapedAt": r[12],
         }
         for r in rows
     ]
@@ -311,9 +358,13 @@ def main() -> int:
         item = NewsItem(
             item_id=item_id,
             series=name,
+            series_fr=translate_ja_fr(name),
             characters=detail["characters"],
+            characters_fr=[translate_ja_fr(c) for c in detail["characters"]],
             release_date_raw=detail["release_date_raw"],
+            release_date_fr=translate_ja_fr(detail["release_date_raw"]),
             price_raw=detail["price_raw"],
+            price_fr=translate_ja_fr(detail["price_raw"]),
             image_url=image_url,
             item_url=item_url,
             local_image_path=str(local_path) if downloaded else "",

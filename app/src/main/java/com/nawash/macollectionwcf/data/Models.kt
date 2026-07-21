@@ -198,10 +198,16 @@ data class PresetPhotoOverride(
 data class WcfNewsEntry(
     @PrimaryKey val id: String,
     val series: String,
-    /** Personnages/variantes listés par le site officiel, séparés par "|" (vide si non détaillé). */
+    /** Traduction FR best-effort (voir `scripts/scrape_wcf_news.py`) — jamais garantie mot juste sur les noms propres. */
+    val seriesFr: String,
+    /** Personnages/variantes listés par le site officiel, séparés par "|" (vide si non détaillé), japonais original. */
     val characters: String,
+    /** Traduction FR de [characters], même ordre/séparateur. */
+    val charactersFr: String,
     val releaseDateRaw: String,
+    val releaseDateFr: String,
     val priceRaw: String,
+    val priceFr: String,
     val imageUrl: String,
     val itemUrl: String,
     val scrapedAt: String

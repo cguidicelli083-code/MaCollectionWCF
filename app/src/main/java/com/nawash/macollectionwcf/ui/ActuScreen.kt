@@ -83,16 +83,17 @@ private fun NewsCard(entry: WcfNewsEntry) {
                 Spacer(Modifier.width(12.dp))
             }
             Column(Modifier.fillMaxWidth()) {
-                Text(entry.series, fontWeight = FontWeight.Bold, fontSize = 15.sp, color = Color.White)
-                if (entry.releaseDateRaw.isNotBlank()) {
+                Text(entry.seriesFr, fontWeight = FontWeight.Bold, fontSize = 15.sp, color = Color.White)
+                Text(entry.series, fontSize = 11.sp, color = Color(0xFF7A7A96))
+                if (entry.releaseDateFr.isNotBlank()) {
                     Spacer(Modifier.height(4.dp))
-                    Text(entry.releaseDateRaw, fontSize = 12.sp, color = NeonCyan)
+                    Text(entry.releaseDateFr, fontSize = 12.sp, color = NeonCyan)
                 }
-                if (entry.priceRaw.isNotBlank()) {
+                if (entry.priceFr.isNotBlank()) {
                     Spacer(Modifier.height(2.dp))
-                    Text(entry.priceRaw, fontSize = 12.sp, color = NeonPurple)
+                    Text(entry.priceFr, fontSize = 12.sp, color = NeonPurple)
                 }
-                val characters = entry.characters.split("|").filter { it.isNotBlank() }
+                val characters = entry.charactersFr.split("|").filter { it.isNotBlank() }
                 if (characters.isNotEmpty()) {
                     Spacer(Modifier.height(6.dp))
                     Text(
