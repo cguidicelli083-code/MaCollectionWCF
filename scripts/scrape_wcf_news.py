@@ -363,6 +363,20 @@ def insert_item(conn: sqlite3.Connection, item: NewsItem) -> None:
     conn.commit()
 
 
+_JP_YEAR_MONTH = re.compile(r"(\d{4})\s*年\s*(\d{1,2})\s*月")
+
+
+def _release_year_month(raw: str):
+    """Annee*12+mois d'une date de sortie brute japonaise (ex. "2026年11月発売"), ou None."""
+    m = _JP_YEAR_MONTH.search(raw or "")
+    if not m:
+        return None
+    year, month = int(m.group(1)), int(m.group(2))
+    if not 1 <= month <= 12:
+        return None
+    return year * 12 + month
+
+
 def export_json(conn: sqlite3.Connection, out_path: Path) -> int:
     cur = conn.execute(
         """
@@ -373,6 +387,10 @@ def export_json(conn: sqlite3.Connection, out_path: Path) -> int:
         """
     )
     rows = cur.fetchall()
+    # Une « actu » doit rester une sortie a venir : on ne publie que le mois en cours et au-dela
+    # (la base garde tout pour le dedup ; les dates non reconnues sont conservees par prudence).
+    now = datetime.now()
+    current_ym = now.year * 12 + now.month
     data = [
         {
             "id": r[0],
@@ -388,6 +406,7 @@ def export_json(conn: sqlite3.Connection, out_path: Path) -> int:
             "scrapedAt": r[10],
         }
         for r in rows
+        if (_release_year_month(r[4]) is None) or (_release_year_month(r[4]) >= current_ym)
     ]
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
