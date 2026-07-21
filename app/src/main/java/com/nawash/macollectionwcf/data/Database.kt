@@ -207,9 +207,44 @@ private val MIGRATION_5_6 = object : Migration(5, 6) {
     }
 }
 
+/**
+ * Remplace les 4 colonnes de traduction FR unique (seriesFr/charactersFr/releaseDateFr/priceFr)
+ * par une seule colonne `translationsJson` couvrant les 11 langues de l'app (voir
+ * `scripts/scrape_wcf_news.py`). Recrée la table (structure de colonnes trop différente pour un
+ * simple ADD COLUMN) mais conserve les données déjà en cache (japonais original) — seules les
+ * traductions déjà affichées sont réinitialisées, remplies au prochain fetch réseau réussi.
+ */
+private val MIGRATION_6_7 = object : Migration(6, 7) {
+    override fun migrate(db: SupportSQLiteDatabase) {
+        db.execSQL("ALTER TABLE `wcf_news` RENAME TO `wcf_news_old`")
+        db.execSQL(
+            """
+            CREATE TABLE `wcf_news` (
+                `id` TEXT PRIMARY KEY NOT NULL,
+                `series` TEXT NOT NULL,
+                `characters` TEXT NOT NULL,
+                `releaseDateRaw` TEXT NOT NULL,
+                `priceRaw` TEXT NOT NULL,
+                `translationsJson` TEXT NOT NULL,
+                `imageUrl` TEXT NOT NULL,
+                `itemUrl` TEXT NOT NULL,
+                `scrapedAt` TEXT NOT NULL
+            )
+            """.trimIndent()
+        )
+        db.execSQL(
+            """
+            INSERT INTO `wcf_news` (id, series, characters, releaseDateRaw, priceRaw, translationsJson, imageUrl, itemUrl, scrapedAt)
+            SELECT id, series, characters, releaseDateRaw, priceRaw, '', imageUrl, itemUrl, scrapedAt FROM `wcf_news_old`
+            """.trimIndent()
+        )
+        db.execSQL("DROP TABLE `wcf_news_old`")
+    }
+}
+
 @Database(
     entities = [CollectionItem::class, PriceHistory::class, ItemPhoto::class, CustomFigurePreset::class, PresetPhotoOverride::class, FigureCatalogEntry::class, WcfNewsEntry::class],
-    version = 6,
+    version = 7,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
@@ -231,7 +266,7 @@ abstract class AppDatabase : RoomDatabase() {
                 AppDatabase::class.java,
                 "macollectionwcf.db"
             )
-                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6)
+                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7)
                 .fallbackToDestructiveMigration()
                 .build().also { instance = it }
         }

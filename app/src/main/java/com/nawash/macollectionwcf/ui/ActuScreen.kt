@@ -29,9 +29,42 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.nawash.macollectionwcf.data.WcfNewsEntry
 import com.nawash.macollectionwcf.ui.theme.NeonCyan
 import com.nawash.macollectionwcf.ui.theme.NeonPurple
+import java.util.Locale
+
+/** Traduction d'un item pour une langue (voir `translate_item()` dans `scripts/scrape_wcf_news.py`). */
+private data class NewsTranslation(
+    val series: String?,
+    val characters: List<String>?,
+    val releaseDate: String?,
+    val price: String?
+)
+
+private val newsGson = Gson()
+private val translationsMapType = object : TypeToken<Map<String, NewsTranslation>>() {}.type
+
+/** Mêmes 11 langues que MaCollection (retrogaming) et que le scraper WCF. */
+private val SUPPORTED_LANGS = setOf("fr", "en", "es", "it", "de", "pt", "ru", "el", "tr", "zh", "ja")
+
+/**
+ * Choisit la traduction correspondant à la langue de l'appareil (repli sur "en" puis sur le
+ * japonais original si la langue de l'appareil n'est pas couverte ou si le JSON est absent).
+ */
+private fun WcfNewsEntry.localized(): NewsTranslation {
+    val fallback = NewsTranslation(series, characters.split("|").filter { it.isNotBlank() }, releaseDateRaw, priceRaw)
+    if (translationsJson.isBlank()) return fallback
+    val translations = try {
+        newsGson.fromJson<Map<String, NewsTranslation>>(translationsJson, translationsMapType) ?: emptyMap()
+    } catch (e: Exception) {
+        emptyMap()
+    }
+    val deviceLang = Locale.getDefault().language.lowercase().takeIf { it in SUPPORTED_LANGS } ?: "en"
+    return translations[deviceLang] ?: translations["en"] ?: translations["ja"] ?: fallback
+}
 
 /**
  * Onglet Actu : nouveautés WCF annoncées sur bsp-prize.jp, récupérées par le scraper
@@ -68,6 +101,7 @@ fun ActuScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
 
 @Composable
 private fun NewsCard(entry: WcfNewsEntry) {
+    val loc = entry.localized()
     GamerCard {
         Row(verticalAlignment = Alignment.Top) {
             if (entry.imageUrl.isNotBlank()) {
@@ -83,17 +117,19 @@ private fun NewsCard(entry: WcfNewsEntry) {
                 Spacer(Modifier.width(12.dp))
             }
             Column(Modifier.fillMaxWidth()) {
-                Text(entry.seriesFr, fontWeight = FontWeight.Bold, fontSize = 15.sp, color = Color.White)
+                Text(loc.series ?: entry.series, fontWeight = FontWeight.Bold, fontSize = 15.sp, color = Color.White)
                 Text(entry.series, fontSize = 11.sp, color = Color(0xFF7A7A96))
-                if (entry.releaseDateFr.isNotBlank()) {
+                val releaseDate = loc.releaseDate ?: entry.releaseDateRaw
+                if (releaseDate.isNotBlank()) {
                     Spacer(Modifier.height(4.dp))
-                    Text(entry.releaseDateFr, fontSize = 12.sp, color = NeonCyan)
+                    Text(releaseDate, fontSize = 12.sp, color = NeonCyan)
                 }
-                if (entry.priceFr.isNotBlank()) {
+                val price = loc.price ?: entry.priceRaw
+                if (price.isNotBlank()) {
                     Spacer(Modifier.height(2.dp))
-                    Text(entry.priceFr, fontSize = 12.sp, color = NeonPurple)
+                    Text(price, fontSize = 12.sp, color = NeonPurple)
                 }
-                val characters = entry.charactersFr.split("|").filter { it.isNotBlank() }
+                val characters = loc.characters ?: entry.characters.split("|").filter { it.isNotBlank() }
                 if (characters.isNotEmpty()) {
                     Spacer(Modifier.height(6.dp))
                     Text(

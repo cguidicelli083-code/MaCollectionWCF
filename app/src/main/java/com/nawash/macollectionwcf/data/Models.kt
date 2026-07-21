@@ -197,17 +197,19 @@ data class PresetPhotoOverride(
 @Entity(tableName = "wcf_news")
 data class WcfNewsEntry(
     @PrimaryKey val id: String,
+    /** Nom de série japonais original (voir `scripts/scrape_wcf_news.py`). */
     val series: String,
-    /** Traduction FR best-effort (voir `scripts/scrape_wcf_news.py`) — jamais garantie mot juste sur les noms propres. */
-    val seriesFr: String,
     /** Personnages/variantes listés par le site officiel, séparés par "|" (vide si non détaillé), japonais original. */
     val characters: String,
-    /** Traduction FR de [characters], même ordre/séparateur. */
-    val charactersFr: String,
     val releaseDateRaw: String,
-    val releaseDateFr: String,
     val priceRaw: String,
-    val priceFr: String,
+    /**
+     * JSON brut `{"ja": {...}, "fr": {...}, "en": {...}, ...}` (11 langues, mêmes codes que
+     * MaCollection) produit par le scraper — traductions best-effort, jamais garanties mot
+     * juste sur les noms propres. Parsé à l'affichage par [ActuScreen][
+     * com.nawash.macollectionwcf.ui.ActuScreen] selon la langue de l'appareil.
+     */
+    val translationsJson: String,
     val imageUrl: String,
     val itemUrl: String,
     val scrapedAt: String

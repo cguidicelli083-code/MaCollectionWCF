@@ -1,22 +1,29 @@
 package com.nawash.macollectionwcf.data
 
 import android.util.Log
+import com.google.gson.Gson
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Url
 
+/** Traduction d'un item pour une langue donnée (voir `translate_item()` dans le scraper Python). */
+private data class TranslationDto(
+    val series: String?,
+    val characters: List<String>?,
+    val releaseDate: String?,
+    val price: String?
+)
+
 /** Reflet JSON exact d'une entrée de `wcf_news.json` (voir `scripts/scrape_wcf_news.py`). */
 private data class WcfNewsDto(
     val id: String,
     val series: String,
-    val seriesFr: String?,
     val characters: List<String>?,
-    val charactersFr: List<String>?,
     val releaseDateRaw: String?,
-    val releaseDateFr: String?,
     val priceRaw: String?,
-    val priceFr: String?,
+    /** Clé = code langue (11 langues, mêmes codes que MaCollection : ja/fr/en/es/it/de/pt/ru/el/tr/zh). */
+    val translations: Map<String, TranslationDto>?,
     val imageUrl: String?,
     val itemUrl: String,
     val scrapedAt: String
@@ -38,6 +45,7 @@ private interface NewsApi {
  */
 object NewsRepository {
     private const val FEED_URL = "https://cguidicelli083-code.github.io/MaCollectionWCF/wcf_news.json"
+    private val gson = Gson()
 
     private val api: NewsApi by lazy {
         Retrofit.Builder()
@@ -52,13 +60,10 @@ object NewsRepository {
             WcfNewsEntry(
                 id = it.id,
                 series = it.series,
-                seriesFr = it.seriesFr ?: it.series,
                 characters = (it.characters ?: emptyList()).joinToString("|"),
-                charactersFr = (it.charactersFr ?: it.characters ?: emptyList()).joinToString("|"),
                 releaseDateRaw = it.releaseDateRaw ?: "",
-                releaseDateFr = it.releaseDateFr ?: it.releaseDateRaw ?: "",
                 priceRaw = it.priceRaw ?: "",
-                priceFr = it.priceFr ?: it.priceRaw ?: "",
+                translationsJson = gson.toJson(it.translations ?: emptyMap<String, TranslationDto>()),
                 imageUrl = it.imageUrl ?: "",
                 itemUrl = it.itemUrl,
                 scrapedAt = it.scrapedAt
