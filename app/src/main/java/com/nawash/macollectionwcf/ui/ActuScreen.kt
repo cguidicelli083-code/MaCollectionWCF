@@ -107,27 +107,24 @@ private fun WcfNewsEntry.localized(): NewsTranslation {
     return translations[deviceLang] ?: translations["en"] ?: translations["ja"] ?: fallback
 }
 
+/** Bascule d'affichage de l'onglet Actu (voir [ActuScreen]). */
+private enum class ActuTimeFilter { UPCOMING, PAST }
+
 /**
  * Onglet Actu : nouveautés WCF annoncées sur bsp-prize.jp, récupérées par le scraper
  * (`scripts/scrape_wcf_news.py`, exécuté chaque nuit par GitHub Actions) — voir [NewsRepository][
  * com.nawash.macollectionwcf.data.NewsRepository]. Lecture seule, aucun lien avec la collection.
  *
- * On ne montre que les sorties du mois en cours ou à venir : le cache Room accumule les items des
- * scrapes précédents, dont des sorties désormais passées — filtrées ici pour rester de vraies
- * « actualités à venir » (les dates non reconnues sont conservées par prudence).
+ * Le cache Room accumule les items au fil des synchronisations, y compris d'anciennes sorties
+ * déjà passées : plutôt que de les cacher purement et simplement, une bascule « À venir » /
+ * « Anciennes » les sépare clairement (les dates non reconnues sont classées en « À venir » par
+ * prudence, pour ne jamais masquer une vraie annonce faute de format de date compris).
  */
 @Composable
 fun ActuScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
     val allNews by vm.wcfNews.collectAsState()
-    val nowYm = remember { currentYearMonth() }
-    val news = remember(allNews, nowYm) {
-        allNews.filter { entry ->
-            val ym = releaseYearMonth(entry.releaseDateRaw)
-            ym == null || ym >= nowYm
-        }
-    }
 
-    if (news.isEmpty()) {
+    if (allNews.isEmpty()) {
         Box(modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Text("Aucune actu pour le moment", fontWeight = FontWeight.Bold, color = Color.White)
@@ -142,6 +139,18 @@ fun ActuScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
         return
     }
 
+    val nowYm = remember { currentYearMonth() }
+    var timeFilter by remember { mutableStateOf(ActuTimeFilter.UPCOMING) }
+    val news = remember(allNews, nowYm, timeFilter) {
+        allNews.filter { entry ->
+            val ym = releaseYearMonth(entry.releaseDateRaw)
+            when (timeFilter) {
+                ActuTimeFilter.UPCOMING -> ym == null || ym >= nowYm
+                ActuTimeFilter.PAST -> ym != null && ym < nowYm
+            }
+        }
+    }
+
     var licenceFilter by remember { mutableStateOf<Licence?>(null) }
     var opened by remember { mutableStateOf<WcfNewsEntry?>(null) }
     val availableLicences = remember(news) {
@@ -152,18 +161,27 @@ fun ActuScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
     }
 
     Column(modifier.fillMaxSize()) {
+        Row(
+            Modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 8.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            NeonChip("À venir", timeFilter == ActuTimeFilter.UPCOMING) { timeFilter = ActuTimeFilter.UPCOMING }
+            NeonChip("Anciennes actus", timeFilter == ActuTimeFilter.PAST) { timeFilter = ActuTimeFilter.PAST }
+        }
         ThemedChoiceDropdown(
             leading = "Licence",
             selectedLabel = licenceFilter?.let { "${licenceEmoji(it)} ${it.label}" } ?: "Toutes les licences",
             options = listOf(null) + availableLicences,
             optionLabel = { it?.let { l -> "${licenceEmoji(l)} ${l.label}" } ?: "Toutes les licences" },
             onSelect = { licenceFilter = it },
-            modifier = Modifier.fillMaxWidth().padding(12.dp)
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp)
         )
+        Spacer(Modifier.height(8.dp))
         if (filtered.isEmpty()) {
             Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 Text(
-                    "Aucune actu pour cette licence pour le moment.",
+                    if (timeFilter == ActuTimeFilter.UPCOMING) "Aucune actu à venir pour le moment."
+                    else "Aucune ancienne actu pour cette licence.",
                     fontSize = 13.sp,
                     color = Color(0xFFB5B5CC),
                     textAlign = TextAlign.Center
