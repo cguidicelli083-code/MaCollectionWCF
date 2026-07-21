@@ -28,11 +28,11 @@ private interface NewsApi {
  * statique hébergé sur GitHub Pages. Best-effort : en cas d'échec réseau, on garde les dernières
  * actus connues en base plutôt que de vider l'onglet ou planter.
  *
- * ATTENTION : remplacer [FEED_URL] par l'URL GitHub Pages réelle une fois le dépôt créé/poussé
- * (voir README de `scripts/`), le placeholder actuel ne pointe vers rien.
+ * [FEED_URL] pointe vers GitHub Pages (dépôt `cguidicelli083-code/MaCollectionWCF`, dossier
+ * `/docs` sur `main`), alimenté chaque nuit par `.github/workflows/scrape.yml`.
  */
 object NewsRepository {
-    private const val FEED_URL = "https://REMPLACER-PAR-TON-USER.github.io/REMPLACER-PAR-TON-REPO/wcf_news.json"
+    private const val FEED_URL = "https://cguidicelli083-code.github.io/MaCollectionWCF/wcf_news.json"
 
     private val api: NewsApi by lazy {
         Retrofit.Builder()
