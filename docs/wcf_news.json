@@ -2,22 +2,85 @@
   {
     "id": "2839971",
     "series": "ドラゴンボール ワールドコレクタブルフィギュア-少年期編4-",
-    "seriesFr": "Figurine à collectionner Dragon Ball World-Boyhood Edition 4-",
     "characters": [],
-    "charactersFr": [],
     "releaseDateRaw": "2026年7月14日(火)より順次登場予定",
-    "releaseDateFr": "Sortie prévue séquentiellement à partir du 14 juillet 2026 (mardi)",
     "priceRaw": "",
-    "priceFr": "",
+    "translations": {
+      "ja": {
+        "series": "ドラゴンボール ワールドコレクタブルフィギュア-少年期編4-",
+        "releaseDate": "2026年7月14日(火)より順次登場予定",
+        "price": "",
+        "characters": []
+      },
+      "fr": {
+        "series": "Figurine à collectionner Dragon Ball World-Boyhood Edition 4-",
+        "releaseDate": "Sortie prévue séquentiellement à partir du 14 juillet 2026 (mardi)",
+        "price": "",
+        "characters": []
+      },
+      "en": {
+        "series": "Dragon Ball World Collectible Figure-Boyhood Edition 4-",
+        "releaseDate": "Scheduled to be released sequentially from July 14, 2026 (Tuesday)",
+        "price": "",
+        "characters": []
+      },
+      "es": {
+        "series": "Figura coleccionable Dragon Ball World-Edición Boyhood 4-",
+        "releaseDate": "Programado para ser lanzado secuencialmente a partir del 14 de julio de 2026 (martes)",
+        "price": "",
+        "characters": []
+      },
+      "it": {
+        "series": "Figura da collezione Dragon Ball World - Edizione Boyhood 4-",
+        "releaseDate": "Il rilascio è previsto in sequenza dal 14 luglio 2026 (martedì)",
+        "price": "",
+        "characters": []
+      },
+      "de": {
+        "series": "Dragon Ball World Sammelfigur-Boyhood Edition 4-",
+        "releaseDate": "Geplante Veröffentlichung nacheinander ab 14. Juli 2026 (Dienstag)",
+        "price": "",
+        "characters": []
+      },
+      "pt": {
+        "series": "Dragon Ball World Collectible Figure-Boyhood Edition 4-",
+        "releaseDate": "Programado para ser lançado sequencialmente a partir de 14 de julho de 2026 (terça-feira)",
+        "price": "",
+        "characters": []
+      },
+      "ru": {
+        "series": "Коллекционная фигурка Dragon Ball World - Детское издание 4-",
+        "releaseDate": "Планируется выпустить последовательно с 14 июля 2026 г. (вторник).",
+        "price": "",
+        "characters": []
+      },
+      "el": {
+        "series": "Dragon Ball World Collectible Figure-Boyhood Edition 4-",
+        "releaseDate": "Έχει προγραμματιστεί να κυκλοφορήσει διαδοχικά από τις 14 Ιουλίου 2026 (Τρίτη)",
+        "price": "",
+        "characters": []
+      },
+      "tr": {
+        "series": "Dragon Ball World Koleksiyonluk Figür-Boyhood Edition 4-",
+        "releaseDate": "14 Temmuz 2026'dan (Salı) itibaren sırayla yayınlanması planlanıyor",
+        "price": "",
+        "characters": []
+      },
+      "zh": {
+        "series": "龙珠世界 收藏人物-少年版4-",
+        "releaseDate": "预定2026年7月14日（周二）起依次发布",
+        "price": "",
+        "characters": []
+      }
+    },
     "imageUrl": "https://bsp-prize.jp/files/%E5%85%B1%E6%9C%89%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80/item/2026.07/2839971_a.jpg",
     "itemUrl": "https://bsp-prize.jp/item/2839971/",
     "localImagePath": "docs/images/wcf/2839971.jpg",
-    "scrapedAt": "2026-07-21T08:06:26.333860+00:00"
+    "scrapedAt": "2026-07-21T08:19:47.363520+00:00"
   },
   {
     "id": "2754457",
     "series": "【プレミアムバンダイ】ドラゴンボールDAIMA ワールドコレクタブルフィギュアPREMIUM vol.3",
-    "seriesFr": "[Premium Bandai] Figurine à collectionner Dragon Ball DAIMA World PREMIUM vol.3",
     "characters": [
       "超サイヤ人4 孫悟空(ミニ)",
       "超サイヤ人3 ベジータ(ミニ)",
@@ -29,24 +92,189 @@
       "憲兵",
       "ジャイアントゴマー"
     ],
-    "charactersFr": [
-      "Super Saiyan 4 Son Goku (mini)",
-      "Super Saiyan 3 Végéta (mini)",
-      "Majin-Do",
-      "roi roucoulement",
-      "Super Saiyan 4, Son Goku",
-      "Super Saiyan 3 Végéta",
-      "Marva",
-      "police militaire",
-      "Gomer géant"
-    ],
     "releaseDateRaw": "2026年7月発送予定",
-    "releaseDateFr": "Expédition prévue en juillet 2026",
     "priceRaw": "販売価格:20,900円(税込)",
-    "priceFr": "Prix ​​de vente : 20 900 yens (taxes incluses)",
+    "translations": {
+      "ja": {
+        "series": "【プレミアムバンダイ】ドラゴンボールDAIMA ワールドコレクタブルフィギュアPREMIUM vol.3",
+        "releaseDate": "2026年7月発送予定",
+        "price": "販売価格:20,900円(税込)",
+        "characters": [
+          "超サイヤ人4 孫悟空(ミニ)",
+          "超サイヤ人3 ベジータ(ミニ)",
+          "魔人ドゥー",
+          "キング・クウ",
+          "超サイヤ人4 孫悟空",
+          "超サイヤ人3 ベジータ",
+          "マーバ",
+          "憲兵",
+          "ジャイアントゴマー"
+        ]
+      },
+      "fr": {
+        "series": "[Premium Bandai] Figurine à collectionner Dragon Ball DAIMA World PREMIUM vol.3",
+        "releaseDate": "Expédition prévue en juillet 2026",
+        "price": "Prix ​​de vente : 20 900 yens (taxes incluses)",
+        "characters": [
+          "Super Saiyan 4 Son Goku (mini)",
+          "Super Saiyan 3 Végéta (mini)",
+          "Majin-Do",
+          "roi roucoulement",
+          "Super Saiyan 4, Son Goku",
+          "Super Saiyan 3 Végéta",
+          "Marva",
+          "police militaire",
+          "Gomer géant"
+        ]
+      },
+      "en": {
+        "series": "[Premium Bandai] Dragon Ball DAIMA World Collectable Figure PREMIUM vol.3",
+        "releaseDate": "Scheduled to ship in July 2026",
+        "price": "Sales price: 20,900 yen (tax included)",
+        "characters": [
+          "Super Saiyan 4 Son Goku (mini)",
+          "Super Saiyan 3 Vegeta (mini)",
+          "Majin Do",
+          "king coo",
+          "Super Saiyan 4 Son Goku",
+          "Super Saiyan 3 Vegeta",
+          "Marva",
+          "military police",
+          "giant gomer"
+        ]
+      },
+      "es": {
+        "series": "[Premium Bandai] Dragon Ball DAIMA World Figura Coleccionable PREMIUM vol.3",
+        "releaseDate": "Programado para enviarse en julio de 2026",
+        "price": "Precio de venta: 20.900 yenes (impuestos incluidos)",
+        "characters": [
+          "Super Saiyajin 4 Son Goku (mini)",
+          "Super Saiyajin 3 Vegeta (mini)",
+          "majin-do",
+          "rey coo",
+          "Super Saiyajin 4 Son Goku",
+          "Super Saiyajin 3 Vegeta",
+          "marva",
+          "policía militar",
+          "gomero gigante"
+        ]
+      },
+      "it": {
+        "series": "[Premium Bandai] Dragon Ball DAIMA World Figure da collezione PREMIUM vol.3",
+        "releaseDate": "La spedizione è prevista per luglio 2026",
+        "price": "Prezzo di vendita: 20.900 yen (tasse incluse)",
+        "characters": [
+          "Super Saiyan 4 Son Goku (mini)",
+          "Super Saiyan 3 Vegeta (mini)",
+          "Majin Do",
+          "re coo",
+          "Super Saiyan 4 Son Goku",
+          "Vegeta Super Saiyan 3",
+          "Marva",
+          "polizia militare",
+          "gomero gigante"
+        ]
+      },
+      "de": {
+        "series": "[Premium Bandai] Dragon Ball DAIMA World Sammelfigur PREMIUM Band 3",
+        "releaseDate": "Geplanter Versand im Juli 2026",
+        "price": "Verkaufspreis: 20.900 Yen (inkl. MwSt.)",
+        "characters": [
+          "Super Saiyajin 4 Son Goku (Mini)",
+          "Super Saiyajin 3 Vegeta (Mini)",
+          "Majin Do",
+          "König gurrt",
+          "Super Saiyajin 4 Son Goku",
+          "Super Saiyajin 3 Vegeta",
+          "Marva",
+          "Militärpolizei",
+          "Riesengomer"
+        ]
+      },
+      "pt": {
+        "series": "[Bandai Premium] Figura colecionável do mundo Dragon Ball DAIMA PREMIUM vol.3",
+        "releaseDate": "Programado para envio em julho de 2026",
+        "price": "Preço de venda: 20.900 ienes (impostos incluídos)",
+        "characters": [
+          "Super Saiyajin 4 Son Goku (mini)",
+          "Super Saiyajin 3 Vegeta (mini)",
+          "Majin Do",
+          "rei coo",
+          "Super Saiyajin 4 Son Goku",
+          "Super Saiyajin 3 Vegeta",
+          "Marva",
+          "polícia militar",
+          "gomer gigante"
+        ]
+      },
+      "ru": {
+        "series": "[Премиум Bandai] Коллекционная фигурка Dragon Ball DAIMA World PREMIUM vol.3",
+        "releaseDate": "Отгрузка запланирована на июль 2026 г.",
+        "price": "Цена продажи: 20 900 иен (включая налоги).",
+        "characters": [
+          "Супер Саян 4 Сон Гоку (мини)",
+          "Супер Саян 3 Вегета (мини)",
+          "Маджин До",
+          "король ку",
+          "Супер Саян 4 Сон Гоку",
+          "Супер Саян 3 Вегета",
+          "Марва",
+          "военная полиция",
+          "гигантский гомер"
+        ]
+      },
+      "el": {
+        "series": "[Premium Bandai] Dragon Ball DAIMA World Collectable Figure PREMIUM vol.3",
+        "releaseDate": "Έχει προγραμματιστεί να αποσταλεί τον Ιούλιο του 2026",
+        "price": "Τιμή πώλησης: 20.900 γιεν (συμπεριλαμβανομένου του φόρου)",
+        "characters": [
+          "Super Saiyan 4 Son Goku (μίνι)",
+          "Super Saiyan 3 Vegeta (μίνι)",
+          "Majin Do",
+          "king coo",
+          "Super Saiyan 4 Son Goku",
+          "Super Saiyan 3 Vegeta",
+          "Marva",
+          "στρατονομία",
+          "γίγαντας γόμερ"
+        ]
+      },
+      "tr": {
+        "series": "[Premium Bandai] Dragon Ball DAIMA Dünya Koleksiyon Figürü PREMIUM vol.3",
+        "releaseDate": "Temmuz 2026'da gönderilmesi planlanıyor",
+        "price": "Satış fiyatı: 20.900 yen (vergi dahil)",
+        "characters": [
+          "Süper Saiyan 4 Son Goku (mini)",
+          "Süper Saiyan 3 Vegeta (mini)",
+          "Majin Do",
+          "kral coo",
+          "Süper Saiyan 4 Son Goku",
+          "Süper Saiyan 3 Vegeta",
+          "Marva",
+          "askeri polis",
+          "dev gomer"
+        ]
+      },
+      "zh": {
+        "series": "[Premium Bandai] 龙珠 DAIMA 世界收藏人物 PREMIUM vol.3",
+        "releaseDate": "预计2026年7月发货",
+        "price": "售价：20,900日元（含税）",
+        "characters": [
+          "超级赛亚人4孙悟空（迷你）",
+          "超级赛亚人3贝吉塔（迷你）",
+          "魔人道",
+          "库王",
+          "超级赛亚人4孙悟空",
+          "超级赛亚人3贝吉塔",
+          "马尔瓦",
+          "宪兵",
+          "巨人戈篾"
+        ]
+      }
+    },
     "imageUrl": "https://bsp-prize.jp/files/%E5%85%B1%E6%9C%89%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80/item/e-banpresto/2026.01/2754457.jpg",
     "itemUrl": "https://bsp-prize.jp/item/2754457/",
     "localImagePath": "docs/images/wcf/2754457.jpg",
-    "scrapedAt": "2026-07-21T08:06:18.141019+00:00"
+    "scrapedAt": "2026-07-21T08:19:23.456825+00:00"
   }
 ]
