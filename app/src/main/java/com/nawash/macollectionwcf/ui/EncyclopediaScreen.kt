@@ -1,6 +1,7 @@
 package com.nawash.macollectionwcf.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -18,6 +19,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
@@ -29,7 +31,9 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.ChecklistRtl
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -70,6 +74,9 @@ import kotlinx.coroutines.withContext
 /** Fiche d'Encyclopédie fusionnée : catalogue intégré (Phase 5) ou fiche perso (voir [custom]). */
 private data class EncycloEntry(val preset: FigurePreset, val custom: CustomFigurePreset?)
 
+/** Clé stable d'une fiche (id Room réel), utilisée pour la sélection multiple et la LazyColumn. */
+private fun EncycloEntry.key(): String = custom?.let { "custom_${it.id}" } ?: "catalog_${preset.catalogId}"
+
 @Composable
 fun FigureEncyclopediaScreen(
     vm: AppViewModel,
@@ -86,6 +93,8 @@ fun FigureEncyclopediaScreen(
     var licenceFilter by remember { mutableStateOf<Licence?>(null) }
     var seriesFilter by remember { mutableStateOf<String?>(null) }
     var opened by remember { mutableStateOf<EncycloEntry?>(null) }
+    var selectionMode by remember { mutableStateOf(false) }
+    var selectedKeys by remember { mutableStateOf(setOf<String>()) }
 
     // Le choix de vague/volume dépend de la licence sélectionnée : on l'invalide si elle change.
     LaunchedEffect(licenceFilter) { seriesFilter = null }
@@ -109,9 +118,31 @@ fun FigureEncyclopediaScreen(
         }.sortedWith(compareBy({ it.preset.licence.label }, { it.preset.series ?: "" }, { it.preset.numero ?: "" }, { it.preset.name.lowercase() }))
     }
 
+    // Sélection invalidée si le filtre change la liste affichée (évite de garder des clés d'une
+    // fiche qui n'est plus visible et qu'on ne peut plus décocher).
+    LaunchedEffect(entries) {
+        val visibleKeys = entries.map { it.key() }.toSet()
+        selectedKeys = selectedKeys.intersect(visibleKeys)
+    }
+
     Column(modifier.fillMaxSize().padding(horizontal = 14.dp)) {
         Spacer(Modifier.height(8.dp))
-        ThemedSearchField(value = searchQuery, onValueChange = { searchQuery = it }, placeholder = "Rechercher un personnage")
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Box(Modifier.weight(1f)) {
+                ThemedSearchField(value = searchQuery, onValueChange = { searchQuery = it }, placeholder = "Rechercher un personnage")
+            }
+            Spacer(Modifier.width(8.dp))
+            IconButton(onClick = {
+                selectionMode = !selectionMode
+                if (!selectionMode) selectedKeys = emptySet()
+            }) {
+                Icon(
+                    Icons.Filled.ChecklistRtl,
+                    contentDescription = "Sélection multiple",
+                    tint = if (selectionMode) NeonPurple else androidx.compose.ui.graphics.Color.White
+                )
+            }
+        }
         Spacer(Modifier.height(8.dp))
         LicenceFilterDropdown(licenceFilter) { licenceFilter = it }
         if (seriesOptions.isNotEmpty()) {
@@ -135,42 +166,102 @@ fun FigureEncyclopediaScreen(
         } else {
             Box(Modifier.weight(1f).fillMaxWidth()) {
                 LazyColumn(state = listState, modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                    itemsIndexed(entries, key = { index, entry -> entry.custom?.let { "custom_${it.id}" } ?: "preset_${index}_${entry.preset.name}" }) { index, entry ->
+                    itemsIndexed(entries, key = { _, entry -> entry.key() }) { index, entry ->
                         val overrideUri = photoOverrides[entry.preset.name]
                         val showHeader = entry.custom == null &&
                             (index == 0 || entries[index - 1].preset.series != entry.preset.series || entries[index - 1].custom != null)
                         Column {
                             if (showHeader && !entry.preset.series.isNullOrBlank()) {
-                                Text(
-                                    entry.preset.series!!,
-                                    style = MaterialTheme.typography.titleSmall,
-                                    fontWeight = FontWeight.Bold,
-                                    color = androidx.compose.ui.graphics.Color.White,
-                                    modifier = Modifier.padding(top = 4.dp, bottom = if (upcomingReleaseLabel(entry.preset.series) != null) 0.dp else 4.dp)
-                                )
-                                upcomingReleaseLabel(entry.preset.series)?.let { label ->
-                                    Text(
-                                        label,
-                                        style = MaterialTheme.typography.labelMedium,
-                                        fontWeight = FontWeight.Bold,
-                                        color = NeonCyan,
-                                        modifier = Modifier.padding(bottom = 4.dp)
-                                    )
+                                val waveKeys = remember(entries, entry.preset.series) {
+                                    entries.filter { it.custom == null && it.preset.series == entry.preset.series }.map { it.key() }.toSet()
+                                }
+                                val waveAllSelected = waveKeys.isNotEmpty() && selectedKeys.containsAll(waveKeys)
+                                // padding(end = 14.dp) compense le padding interne de GamerCard (voir CommonUi.kt)
+                                // pour que cette case s'aligne exactement sous celles des fiches en dessous.
+                                Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth().padding(end = 14.dp)) {
+                                    Column(Modifier.weight(1f)) {
+                                        Text(
+                                            entry.preset.series!!,
+                                            style = MaterialTheme.typography.titleSmall,
+                                            fontWeight = FontWeight.Bold,
+                                            color = androidx.compose.ui.graphics.Color.White,
+                                            modifier = Modifier.padding(top = 4.dp, bottom = if (upcomingReleaseLabel(entry.preset.series) != null) 0.dp else 4.dp)
+                                        )
+                                        upcomingReleaseLabel(entry.preset.series)?.let { label ->
+                                            Text(
+                                                label,
+                                                style = MaterialTheme.typography.labelMedium,
+                                                fontWeight = FontWeight.Bold,
+                                                color = NeonCyan,
+                                                modifier = Modifier.padding(bottom = 4.dp)
+                                            )
+                                        }
+                                    }
+                                    if (selectionMode) {
+                                        RoundCheckbox(
+                                            checked = waveAllSelected,
+                                            onCheckedChange = {
+                                                selectedKeys = if (waveAllSelected) selectedKeys - waveKeys else selectedKeys + waveKeys
+                                            }
+                                        )
+                                    }
                                 }
                             }
                             FigureRow(
                                 entry.preset,
                                 overrideUri,
-                                onEnrich = { p -> vm.enrichCatalogEntry(p.catalogId!!, p.licence, p.character, p.series) }
-                            ) { opened = entry }
+                                onEnrich = { p -> vm.enrichCatalogEntry(p.catalogId!!, p.licence, p.character, p.series) },
+                                selectionMode = selectionMode,
+                                selected = entry.key() in selectedKeys,
+                                onToggleSelect = {
+                                    val k = entry.key()
+                                    selectedKeys = if (k in selectedKeys) selectedKeys - k else selectedKeys + k
+                                },
+                                onClick = { opened = entry }
+                            )
                         }
                     }
-                    item { Spacer(Modifier.height(90.dp)) }
+                    item { Spacer(Modifier.height(if (selectionMode && selectedKeys.isNotEmpty()) 150.dp else 90.dp)) }
                 }
                 ScrollProgressBar(
                     listState,
                     Modifier.align(Alignment.CenterEnd).fillMaxHeight().padding(vertical = 8.dp, horizontal = 2.dp)
                 )
+                if (selectionMode && selectedKeys.isNotEmpty()) {
+                    val selectedPresets = remember(entries, selectedKeys) {
+                        entries.filter { it.key() in selectedKeys }.map { it.preset.copy(imagePath = photoOverrides[it.preset.name] ?: it.preset.imagePath) }
+                    }
+                    Column(
+                        Modifier.align(Alignment.BottomCenter).fillMaxWidth()
+                            .background(Brush.verticalGradient(listOf(Color.Transparent, Color(0xFF0D0D14))))
+                            .padding(top = 24.dp, bottom = 8.dp, start = 4.dp, end = 4.dp)
+                    ) {
+                        Text(
+                            "${selectedPresets.size} sélectionnée${if (selectedPresets.size > 1) "s" else ""}",
+                            color = androidx.compose.ui.graphics.Color.White,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.padding(bottom = 6.dp)
+                        )
+                        Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
+                            Button(
+                                onClick = {
+                                    vm.saveCatalogPresets(selectedPresets, isWishlist = false, photoOverrides)
+                                    selectedKeys = emptySet()
+                                    selectionMode = false
+                                },
+                                modifier = Modifier.weight(1f)
+                            ) { Text("+ Collection") }
+                            OutlinedButton(
+                                onClick = {
+                                    vm.saveCatalogPresets(selectedPresets, isWishlist = true, photoOverrides)
+                                    selectedKeys = emptySet()
+                                    selectionMode = false
+                                },
+                                modifier = Modifier.weight(1f)
+                            ) { Text("+ Souhaits") }
+                        }
+                    }
+                }
             }
         }
     }
@@ -192,12 +283,36 @@ fun FigureEncyclopediaScreen(
     }
 }
 
+/** Case à cocher ronde (sélection multiple Encyclo), dans le style néon de l'app. */
 @Composable
-private fun FigureRow(preset: FigurePreset, overrideUri: String?, onEnrich: (FigurePreset) -> Unit, onClick: () -> Unit) {
+private fun RoundCheckbox(checked: Boolean, onCheckedChange: () -> Unit, modifier: Modifier = Modifier) {
+    Box(
+        modifier
+            .size(26.dp)
+            .clip(CircleShape)
+            .background(if (checked) NeonPurple else Color.Transparent)
+            .border(2.dp, if (checked) NeonPurple else Color(0xFF7A7A96), CircleShape)
+            .clickable(onClick = onCheckedChange),
+        contentAlignment = Alignment.Center
+    ) {
+        if (checked) Icon(Icons.Filled.Check, contentDescription = null, tint = Color.White, modifier = Modifier.size(16.dp))
+    }
+}
+
+@Composable
+private fun FigureRow(
+    preset: FigurePreset,
+    overrideUri: String?,
+    onEnrich: (FigurePreset) -> Unit,
+    selectionMode: Boolean,
+    selected: Boolean,
+    onToggleSelect: () -> Unit,
+    onClick: () -> Unit
+) {
     LaunchedEffect(preset.catalogId) {
         if (preset.catalogId != null && !preset.photoChecked) onEnrich(preset)
     }
-    GamerCard(onClick = onClick) {
+    GamerCard(onClick = if (selectionMode) onToggleSelect else onClick) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             val photo = overrideUri ?: preset.imagePath
             if (photo != null) {
@@ -224,6 +339,10 @@ private fun FigureRow(preset: FigurePreset, overrideUri: String?, onEnrich: (Fig
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
+            }
+            if (selectionMode) {
+                Spacer(Modifier.width(8.dp))
+                RoundCheckbox(checked = selected, onCheckedChange = onToggleSelect)
             }
         }
     }

@@ -17,6 +17,7 @@ import com.nawash.macollectionwcf.data.CustomFigurePreset
 import com.nawash.macollectionwcf.data.EbayPrices
 import com.nawash.macollectionwcf.data.FigureCatalogEntry
 import com.nawash.macollectionwcf.data.FigureCatalogSeeder
+import com.nawash.macollectionwcf.data.FigurePreset
 import com.nawash.macollectionwcf.data.GeminiVision
 import com.nawash.macollectionwcf.data.ItemPhoto
 import com.nawash.macollectionwcf.data.Licence
@@ -335,6 +336,41 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
             batchSaving.value = null
         }
     }
+
+    /**
+     * Ajoute en une fois toutes les fiches Encyclo cochées par l'utilisateur (sélection multiple
+     * d'une vague/licence entière, sans ouvrir chaque fiche une par une) à la collection ou aux
+     * souhaits. Contrairement à [saveBatch] (scan photo, aucune donnée fiable connue), ici la
+     * photo et la côte indicative de chaque fiche sont déjà connues côté catalogue : on les
+     * reprend telles quelles (pas d'appel réseau eBay/IA par figurine, l'ajout en masse doit
+     * rester instantané) plutôt que de tout re-résoudre.
+     */
+    fun saveCatalogPresets(presets: List<FigurePreset>, isWishlist: Boolean, photoOverrides: Map<String, String> = emptyMap()) =
+        viewModelScope.launch {
+            batchSaving.value = presets.size
+            try {
+                for (preset in presets) {
+                    val item = CollectionItem(
+                        licence = preset.licence,
+                        series = preset.series,
+                        character = preset.character,
+                        name = preset.name.ifBlank { preset.character },
+                        numero = preset.numero,
+                        condition = Condition.NEUF,
+                        hasBox = true,
+                        hasAccessories = true,
+                        heightCm = preset.heightCm,
+                        releaseYear = preset.year,
+                        priceCents = preset.priceCents,
+                        imageUri = photoOverrides[preset.name] ?: preset.imagePath,
+                        isWishlist = isWishlist
+                    )
+                    insertOrUpdateBareItem(item)
+                }
+            } finally {
+                batchSaving.value = null
+            }
+        }
 
     /** Insère (ou met à jour) la figurine SANS résoudre son prix — juste la ligne en base. */
     private suspend fun insertOrUpdateBareItem(item: CollectionItem): Pair<Long, CollectionItem> {
