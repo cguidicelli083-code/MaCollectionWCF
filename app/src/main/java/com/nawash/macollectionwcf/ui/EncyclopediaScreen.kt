@@ -33,7 +33,6 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.ChecklistRtl
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -80,6 +79,7 @@ private fun EncycloEntry.key(): String = custom?.let { "custom_${it.id}" } ?: "c
 @Composable
 fun FigureEncyclopediaScreen(
     vm: AppViewModel,
+    selectionMode: Boolean,
     onAddToCollection: (FigurePreset) -> Unit,
     onAddToWishlist: (FigurePreset) -> Unit,
     onEditPreset: (CustomFigurePreset) -> Unit,
@@ -93,8 +93,11 @@ fun FigureEncyclopediaScreen(
     var licenceFilter by remember { mutableStateOf<Licence?>(null) }
     var seriesFilter by remember { mutableStateOf<String?>(null) }
     var opened by remember { mutableStateOf<EncycloEntry?>(null) }
-    var selectionMode by remember { mutableStateOf(false) }
     var selectedKeys by remember { mutableStateOf(setOf<String>()) }
+
+    // Le bouton qui bascule ce mode vit dans la TopAppBar (MainActivity, à côté des Réglages) :
+    // on efface juste la sélection courante quand il repasse à false depuis l'extérieur.
+    LaunchedEffect(selectionMode) { if (!selectionMode) selectedKeys = emptySet() }
 
     // Le choix de vague/volume dépend de la licence sélectionnée : on l'invalide si elle change.
     LaunchedEffect(licenceFilter) { seriesFilter = null }
@@ -127,22 +130,7 @@ fun FigureEncyclopediaScreen(
 
     Column(modifier.fillMaxSize().padding(horizontal = 14.dp)) {
         Spacer(Modifier.height(8.dp))
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Box(Modifier.weight(1f)) {
-                ThemedSearchField(value = searchQuery, onValueChange = { searchQuery = it }, placeholder = "Rechercher un personnage")
-            }
-            Spacer(Modifier.width(8.dp))
-            IconButton(onClick = {
-                selectionMode = !selectionMode
-                if (!selectionMode) selectedKeys = emptySet()
-            }) {
-                Icon(
-                    Icons.Filled.ChecklistRtl,
-                    contentDescription = "Sélection multiple",
-                    tint = if (selectionMode) NeonPurple else androidx.compose.ui.graphics.Color.White
-                )
-            }
-        }
+        ThemedSearchField(value = searchQuery, onValueChange = { searchQuery = it }, placeholder = "Rechercher un personnage")
         Spacer(Modifier.height(8.dp))
         LicenceFilterDropdown(licenceFilter) { licenceFilter = it }
         if (seriesOptions.isNotEmpty()) {
@@ -247,7 +235,6 @@ fun FigureEncyclopediaScreen(
                                 onClick = {
                                     vm.saveCatalogPresets(selectedPresets, isWishlist = false, photoOverrides)
                                     selectedKeys = emptySet()
-                                    selectionMode = false
                                 },
                                 modifier = Modifier.weight(1f)
                             ) { Text("+ Collection") }
@@ -255,7 +242,6 @@ fun FigureEncyclopediaScreen(
                                 onClick = {
                                     vm.saveCatalogPresets(selectedPresets, isWishlist = true, photoOverrides)
                                     selectedKeys = emptySet()
-                                    selectionMode = false
                                 },
                                 modifier = Modifier.weight(1f)
                             ) { Text("+ Souhaits") }

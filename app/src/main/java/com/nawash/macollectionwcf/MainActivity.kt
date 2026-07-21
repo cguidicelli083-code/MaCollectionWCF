@@ -36,6 +36,7 @@ import androidx.compose.material.icons.filled.Campaign
 import androidx.compose.material.icons.filled.Euro
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.MenuBook
+import androidx.compose.material.icons.filled.ChecklistRtl
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.AlertDialog
@@ -149,6 +150,7 @@ fun AppRoot(vm: AppViewModel = viewModel()) {
 
     var showOnboarding by remember { mutableStateOf(!AppPrefs.onboardingSeen) }
     var tab by remember { mutableStateOf(Tab.COLLECTION) }
+    var encycloSelectionMode by remember { mutableStateOf(false) }
     var showChooser by remember { mutableStateOf(false) }
     var chooserForWishlist by remember { mutableStateOf(false) }
     var editor by remember { mutableStateOf<CollectionEditor?>(null) }
@@ -554,6 +556,15 @@ fun AppRoot(vm: AppViewModel = viewModel()) {
                 TopAppBar(
                     title = { Text(titleFor(tab), fontWeight = FontWeight.Bold) },
                     actions = {
+                        if (tab == Tab.ENCYCLO) {
+                            IconButton(onClick = { encycloSelectionMode = !encycloSelectionMode }) {
+                                Icon(
+                                    Icons.Filled.ChecklistRtl,
+                                    contentDescription = "Sélection multiple",
+                                    tint = if (encycloSelectionMode) NeonPurple else Color.White
+                                )
+                            }
+                        }
                         IconButton(onClick = { showOptionsMenu = true }) {
                             Icon(Icons.Filled.Settings, contentDescription = "Réglages", tint = Color.White)
                         }
@@ -666,6 +677,7 @@ fun AppRoot(vm: AppViewModel = viewModel()) {
                     )
                     Tab.ENCYCLO -> FigureEncyclopediaScreen(
                         vm = vm,
+                        selectionMode = encycloSelectionMode,
                         onAddToCollection = { preset -> editor = presetToEditor(preset, isWishlist = false).copy(fromEncyclo = true) },
                         onAddToWishlist = { preset -> editor = presetToEditor(preset, isWishlist = true).copy(fromEncyclo = true) },
                         onEditPreset = { editingCustomPreset = it },
