@@ -117,8 +117,9 @@ private enum class ActuTimeFilter { UPCOMING, PAST }
  *
  * Le cache Room accumule les items au fil des synchronisations, y compris d'anciennes sorties
  * déjà passées : plutôt que de les cacher purement et simplement, une bascule « À venir » /
- * « Anciennes » les sépare clairement (les dates non reconnues sont classées en « À venir » par
- * prudence, pour ne jamais masquer une vraie annonce faute de format de date compris).
+ * « Anciennes » les sépare clairement. Une annonce sans date de sortie/expédition reconnue (donc
+ * sans engagement ferme de date future) est classée en « Anciennes » plutôt qu'« À venir » : ce
+ * n'est pas une vraie « sortie prochaine » tant qu'aucune date n'est annoncée.
  */
 @Composable
 fun ActuScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
@@ -145,8 +146,8 @@ fun ActuScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
         allNews.filter { entry ->
             val ym = releaseYearMonth(entry.releaseDateRaw)
             when (timeFilter) {
-                ActuTimeFilter.UPCOMING -> ym == null || ym >= nowYm
-                ActuTimeFilter.PAST -> ym != null && ym < nowYm
+                ActuTimeFilter.UPCOMING -> ym != null && ym >= nowYm
+                ActuTimeFilter.PAST -> ym == null || ym < nowYm
             }
         }
     }
