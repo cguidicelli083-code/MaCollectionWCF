@@ -25,6 +25,7 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateMapOf
@@ -50,7 +51,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 @Composable
-fun BackupScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
+fun BackupScreen(vm: AppViewModel, modifier: Modifier = Modifier, onOpenPremium: () -> Unit = {}) {
+    val isPremium by vm.isPremium.collectAsState()
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
     var working by remember { mutableStateOf(false) }
@@ -131,10 +133,13 @@ fun BackupScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
         )
         Spacer(Modifier.height(12.dp))
         OutlinedButton(
-            onClick = { excelExportLauncher.launch("macollectionwcf-${System.currentTimeMillis()}.xls") },
+            onClick = {
+                if (isPremium) excelExportLauncher.launch("macollectionwcf-${System.currentTimeMillis()}.xls")
+                else onOpenPremium()
+            },
             enabled = !working,
             modifier = Modifier.fillMaxWidth()
-        ) { Text(stringResource(R.string.excel_export_button)) }
+        ) { Text(stringResource(if (isPremium) R.string.excel_export_button else R.string.excel_export_locked)) }
 
         Spacer(Modifier.height(20.dp))
         Text(

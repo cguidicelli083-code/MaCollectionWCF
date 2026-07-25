@@ -39,9 +39,9 @@ Français, anglais, espagnol, italien, allemand, portugais, russe, grec, turc, j
 🎨 THÈMES PERSONNALISABLES
 Choisis un thème visuel par licence, et change l'image de fond de l'application.
 
-Ma Collection WCF est gratuite et financée par des publicités discrètes (bannière + un interstitiel unique lors de la consultation de la valeur totale).
+Ma Collection WCF est gratuite, financée par des publicités discrètes (bannière + un interstitiel unique lors de la consultation de la valeur totale). Un achat Premium unique (sans abonnement) retire toutes les publicités et débloque l'export Excel illimité.
 ```
-(≈1450 caractères — OK)
+(≈1600 caractères — OK)
 
 ## Full description (4000 char max) — English
 ```
@@ -68,11 +68,16 @@ French, English, Spanish, Italian, German, Portuguese, Russian, Greek, Turkish, 
 🎨 CUSTOMIZABLE THEMES
 Choose a visual theme per licence, and change the app's background image.
 
-Ma Collection WCF is free and funded by unobtrusive ads (a banner + a single interstitial when viewing the total value).
+Ma Collection WCF is free, funded by unobtrusive ads (a banner + a single interstitial when viewing the total value). A one-time Premium purchase (no subscription) removes all ads and unlocks unlimited Excel export.
 ```
 
 ## Catégorie suggérée
 Divertissement (Entertainment), ou Style de vie (Lifestyle).
+
+## Achats intégrés
+Coche "Contient des achats intégrés" dans Play Console. Un seul produit géré (achat unique, pas d'abonnement) :
+- ID produit : `premium_all_access_iap`
+- Fourchette de prix suggérée à indiquer dans la fiche Store : à définir toi-même selon le prix choisi côté Monétisation.
 
 ## Classification du contenu
 À faire dans Play Console → questionnaire de classification (aucune violence/contenu adulte réel dans l'app elle-même — catalogue de figurines).

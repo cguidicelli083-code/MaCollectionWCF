@@ -212,4 +212,16 @@
     <string name="lang_name_tr">Türkçe</string>
     <string name="lang_name_ja">日本語</string>
     <string name="lang_name_zh">中文</string>
+
+    <!-- Premium -->
+    <string name="premium_option">⭐ Premium</string>
+    <string name="premium_status_active">⭐ Premium aktif</string>
+    <string name="premium_dialog_title">Premium\'a Geç</string>
+    <string name="premium_cta_button">Premium\'a Geç</string>
+    <string name="premium_coming_soon">Yakında</string>
+    <string name="premium_already_active">Teşekkürler! Premium erişimin aktif: artık reklam yok ve Excel dışa aktarma kilidi açıldı.</string>
+    <string name="premium_pitch">Kalıcı olarak şunların kilidini açan tek seferlik bir satın alma (abonelik değil):</string>
+    <string name="premium_benefit_no_ads">Artık reklam yok</string>
+    <string name="premium_benefit_excel">Sınırsız Excel dışa aktarma</string>
+    <string name="excel_export_locked">🔒 Excel dışa aktarmanın kilidini aç</string>
 </resources>

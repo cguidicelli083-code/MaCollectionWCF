@@ -212,4 +212,16 @@
     <string name="lang_name_tr">Türkçe</string>
     <string name="lang_name_ja">日本語</string>
     <string name="lang_name_zh">中文</string>
+
+    <!-- Premium -->
+    <string name="premium_option">⭐ Premium</string>
+    <string name="premium_status_active">⭐ Premium ενεργό</string>
+    <string name="premium_dialog_title">Αναβάθμιση σε Premium</string>
+    <string name="premium_cta_button">Αναβάθμιση σε Premium</string>
+    <string name="premium_coming_soon">Σύντομα διαθέσιμο</string>
+    <string name="premium_already_active">Ευχαριστούμε! Η πρόσβαση Premium είναι ενεργή: καμία διαφήμιση πια, και η εξαγωγή σε Excel είναι ξεκλείδωτη.</string>
+    <string name="premium_pitch">Μια εφάπαξ αγορά (χωρίς συνδρομή) που ξεκλειδώνει μόνιμα:</string>
+    <string name="premium_benefit_no_ads">Καμία διαφήμιση πια</string>
+    <string name="premium_benefit_excel">Απεριόριστη εξαγωγή σε Excel</string>
+    <string name="excel_export_locked">🔒 Ξεκλείδωσε την εξαγωγή σε Excel</string>
 </resources>

@@ -212,4 +212,16 @@
     <string name="lang_name_tr">Türkçe</string>
     <string name="lang_name_ja">日本語</string>
     <string name="lang_name_zh">中文</string>
+
+    <!-- Premium -->
+    <string name="premium_option">⭐ Premium</string>
+    <string name="premium_status_active">⭐ Premium aktiv</string>
+    <string name="premium_dialog_title">Premium freischalten</string>
+    <string name="premium_cta_button">Premium freischalten</string>
+    <string name="premium_coming_soon">Demnächst verfügbar</string>
+    <string name="premium_already_active">Danke! Dein Premium-Zugang ist aktiv: keine Werbung mehr, und der Excel-Export ist freigeschaltet.</string>
+    <string name="premium_pitch">Ein einmaliger Kauf (kein Abo), der dauerhaft freischaltet:</string>
+    <string name="premium_benefit_no_ads">Keine Werbung mehr</string>
+    <string name="premium_benefit_excel">Unbegrenzter Excel-Export</string>
+    <string name="excel_export_locked">🔒 Excel-Export freischalten</string>
 </resources>

@@ -212,4 +212,16 @@
     <string name="lang_name_tr">Türkçe</string>
     <string name="lang_name_ja">日本語</string>
     <string name="lang_name_zh">中文</string>
+
+    <!-- 高级版 -->
+    <string name="premium_option">⭐ 高级版</string>
+    <string name="premium_status_active">⭐ 高级版已激活</string>
+    <string name="premium_dialog_title">升级高级版</string>
+    <string name="premium_cta_button">升级高级版</string>
+    <string name="premium_coming_soon">即将推出</string>
+    <string name="premium_already_active">感谢支持！你的高级版已激活：不再显示广告，Excel 导出功能已解锁。</string>
+    <string name="premium_pitch">一次性购买（非订阅），永久解锁：</string>
+    <string name="premium_benefit_no_ads">不再显示广告</string>
+    <string name="premium_benefit_excel">无限次 Excel 导出</string>
+    <string name="excel_export_locked">🔒 解锁 Excel 导出</string>
 </resources>

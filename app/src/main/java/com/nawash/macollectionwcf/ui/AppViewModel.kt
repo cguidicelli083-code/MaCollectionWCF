@@ -63,6 +63,17 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
     private val catalogDao = db.figureCatalogDao()
     private val newsDao = db.wcfNewsDao()
 
+    private val billing = com.nawash.macollectionwcf.billing.BillingManager(app)
+
+    /** true dès que l'achat Premium (accès total, argent réel) est confirmé par Google Play. */
+    val isPremium: StateFlow<Boolean> = billing.premiumPurchased
+
+    /** true seulement si le produit Premium est réellement configuré côté Play Console. */
+    val premiumProductAvailable: StateFlow<Boolean> = billing.productAvailable
+
+    /** Lance le flux d'achat réel Google Play pour le statut Premium. */
+    fun launchPremiumPurchase(activity: android.app.Activity) = billing.launchPurchase(activity)
+
     init {
         viewModelScope.launch {
             // Best-effort, silencieux : sans réseau ou si le flux n'est pas encore configuré

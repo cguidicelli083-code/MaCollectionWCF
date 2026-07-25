@@ -122,5 +122,9 @@ dependencies {
     implementation("com.google.android.gms:play-services-ads:23.3.0")
     implementation("com.google.android.ump:user-messaging-platform:2.2.0")
 
+    // Premium (achat unique, retire les pubs + débloque l'export Excel). Artefact de base (pas
+    // -ktx) : évite un conflit de version de métadonnées Kotlin, callbacks classiques utilisés.
+    implementation("com.android.billingclient:billing:8.3.0")
+
     debugImplementation("androidx.compose.ui:ui-tooling")
 }

@@ -212,4 +212,16 @@
     <string name="lang_name_tr">Türkçe</string>
     <string name="lang_name_ja">日本語</string>
     <string name="lang_name_zh">中文</string>
+
+    <!-- Premium -->
+    <string name="premium_option">⭐ Premium</string>
+    <string name="premium_status_active">⭐ Premium active</string>
+    <string name="premium_dialog_title">Go Premium</string>
+    <string name="premium_cta_button">Go Premium</string>
+    <string name="premium_coming_soon">Coming soon</string>
+    <string name="premium_already_active">Thank you! Your Premium access is active: no more ads, and Excel export is unlocked.</string>
+    <string name="premium_pitch">A one-time purchase (no subscription) that permanently unlocks:</string>
+    <string name="premium_benefit_no_ads">No more ads</string>
+    <string name="premium_benefit_excel">Unlimited Excel export</string>
+    <string name="excel_export_locked">🔒 Unlock Excel export</string>
 </resources>

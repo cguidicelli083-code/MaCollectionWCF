@@ -212,4 +212,16 @@
     <string name="lang_name_tr">Türkçe</string>
     <string name="lang_name_ja">日本語</string>
     <string name="lang_name_zh">中文</string>
+
+    <!-- プレミアム -->
+    <string name="premium_option">⭐ プレミアム</string>
+    <string name="premium_status_active">⭐ プレミアム有効</string>
+    <string name="premium_dialog_title">プレミアムにアップグレード</string>
+    <string name="premium_cta_button">プレミアムにアップグレード</string>
+    <string name="premium_coming_soon">近日公開</string>
+    <string name="premium_already_active">ありがとうございます！プレミアムアクセスが有効です：広告が非表示になり、Excelエクスポートが利用可能になりました。</string>
+    <string name="premium_pitch">買い切り（サブスクリプションではありません）で、以下を永久に解除します：</string>
+    <string name="premium_benefit_no_ads">広告非表示</string>
+    <string name="premium_benefit_excel">無制限のExcelエクスポート</string>
+    <string name="excel_export_locked">🔒 Excelエクスポートを解除</string>
 </resources>

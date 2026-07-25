@@ -212,4 +212,16 @@
     <string name="lang_name_tr">Türkçe</string>
     <string name="lang_name_ja">日本語</string>
     <string name="lang_name_zh">中文</string>
+
+    <!-- Премиум -->
+    <string name="premium_option">⭐ Премиум</string>
+    <string name="premium_status_active">⭐ Премиум активен</string>
+    <string name="premium_dialog_title">Перейти на Премиум</string>
+    <string name="premium_cta_button">Перейти на Премиум</string>
+    <string name="premium_coming_soon">Скоро будет доступно</string>
+    <string name="premium_already_active">Спасибо! Ваш Премиум-доступ активен: больше никакой рекламы, и экспорт в Excel разблокирован.</string>
+    <string name="premium_pitch">Единоразовая покупка (без подписки), которая навсегда открывает:</string>
+    <string name="premium_benefit_no_ads">Никакой рекламы</string>
+    <string name="premium_benefit_excel">Неограниченный экспорт в Excel</string>
+    <string name="excel_export_locked">🔒 Разблокировать экспорт в Excel</string>
 </resources>

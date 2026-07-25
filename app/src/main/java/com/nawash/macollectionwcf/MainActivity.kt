@@ -171,6 +171,8 @@ fun AppRoot(vm: AppViewModel = viewModel()) {
     var currentLang by remember { mutableStateOf(AppPrefs.language) }
     var showTipsDialog by remember { mutableStateOf(false) }
     var showThemeDialog by remember { mutableStateOf(false) }
+    var showPremiumDialog by remember { mutableStateOf(false) }
+    val isPremium by vm.isPremium.collectAsState()
 
     // Position de défilement de chaque liste, hissée ici pour survivre à un aller-retour vers
     // la fiche de détail/modification ou à un changement d'onglet.
@@ -423,6 +425,10 @@ fun AppRoot(vm: AppViewModel = viewModel()) {
             text = {
                 Column {
                     TextButton(
+                        onClick = { showOptionsMenu = false; showPremiumDialog = true },
+                        modifier = Modifier.fillMaxWidth()
+                    ) { Text(stringResource(if (isPremium) R.string.premium_status_active else R.string.premium_option)) }
+                    TextButton(
                         onClick = { showOptionsMenu = false; showCurrencyDialog = true },
                         modifier = Modifier.fillMaxWidth()
                     ) { Text(stringResource(R.string.currency_option)) }
@@ -586,6 +592,37 @@ fun AppRoot(vm: AppViewModel = viewModel()) {
         )
     }
 
+    if (showPremiumDialog) {
+        val productAvailable by vm.premiumProductAvailable.collectAsState()
+        AlertDialog(
+            onDismissRequest = { showPremiumDialog = false },
+            title = { Text(stringResource(R.string.premium_dialog_title)) },
+            confirmButton = {
+                when {
+                    isPremium -> {}
+                    productAvailable -> TextButton(onClick = {
+                        (context as? android.app.Activity)?.let { vm.launchPremiumPurchase(it) }
+                    }) { Text(stringResource(R.string.premium_cta_button)) }
+                    else -> TextButton(onClick = {}, enabled = false) { Text(stringResource(R.string.premium_coming_soon)) }
+                }
+            },
+            dismissButton = { TextButton(onClick = { showPremiumDialog = false }) { Text(stringResource(R.string.close)) } },
+            text = {
+                Column {
+                    if (isPremium) {
+                        Text(stringResource(R.string.premium_already_active), style = MaterialTheme.typography.bodyMedium)
+                    } else {
+                        Text(stringResource(R.string.premium_pitch), style = MaterialTheme.typography.bodyMedium)
+                        Spacer(Modifier.height(10.dp))
+                        Text("✅ " + stringResource(R.string.premium_benefit_no_ads), style = MaterialTheme.typography.bodyMedium)
+                        Spacer(Modifier.height(4.dp))
+                        Text("✅ " + stringResource(R.string.premium_benefit_excel), style = MaterialTheme.typography.bodyMedium)
+                    }
+                }
+            }
+        )
+    }
+
     GamerScreenBackground {
         Scaffold(
             containerColor = Color.Transparent,
@@ -615,7 +652,8 @@ fun AppRoot(vm: AppViewModel = viewModel()) {
                 Column {
                     // Bandeau pub léger : affiché en bas de CHAQUE écran (partagé par tous les
                     // onglets via le bottomBar du Scaffold), au-dessus de la barre de navigation.
-                    BannerAdView()
+                    // Masqué pour les utilisateurs Premium (voir AppViewModel.isPremium).
+                    if (!isPremium) BannerAdView()
                     NavigationBar(containerColor = SurfaceBg) {
                         NavigationBarItem(
                             selected = tab == Tab.COLLECTION,
@@ -643,7 +681,8 @@ fun AppRoot(vm: AppViewModel = viewModel()) {
                             onClick = {
                                 tab = Tab.TOTAL
                                 // Seul endroit de l'app où une pub s'ouvre d'elle-même (voir AdsManager).
-                                (context as? android.app.Activity)?.let { AdsManager.showInterstitialOnTotal(it) }
+                                // Jamais pour les utilisateurs Premium.
+                                if (!isPremium) (context as? android.app.Activity)?.let { AdsManager.showInterstitialOnTotal(it) }
                             },
                             icon = { ThemedNavIcon(navTheme, 3, Icons.Filled.Euro) },
                             label = { NavLabel(stringResource(R.string.nav_total)) },
@@ -723,7 +762,7 @@ fun AppRoot(vm: AppViewModel = viewModel()) {
                     )
                     Tab.TOTAL -> TotalScreen(vm, Modifier.padding(padding))
                     Tab.ACTU -> ActuScreen(vm, Modifier.padding(padding))
-                    Tab.BACKUP -> BackupScreen(vm, Modifier.padding(padding))
+                    Tab.BACKUP -> BackupScreen(vm, Modifier.padding(padding), onOpenPremium = { showPremiumDialog = true })
                 }
             }
         }

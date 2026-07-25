@@ -11,8 +11,15 @@
 - [x] Icône Play Store 512×512 générée : `docs/store/icon-512.png`.
 - [x] Bannière de présentation 1024×500 générée : `docs/store/feature-graphic-1024x500.png`.
 - [x] Fiche Store (titre, descriptions courte/longue fr+en) rédigée : `docs/store/fiche-play-store.md`.
+- [x] Premium (achat unique, argent réel) implémenté : Google Play Billing, retire les pubs + débloque l'export Excel. Traduit dans les 11 langues.
 
 ## ⚠️ À FAIRE PAR TOI avant de publier (nécessite ton compte / des captures d'écran)
+
+0. **Play Console — produit in-app Premium** (bloquant pour que le bouton "Passer Premium" fonctionne) :
+   - Play Console → ton app → Monétiser → Produits → Produits gérés → Créer un produit.
+   - ID produit (à taper EXACTEMENT, sensible à la casse) : `premium_all_access_iap`
+   - Titre/description libres (ex. "Accès Premium — sans pub + export Excel"), fixe un prix.
+   - Active le produit. Tant qu'il n'est pas créé et actif, le bouton "Passer Premium" affiche "Bientôt disponible" dans l'app (comportement normal et voulu, pas un bug).
 
 1. **AdMob — IDs réels** (bloquant, actuellement en IDs de TEST Google) :
    - Crée un compte AdMob si pas déjà fait (https://admob.google.com).
@@ -33,7 +40,7 @@
    - Nom, description courte/longue, icône, bannière → copier depuis `docs/store/fiche-play-store.md` et `docs/store/*.png`.
    - Coller l'URL de la politique de confidentialité (étape 4).
    - Questionnaire de classification du contenu (aucun contenu sensible dans l'app).
-   - Section "Sécurité des données" (Data safety) : déclarer les données collectées — voir `docs/privacy-policy.html` pour la liste exacte (photos envoyées à Gemini/Groq pour reconnaissance, requêtes de recherche envoyées à eBay/Tavily, IDs publicitaires via AdMob).
+   - Section "Sécurité des données" (Data safety) : déclarer les données collectées — voir `docs/privacy-policy.html` pour la liste exacte (photos envoyées à Gemini/Groq pour reconnaissance, requêtes de recherche envoyées à eBay/Tavily, IDs publicitaires via AdMob). Cocher aussi "Contient des achats intégrés" (voir section dédiée dans `fiche-play-store.md`).
    - Uploader `app/build/outputs/bundle/release/app-release.aab` dans une release (commencer par un test interne/fermé est recommandé avant production).
 
 6. **Après publication** : pense à sauvegarder le keystore (`macollectionwcf-release.jks`) et son mot de passe (dans `local.properties`) ailleurs qu'sur ce PC (gestionnaire de mots de passe, cloud chiffré...) — leur perte rendrait impossible toute future mise à jour de l'app.
