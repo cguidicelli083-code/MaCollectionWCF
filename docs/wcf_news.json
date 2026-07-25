@@ -184,6 +184,86 @@
     "scrapedAt": "2026-07-21T09:24:16.539993+00:00"
   },
   {
+    "id": "2839972",
+    "series": "ドラゴンボール ワールドコレクタブルフィギュア-少年期編5-",
+    "licence": "DRAGON_BALL",
+    "characters": [],
+    "releaseDateRaw": "2026年8月27日(木)より順次登場予定",
+    "priceRaw": "",
+    "translations": {
+      "ja": {
+        "series": "ドラゴンボール ワールドコレクタブルフィギュア-少年期編5-",
+        "releaseDate": "2026年8月27日(木)より順次登場予定",
+        "price": "",
+        "characters": []
+      },
+      "fr": {
+        "series": "Figurine à collectionner Dragon Ball World-Boyhood Edition 5-",
+        "releaseDate": "Sortie prévue séquentiellement à partir du jeudi 27 août 2026",
+        "price": "",
+        "characters": []
+      },
+      "en": {
+        "series": "Dragon Ball World Collectible Figure-Boyhood Edition 5-",
+        "releaseDate": "Scheduled to be released sequentially from Thursday, August 27, 2026",
+        "price": "",
+        "characters": []
+      },
+      "es": {
+        "series": "Figura Coleccionable Dragon Ball World-Edición Boyhood 5-",
+        "releaseDate": "Programado para ser lanzado secuencialmente a partir del jueves 27 de agosto de 2026",
+        "price": "",
+        "characters": []
+      },
+      "it": {
+        "series": "Figura da collezione Dragon Ball World - Edizione Boyhood 5-",
+        "releaseDate": "Il rilascio è previsto in sequenza a partire da giovedì 27 agosto 2026",
+        "price": "",
+        "characters": []
+      },
+      "de": {
+        "series": "Dragon Ball World Sammelfigur-Boyhood Edition 5-",
+        "releaseDate": "Geplante Veröffentlichung nacheinander ab Donnerstag, 27. August 2026",
+        "price": "",
+        "characters": []
+      },
+      "pt": {
+        "series": "Dragon Ball World Collectible Figure-Boyhood Edition 5-",
+        "releaseDate": "Programado para ser lançado sequencialmente a partir de quinta-feira, 27 de agosto de 2026",
+        "price": "",
+        "characters": []
+      },
+      "ru": {
+        "series": "Коллекционная фигурка Dragon Ball World - Boyhood Edition 5-",
+        "releaseDate": "Планируется выпустить последовательно с четверга, 27 августа 2026 г.",
+        "price": "",
+        "characters": []
+      },
+      "el": {
+        "series": "Dragon Ball World Collectible Figure-Boyhood Edition 5-",
+        "releaseDate": "Έχει προγραμματιστεί να κυκλοφορήσει διαδοχικά από την Πέμπτη 27 Αυγούστου 2026",
+        "price": "",
+        "characters": []
+      },
+      "tr": {
+        "series": "Dragon Ball World Koleksiyonluk Figür-Boyhood Edition 5-",
+        "releaseDate": "27 Ağustos 2026 Perşembe gününden itibaren sırayla yayınlanması planlanıyor",
+        "price": "",
+        "characters": []
+      },
+      "zh": {
+        "series": "龙珠世界 收藏人物-少年版5-",
+        "releaseDate": "预定从2026年8月27日星期四起依次发布",
+        "price": "",
+        "characters": []
+      }
+    },
+    "imageUrl": "https://cguidicelli083-code.github.io/MaCollectionWCF/images/wcf/2839972.jpg",
+    "itemUrl": "https://bsp-prize.jp/item/2839972/",
+    "localImagePath": "docs/images/wcf/2839972.jpg",
+    "scrapedAt": "2026-07-24T10:36:25.495114+00:00"
+  },
+  {
     "id": "2839971",
     "series": "ドラゴンボール ワールドコレクタブルフィギュア-少年期編4-",
     "licence": "DRAGON_BALL",
@@ -342,6 +422,86 @@
     "itemUrl": "https://bsp-prize.jp/item/2832090/",
     "localImagePath": "docs/images/wcf/2832090.jpg",
     "scrapedAt": "2026-07-21T09:24:04.793142+00:00"
+  },
+  {
+    "id": "2829160",
+    "series": "ワンピース ワールドコレクタブルフィギュア-宴1-",
+    "licence": "ONE_PIECE",
+    "characters": [],
+    "releaseDateRaw": "2026年8月4日(火)より順次登場予定",
+    "priceRaw": "",
+    "translations": {
+      "ja": {
+        "series": "ワンピース ワールドコレクタブルフィギュア-宴1-",
+        "releaseDate": "2026年8月4日(火)より順次登場予定",
+        "price": "",
+        "characters": []
+      },
+      "fr": {
+        "series": "ワンピース ワールドコレクタブルフィギュア-宴1-",
+        "releaseDate": "2026年8月4日(火)より順次登場予定",
+        "price": "",
+        "characters": []
+      },
+      "en": {
+        "series": "One Piece World Collectible Figure - Banquet 1 -",
+        "releaseDate": "Scheduled to be released sequentially from August 4, 2026 (Tuesday)",
+        "price": "",
+        "characters": []
+      },
+      "es": {
+        "series": "Figura coleccionable One Piece World - Banquete 1 -",
+        "releaseDate": "Programado para ser lanzado secuencialmente a partir del 4 de agosto de 2026 (martes)",
+        "price": "",
+        "characters": []
+      },
+      "it": {
+        "series": "Figura da collezione One Piece World - Banchetto 1 -",
+        "releaseDate": "Il rilascio è previsto in sequenza dal 4 agosto 2026 (martedì)",
+        "price": "",
+        "characters": []
+      },
+      "de": {
+        "series": "One Piece World Sammelfigur – Bankett 1 –",
+        "releaseDate": "Geplante Veröffentlichung nacheinander ab 4. August 2026 (Dienstag)",
+        "price": "",
+        "characters": []
+      },
+      "pt": {
+        "series": "Figura colecionável do mundo de One Piece - Banquete 1 -",
+        "releaseDate": "Programado para ser lançado sequencialmente a partir de 4 de agosto de 2026 (terça-feira)",
+        "price": "",
+        "characters": []
+      },
+      "ru": {
+        "series": "Коллекционная фигурка One Piece World — Банкет 1 —",
+        "releaseDate": "Планируется выпустить последовательно с 4 августа 2026 г. (вторник).",
+        "price": "",
+        "characters": []
+      },
+      "el": {
+        "series": "One Piece World Συλλεκτική Φιγούρα - Δείπνο 1 -",
+        "releaseDate": "Έχει προγραμματιστεί να κυκλοφορήσει διαδοχικά από τις 4 Αυγούστου 2026 (Τρίτη)",
+        "price": "",
+        "characters": []
+      },
+      "tr": {
+        "series": "Tek Parça Dünya Koleksiyon Figürü - Ziyafet 1 -",
+        "releaseDate": "4 Ağustos 2026'dan (Salı) itibaren sırayla yayınlanması planlanıyor",
+        "price": "",
+        "characters": []
+      },
+      "zh": {
+        "series": "海贼王收藏人物 - 宴会 1 -",
+        "releaseDate": "预定2026年8月4日（周二）起依次发布",
+        "price": "",
+        "characters": []
+      }
+    },
+    "imageUrl": "https://cguidicelli083-code.github.io/MaCollectionWCF/images/wcf/2829160.jpg",
+    "itemUrl": "https://bsp-prize.jp/item/2829160/",
+    "localImagePath": "docs/images/wcf/2829160.jpg",
+    "scrapedAt": "2026-07-24T10:36:54.359204+00:00"
   },
   {
     "id": "2803927",
