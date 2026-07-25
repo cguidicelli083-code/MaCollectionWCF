@@ -1,0 +1,215 @@
+<resources>
+    <string name="app_name">Ma Collection WCF</string>
+
+    <!-- Onboarding (tutorial de primer lanzamiento) -->
+    <string name="onboarding_page1_title">Bienvenido a Ma Collection WCF 🎎</string>
+    <string name="onboarding_page1_text">Esta app te ayuda a catalogar tu colección de figuras World Collectable Figure (One Piece, Bleach, Dragon Ball, Naruto...), con estimación de precios.</string>
+    <string name="onboarding_page2_title">📷 Añadir una figura</string>
+    <string name="onboarding_page2_text">Pulsa el botón + para añadir una figura: escanea un código de barras, haz una foto, elige una de tu galería, o introduce todo manualmente.</string>
+    <string name="onboarding_page3_title">📚 Enciclo</string>
+    <string name="onboarding_page3_text">Consulta el catálogo de figuras y añade una ficha directamente a tu colección o a tus deseos. El catálogo integrado se amplía progresivamente; mientras tanto, añade tus propias fichas (con foto) con el botón +.</string>
+    <string name="onboarding_page4_title">❤️ Deseos &amp; 💎 Total</string>
+    <string name="onboarding_page4_text">La pestaña Deseos enumera tus futuras adquisiciones. La pestaña Total muestra el valor estimado de toda tu colección.</string>
+    <string name="onboarding_page5_title">💾 Copia de seguridad</string>
+    <string name="onboarding_page5_text">Guarda toda tu colección (datos y fotos) en un archivo que tú eliges dónde guardar, y restáurala en cualquier momento — útil si reinstalas o cambias de teléfono. En los ajustes (engranaje), también puedes cambiar la imagen de fondo de toda la app.</string>
+    <string name="onboarding_page6_title">💡 Consejos</string>
+    <string name="onboarding_page6_text">En los ajustes (engranaje), una pestaña «Consejos» resume las recomendaciones para encuadrar bien tus fotos y rellenar bien tus figuras a mano.</string>
+    <string name="onboarding_skip">Saltar</string>
+    <string name="onboarding_next">Siguiente</string>
+    <string name="onboarding_start">Empezar</string>
+
+    <!-- Colección / Deseos -->
+    <string name="search_placeholder_wishlist">Buscar en los deseos</string>
+    <string name="search_placeholder_collection">Buscar en la colección</string>
+    <string name="wave_volume_label">Oleada/Volumen</string>
+    <string name="all_waves">Todas las oleadas</string>
+    <string name="no_search_results">Sin resultados para esta búsqueda.</string>
+    <string name="empty_wishlist_message">Ningún deseo por ahora. Añade una figura que quieras con el botón +.</string>
+    <string name="empty_collection_message">Tu colección está vacía. Añade tu primera figura con el botón +.</string>
+    <string name="unnamed_figure">Figura sin nombre</string>
+    <string name="tag_box">Caja</string>
+    <string name="tag_accessories">Accesorios</string>
+    <string name="ai_estimate_suffix">(IA)</string>
+    <string name="edit_content_description">Editar</string>
+    <string name="delete_content_description">Eliminar</string>
+    <string name="sort_label">Ordenar</string>
+    <string name="all_licences">Todas las licencias</string>
+    <string name="licence_label">Licencia</string>
+    <string name="sort_name">Nombre</string>
+    <string name="sort_price_desc">Precio (alto → bajo)</string>
+    <string name="sort_price_asc">Precio (bajo → alto)</string>
+    <string name="sort_release_asc">Fecha de lanzamiento (antigua → reciente)</string>
+    <string name="sort_release_desc">Fecha de lanzamiento (reciente → antigua)</string>
+
+    <!-- Comunes -->
+    <string name="cancel">Cancelar</string>
+    <string name="close">Cerrar</string>
+
+    <!-- Escaneo por lote -->
+    <string name="batch_scan_title">%1$d figura(s) detectada(s)</string>
+    <string name="batch_scan_selected_count">%1$d / %2$d seleccionada(s)</string>
+    <string name="batch_scan_confirm">Confirmar añadido por lote</string>
+
+    <!-- Ficha detalle -->
+    <string name="back_content_description">Volver</string>
+    <string name="search_ebay_sold">🔍 Buscar en eBay (ventas realizadas)</string>
+    <string name="size_cm">Tamaño: %1$s cm</string>
+    <string name="edit_price">Editar precio</string>
+    <string name="move_to_collection">Pasar a colección</string>
+    <string name="gallery_count">Galería (%1$d)</string>
+    <string name="price_euro_label">Precio (€)</string>
+    <string name="save">Guardar</string>
+
+    <!-- Total -->
+    <string name="collection_value">Valor de la colección</string>
+    <string name="figure_count">%1$d figura(s)</string>
+    <string name="completion_by_series">Compleción por gama</string>
+    <string name="completion_placeholder">La compleción por gama aparecerá en cuanto el catálogo Enciclo tenga oleadas WCF registradas.</string>
+    <string name="completion_sort_percent_desc">% (alto → bajo)</string>
+    <string name="completion_sort_percent_asc">% (bajo → alto)</string>
+
+    <!-- Copia de seguridad / Exportar / Importar -->
+    <string name="backup_export_success">Copia de seguridad guardada con éxito.</string>
+    <string name="backup_export_failure">Error al guardar la copia de seguridad.</string>
+    <string name="excel_export_success">Tabla Excel exportada con éxito.</string>
+    <string name="excel_export_failure">Error al exportar la tabla Excel.</string>
+    <string name="import_read_failure">No se puede leer este archivo. Formatos aceptados: .xlsx o .csv.</string>
+    <string name="backup_intro">Guarda toda tu colección (datos y fotos) en un archivo que tú eliges (descargas, Drive...). Este archivo sigue disponible aunque desinstales la app.</string>
+    <string name="backup_save_button">Guardar la colección</string>
+    <string name="backup_restore_button">Restaurar una copia de seguridad</string>
+    <string name="excel_export_intro">Exporta toda tu colección (y tus deseos) como una tabla con una foto por fila — legible en Excel o cualquier hoja de cálculo (Excel mostrará un aviso de formato al abrir, sin consecuencias: haz clic en «Sí»).</string>
+    <string name="excel_export_button">Exportar como tabla Excel</string>
+    <string name="sheet_import_intro">Importa una colección desde un archivo Excel (.xlsx) o CSV — aunque sus columnas no coincidan con el formato de la app, podrás hacerlas coincidir en el siguiente paso.</string>
+    <string name="sheet_import_button">Importar un archivo Excel/CSV</string>
+    <string name="backup_restore_confirm_text">Esta acción reemplaza por completo tu colección actual por el contenido de la copia de seguridad. ¿Continuar?</string>
+    <string name="restore">Restaurar</string>
+    <string name="backup_restore_success">Colección restaurada con éxito.</string>
+    <string name="backup_restore_failure">Error al restaurar: archivo inválido o dañado.</string>
+    <string name="import_success_count">%1$d figura(s) importada(s) con éxito.</string>
+    <string name="field_character">Personaje</string>
+    <string name="field_commercial_name">Nombre comercial</string>
+    <string name="field_series">Gama / oleada WCF</string>
+    <string name="field_manufacturer">Editor</string>
+    <string name="field_condition">Estado</string>
+    <string name="field_has_box">Con caja</string>
+    <string name="field_has_accessories">Con accesorios</string>
+    <string name="field_year">Año de lanzamiento</string>
+    <string name="field_height">Tamaño (cm)</string>
+    <string name="field_price">Precio</string>
+    <string name="field_barcode">Código de barras</string>
+    <string name="field_description">Descripción</string>
+    <string name="no_column">Ninguna columna</string>
+    <string name="match_columns_title">Hacer coincidir las columnas</string>
+    <string name="match_columns_help">Indica a qué columna de tu archivo corresponde cada campo. Solo el Personaje es obligatorio; los demás campos no encontrados quedarán vacíos.</string>
+    <string name="next">Siguiente</string>
+    <string name="import_action">Importar</string>
+
+    <!-- Formulario añadir/editar figura -->
+    <string name="form_title_edit">Editar figura</string>
+    <string name="form_title_new_wish">Nuevo deseo</string>
+    <string name="form_title_new_figure">Nueva figura</string>
+    <string name="search_catalog_placeholder">Buscar en el catálogo (opcional)</string>
+    <string name="no_local_catalog_results">Sin resultados en el catálogo local.</string>
+    <string name="choose_photo_option">🖼️  Elegir una foto</string>
+    <string name="take_photo_option">📸  Hacer una foto</string>
+    <string name="remove_photo">Quitar la foto</string>
+    <string name="photo_gallery">Galería de fotos</string>
+    <string name="field_code_hint">Código (ej. OP-427, dejar vacío si se desconoce)</string>
+    <string name="field_has_accessories_hint">Con accesorios (armas, piezas...)</string>
+    <string name="field_price_hint">Precio (€, dejar vacío si se desconoce)</string>
+    <string name="update_action">Actualizar</string>
+    <string name="add_to_wishlist">Añadir a deseos</string>
+    <string name="condition_hs">Roto</string>
+    <string name="condition_mauvais">Malo</string>
+    <string name="condition_bon">Bueno</string>
+    <string name="condition_tres_bon">Muy bueno</string>
+    <string name="condition_mint">Perfecto</string>
+    <string name="condition_neuf">Nuevo</string>
+
+    <!-- Enciclo -->
+    <string name="search_character_placeholder">Buscar un personaje</string>
+    <string name="encyclo_empty_no_catalog">El catálogo integrado llegará en una próxima actualización. Mientras tanto, añade tus propias fichas con el botón +.</string>
+    <string name="selected_count">%1$d seleccionada(s)</string>
+    <string name="plus_collection">+ Colección</string>
+    <string name="plus_wishlist">+ Deseos</string>
+    <string name="official_photo_coming">Foto oficial próximamente</string>
+    <string name="change_photo">Cambiar la foto</string>
+    <string name="add_photo">Añadir una foto</string>
+    <string name="cm_suffix">cm</string>
+    <string name="upcoming_release_note">%1$s — todavía no comercializado, foto oficial próximamente.</string>
+    <string name="indicative_price">Precio orientativo: %1$s</string>
+    <string name="add_to_collection">Añadir a mi colección</string>
+    <string name="form_title_edit_sheet">Editar ficha</string>
+    <string name="form_title_new_encyclo_sheet">Nueva ficha Enciclo</string>
+
+    <!-- Novedades -->
+    <string name="no_news_yet">Sin novedades por ahora</string>
+    <string name="no_news_yet_detail">Las novedades WCF aparecerán aquí tras la próxima sincronización.</string>
+    <string name="upcoming">Próximamente</string>
+    <string name="past_news">Novedades antiguas</string>
+    <string name="no_upcoming_news">Sin próximas novedades por ahora.</string>
+    <string name="no_past_news_for_licence">Sin novedades antiguas para esta licencia.</string>
+    <string name="tap_to_read_enlarge">Toca para leer / ampliar la foto</string>
+    <string name="tap_photo_to_enlarge">Toca la foto para ampliarla</string>
+    <string name="figures_label">Figuras</string>
+    <string name="view_official_page">Ver la ficha oficial</string>
+
+    <!-- Estimación de precio por IA -->
+    <string name="ai_estimate_label_tavily">Estimación por IA (búsqueda web) — no se encontró ningún anuncio eBay comparable, cuota de Gemini no disponible</string>
+    <string name="ai_estimate_label_web">Estimación por IA (búsqueda en línea) — no se encontró ningún anuncio eBay comparable</string>
+
+    <!-- MainActivity: diálogos y navegación -->
+    <string name="add_item_dialog_title">Añadir un objeto</string>
+    <string name="scan_barcode_option">📷  Escanear un código de barras</string>
+    <string name="scan_batch_option">Escanear un lote (varias figuras)</string>
+    <string name="manual_entry_option">✏️  Entrada manual</string>
+    <string name="lang_dialog_title">Idioma de la aplicación</string>
+    <string name="lang_option_checked">%1$s  ✓</string>
+    <string name="settings_content_description">Ajustes</string>
+    <string name="add_content_description">Añadir</string>
+    <string name="nav_collection">Colección</string>
+    <string name="nav_wishlist">Deseos</string>
+    <string name="nav_encyclo">Enciclo</string>
+    <string name="nav_total">Total</string>
+    <string name="nav_actu">Novedades</string>
+    <string name="title_collection">Mi colección</string>
+    <string name="scanning_batch">Analizando el lote…</string>
+    <string name="scanning_recognition">Reconociendo el personaje (IA)…</string>
+    <string name="scanning_photo">Analizando la foto…</string>
+    <string name="analysis_unavailable_title">Análisis no disponible</string>
+    <string name="analysis_unavailable_text">El análisis por IA no está disponible temporalmente (límite diario alcanzado o problema de conexión). Inténtalo de nuevo más tarde.</string>
+    <string name="no_figure_detected_title">No se detectó ninguna figura</string>
+    <string name="no_figure_detected_text">No se detectó ninguna figura en esta foto.</string>
+    <string name="adding_figures_in_progress">Añadiendo %1$d figura(s)…</string>
+    <string name="currency_option">💱 Moneda</string>
+    <string name="language_option">🌐 Idioma</string>
+    <string name="backup_option">💾 Copia de seguridad</string>
+    <string name="replay_tutorial_option">❓ Volver a ver el tutorial</string>
+    <string name="tips_option">💡 Consejos</string>
+    <string name="background_image_option">🖼️ Imagen de fondo</string>
+    <string name="default_background_option">↩️ Fondo predeterminado</string>
+    <string name="theme_option">🎨 Tema</string>
+    <string name="theme_dialog_title">Tema de la aplicación</string>
+    <string name="theme_dialog_help">Elige un tema por licencia. Todos son gratuitos y se aplican de inmediato.</string>
+    <string name="currency_dialog_help">Moneda de visualización y de introducción de precios (siempre convertida desde el euro, al tipo más reciente obtenido al iniciar).</string>
+    <string name="tips_framing_title">📸 Encuadrar bien la foto</string>
+    <string name="tips_framing_text">Encuadra la foto de cerca sobre la figura o su caja, plana y de frente, con buena luz sin reflejos ni desenfoque: cuanto más nítido y legible sea el texto de la caja, más fiable será la sugerencia automática del nombre.</string>
+    <string name="tips_fields_title">🏷️ Rellenar bien una figura</string>
+    <string name="tips_fields_text">Indica el personaje, la licencia y, si es posible, la gama/oleada WCF exacta (visible en la caja): esto ayudará a encontrar la ficha correcta en Enciclo y, más adelante, a obtener un precio más preciso.</string>
+    <string name="tips_price_title">💰 Precio introducido a mano</string>
+    <string name="tips_price_text">Mientras la estimación automática no esté disponible, introduce tú mismo el precio en cada ficha (botón «Editar precio») para que el valor total de tu colección se mantenga actualizado.</string>
+    <string name="multi_select_content_description">Selección múltiple</string>
+
+    <!-- Nombres nativos de los idiomas (selector de idioma) -->
+    <string name="lang_name_fr">Français</string>
+    <string name="lang_name_en">English</string>
+    <string name="lang_name_es">Español</string>
+    <string name="lang_name_it">Italiano</string>
+    <string name="lang_name_de">Deutsch</string>
+    <string name="lang_name_pt">Português</string>
+    <string name="lang_name_ru">Русский</string>
+    <string name="lang_name_el">Ελληνικά</string>
+    <string name="lang_name_tr">Türkçe</string>
+    <string name="lang_name_ja">日本語</string>
+    <string name="lang_name_zh">中文</string>
+</resources>

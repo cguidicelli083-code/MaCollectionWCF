@@ -48,10 +48,12 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import coil.compose.AsyncImage
+import com.nawash.macollectionwcf.R
 import com.canhub.cropper.CropImageContract
 import com.canhub.cropper.CropImageContractOptions
 import com.canhub.cropper.CropImageOptions
@@ -130,16 +132,17 @@ fun FigureEncyclopediaScreen(
 
     Column(modifier.fillMaxSize().padding(horizontal = 14.dp)) {
         Spacer(Modifier.height(8.dp))
-        ThemedSearchField(value = searchQuery, onValueChange = { searchQuery = it }, placeholder = "Rechercher un personnage")
+        ThemedSearchField(value = searchQuery, onValueChange = { searchQuery = it }, placeholder = stringResource(R.string.search_character_placeholder))
         Spacer(Modifier.height(8.dp))
         LicenceFilterDropdown(licenceFilter) { licenceFilter = it }
         if (seriesOptions.isNotEmpty()) {
             Spacer(Modifier.height(8.dp))
+            val allWaves = stringResource(R.string.all_waves)
             ThemedChoiceDropdown(
-                leading = "Vague/Volume",
-                selectedLabel = seriesFilter ?: "Toutes les vagues",
+                leading = stringResource(R.string.wave_volume_label),
+                selectedLabel = seriesFilter ?: allWaves,
                 options = listOf(null) + seriesOptions,
-                optionLabel = { it ?: "Toutes les vagues" },
+                optionLabel = { it ?: allWaves },
                 onSelect = { seriesFilter = it }
             )
         }
@@ -148,8 +151,8 @@ fun FigureEncyclopediaScreen(
         if (entries.isEmpty()) {
             EmptyState(
                 if (customPresets.isEmpty())
-                    "Le catalogue intégré arrivera dans une prochaine mise à jour. En attendant, ajoute tes propres fiches avec le bouton +."
-                else "Aucun résultat pour cette recherche."
+                    stringResource(R.string.encyclo_empty_no_catalog)
+                else stringResource(R.string.no_search_results)
             )
         } else {
             Box(Modifier.weight(1f).fillMaxWidth()) {
@@ -225,7 +228,7 @@ fun FigureEncyclopediaScreen(
                             .padding(top = 24.dp, bottom = 8.dp, start = 4.dp, end = 4.dp)
                     ) {
                         Text(
-                            "${selectedPresets.size} sélectionnée${if (selectedPresets.size > 1) "s" else ""}",
+                            stringResource(R.string.selected_count, selectedPresets.size),
                             color = androidx.compose.ui.graphics.Color.White,
                             fontWeight = FontWeight.Bold,
                             modifier = Modifier.padding(bottom = 6.dp)
@@ -237,14 +240,14 @@ fun FigureEncyclopediaScreen(
                                     selectedKeys = emptySet()
                                 },
                                 modifier = Modifier.weight(1f)
-                            ) { Text("+ Collection") }
+                            ) { Text(stringResource(R.string.plus_collection)) }
                             OutlinedButton(
                                 onClick = {
                                     vm.saveCatalogPresets(selectedPresets, isWishlist = true, photoOverrides)
                                     selectedKeys = emptySet()
                                 },
                                 modifier = Modifier.weight(1f)
-                            ) { Text("+ Souhaits") }
+                            ) { Text(stringResource(R.string.plus_wishlist)) }
                         }
                     }
                 }
@@ -396,7 +399,7 @@ private fun FigureDetailDialog(
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             Text(licenceEmoji(preset.licence), style = MaterialTheme.typography.displayMedium)
                             Text(
-                                "Photo officielle à venir",
+                                stringResource(R.string.official_photo_coming),
                                 style = MaterialTheme.typography.bodySmall,
                                 color = Color.White
                             )
@@ -408,22 +411,23 @@ private fun FigureDetailDialog(
                     OutlinedButton(
                         onClick = { photoPicker.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)) },
                         modifier = Modifier.fillMaxWidth()
-                    ) { Text(if (displayedPhoto != null) "Changer la photo" else "Ajouter une photo") }
+                    ) { Text(stringResource(if (displayedPhoto != null) R.string.change_photo else R.string.add_photo)) }
                     Spacer(Modifier.height(8.dp))
                 }
+                val cmSuffix = stringResource(R.string.cm_suffix)
                 Text(
                     listOfNotNull(
                         preset.numero,
                         preset.licence.label,
                         preset.series?.ifBlank { null },
                         preset.year?.toString(),
-                        preset.heightCm?.let { "${if (it == it.toInt().toDouble()) it.toInt().toString() else it.toString()} cm" }
+                        preset.heightCm?.let { "${if (it == it.toInt().toDouble()) it.toInt().toString() else it.toString()} $cmSuffix" }
                     ).joinToString(" • ")
                 )
                 upcomingReleaseLabel(preset.series)?.let { label ->
                     Spacer(Modifier.height(6.dp))
                     Text(
-                        "$label — coffret pas encore commercialisé, visuel officiel à venir.",
+                        stringResource(R.string.upcoming_release_note, label),
                         style = MaterialTheme.typography.bodyMedium,
                         fontWeight = FontWeight.Bold,
                         color = NeonCyan
@@ -432,7 +436,7 @@ private fun FigureDetailDialog(
                 preset.priceCents?.let {
                     Spacer(Modifier.height(6.dp))
                     Text(
-                        "Côte indicative : ${formatPrice(it)}",
+                        stringResource(R.string.indicative_price, formatPrice(it)),
                         style = MaterialTheme.typography.bodyMedium,
                         fontWeight = FontWeight.Bold,
                         color = NeonCyan
@@ -446,19 +450,19 @@ private fun FigureDetailDialog(
         },
         confirmButton = {
             Column {
-                Button(onClick = onAddToCollection, modifier = Modifier.fillMaxWidth()) { Text("Ajouter à ma collection") }
+                Button(onClick = onAddToCollection, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.add_to_collection)) }
                 Spacer(Modifier.height(6.dp))
-                OutlinedButton(onClick = onAddToWishlist, modifier = Modifier.fillMaxWidth()) { Text("Ajouter aux souhaits") }
+                OutlinedButton(onClick = onAddToWishlist, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.add_to_wishlist)) }
                 if (onEdit != null || onDelete != null) {
                     Spacer(Modifier.height(6.dp))
                     Row(Modifier.fillMaxWidth()) {
-                        onEdit?.let { TextButton(onClick = it, modifier = Modifier.weight(1f)) { Text("Modifier") } }
-                        onDelete?.let { TextButton(onClick = it, modifier = Modifier.weight(1f)) { Text("Supprimer") } }
+                        onEdit?.let { TextButton(onClick = it, modifier = Modifier.weight(1f)) { Text(stringResource(R.string.edit_content_description)) } }
+                        onDelete?.let { TextButton(onClick = it, modifier = Modifier.weight(1f)) { Text(stringResource(R.string.delete_content_description)) } }
                     }
                 }
                 Spacer(Modifier.height(6.dp))
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-                    TextButton(onClick = onDismiss) { Text("Fermer") }
+                    TextButton(onClick = onDismiss) { Text(stringResource(R.string.close)) }
                 }
             }
         }
@@ -469,7 +473,7 @@ private fun FigureDetailDialog(
             Box(Modifier.fillMaxSize().background(Color.Black.copy(alpha = 0.92f)), contentAlignment = Alignment.Center) {
                 ZoomableImage(uri = uri, modifier = Modifier.fillMaxWidth().padding(16.dp))
                 IconButton(onClick = { fullscreenUri = null }, modifier = Modifier.align(Alignment.TopEnd).padding(8.dp)) {
-                    Icon(Icons.Filled.Close, contentDescription = "Fermer", tint = Color.White)
+                    Icon(Icons.Filled.Close, contentDescription = stringResource(R.string.close), tint = Color.White)
                 }
             }
         }
@@ -508,25 +512,25 @@ fun AddCustomFigurePresetForm(
         }
     }
 
-    FormScaffold(title = if (existing != null) "Modifier la fiche" else "Nouvelle fiche Encyclo", onCancel = onCancel) {
+    FormScaffold(title = stringResource(if (existing != null) R.string.form_title_edit_sheet else R.string.form_title_new_encyclo_sheet), onCancel = onCancel) {
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             Licence.entries.forEach { l ->
                 NeonChip("${licenceEmoji(l)} ${l.label}", licence == l) { licence = l }
             }
         }
-        Field(character, "Personnage") { character = it; if (name.isBlank()) name = it }
-        Field(name, "Nom commercial") { name = it }
-        Field(series, "Gamme / vague WCF") { series = it }
+        Field(character, stringResource(R.string.field_character)) { character = it; if (name.isBlank()) name = it }
+        Field(name, stringResource(R.string.field_commercial_name)) { name = it }
+        Field(series, stringResource(R.string.field_series)) { series = it }
         OutlinedTextField(
             value = description,
             onValueChange = { description = it },
-            label = { Text("Description") },
+            label = { Text(stringResource(R.string.field_description)) },
             modifier = Modifier.fillMaxWidth().height(100.dp)
         )
         OutlinedButton(
             onClick = { photoPicker.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)) },
             modifier = Modifier.fillMaxWidth()
-        ) { Text("Choisir une photo") }
+        ) { Text(stringResource(R.string.choose_photo_option)) }
         photoUri?.let { uri ->
             AsyncImage(
                 model = uri,
@@ -550,6 +554,6 @@ fun AddCustomFigurePresetForm(
             },
             enabled = character.isNotBlank(),
             modifier = Modifier.fillMaxWidth()
-        ) { Text("Enregistrer") }
+        ) { Text(stringResource(R.string.save)) }
     }
 }

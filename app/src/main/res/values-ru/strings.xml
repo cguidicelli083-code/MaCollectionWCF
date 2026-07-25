@@ -1,0 +1,215 @@
+<resources>
+    <string name="app_name">Ma Collection WCF</string>
+
+    <!-- Обучение (туториал при первом запуске) -->
+    <string name="onboarding_page1_title">Добро пожаловать в Ma Collection WCF 🎎</string>
+    <string name="onboarding_page1_text">Это приложение поможет вам каталогизировать коллекцию фигурок World Collectable Figure (One Piece, Bleach, Dragon Ball, Naruto...) с оценкой стоимости.</string>
+    <string name="onboarding_page2_title">📷 Добавить фигурку</string>
+    <string name="onboarding_page2_text">Нажмите кнопку +, чтобы добавить фигурку: отсканируйте штрихкод, сделайте фото, выберите его из галереи или введите всё вручную.</string>
+    <string name="onboarding_page3_title">📚 Энциклопедия</string>
+    <string name="onboarding_page3_text">Просматривайте каталог фигурок и добавляйте карточку прямо в коллекцию или в список желаний. Встроенный каталог постепенно пополняется; а пока добавляйте свои карточки (с фото) кнопкой +.</string>
+    <string name="onboarding_page4_title">❤️ Желания и 💎 Итого</string>
+    <string name="onboarding_page4_text">Вкладка «Желания» перечисляет ваши будущие приобретения. Вкладка «Итого» показывает оценочную стоимость всей коллекции.</string>
+    <string name="onboarding_page5_title">💾 Резервная копия</string>
+    <string name="onboarding_page5_text">Сохраните всю коллекцию (данные и фото) в файл в выбранном вами месте и восстановите её в любой момент — полезно при переустановке или смене телефона. В настройках (шестерёнка) можно также изменить фоновое изображение всего приложения.</string>
+    <string name="onboarding_page6_title">💡 Советы</string>
+    <string name="onboarding_page6_text">В настройках (шестерёнка) вкладка «Советы» содержит рекомендации по правильному кадрированию фото и заполнению фигурок вручную.</string>
+    <string name="onboarding_skip">Пропустить</string>
+    <string name="onboarding_next">Далее</string>
+    <string name="onboarding_start">Начать</string>
+
+    <!-- Коллекция / Желания -->
+    <string name="search_placeholder_wishlist">Поиск в списке желаний</string>
+    <string name="search_placeholder_collection">Поиск в коллекции</string>
+    <string name="wave_volume_label">Волна/Том</string>
+    <string name="all_waves">Все волны</string>
+    <string name="no_search_results">Нет результатов по этому запросу.</string>
+    <string name="empty_wishlist_message">Пока нет желаний. Добавьте желаемую фигурку кнопкой +.</string>
+    <string name="empty_collection_message">Ваша коллекция пуста. Добавьте первую фигурку кнопкой +.</string>
+    <string name="unnamed_figure">Фигурка без названия</string>
+    <string name="tag_box">Коробка</string>
+    <string name="tag_accessories">Аксессуары</string>
+    <string name="ai_estimate_suffix">(ИИ)</string>
+    <string name="edit_content_description">Изменить</string>
+    <string name="delete_content_description">Удалить</string>
+    <string name="sort_label">Сортировать</string>
+    <string name="all_licences">Все лицензии</string>
+    <string name="licence_label">Лицензия</string>
+    <string name="sort_name">Имя</string>
+    <string name="sort_price_desc">Цена (выс. → низ.)</string>
+    <string name="sort_price_asc">Цена (низ. → выс.)</string>
+    <string name="sort_release_asc">Дата выпуска (старые → новые)</string>
+    <string name="sort_release_desc">Дата выпуска (новые → старые)</string>
+
+    <!-- Общее -->
+    <string name="cancel">Отмена</string>
+    <string name="close">Закрыть</string>
+
+    <!-- Пакетное сканирование -->
+    <string name="batch_scan_title">Обнаружено фигурок: %1$d</string>
+    <string name="batch_scan_selected_count">Выбрано: %1$d / %2$d</string>
+    <string name="batch_scan_confirm">Подтвердить пакетное добавление</string>
+
+    <!-- Карточка деталей -->
+    <string name="back_content_description">Назад</string>
+    <string name="search_ebay_sold">🔍 Поиск на eBay (проданные лоты)</string>
+    <string name="size_cm">Размер: %1$s см</string>
+    <string name="edit_price">Изменить цену</string>
+    <string name="move_to_collection">Перенести в коллекцию</string>
+    <string name="gallery_count">Галерея (%1$d)</string>
+    <string name="price_euro_label">Цена (€)</string>
+    <string name="save">Сохранить</string>
+
+    <!-- Итого -->
+    <string name="collection_value">Стоимость коллекции</string>
+    <string name="figure_count">Фигурок: %1$d</string>
+    <string name="completion_by_series">Заполненность по сериям</string>
+    <string name="completion_placeholder">Заполненность по сериям появится, как только в каталоге Энциклопедии появятся волны WCF.</string>
+    <string name="completion_sort_percent_desc">% (выс. → низ.)</string>
+    <string name="completion_sort_percent_asc">% (низ. → выс.)</string>
+
+    <!-- Резервное копирование / Экспорт / Импорт -->
+    <string name="backup_export_success">Резервная копия успешно сохранена.</string>
+    <string name="backup_export_failure">Не удалось создать резервную копию.</string>
+    <string name="excel_export_success">Таблица Excel успешно экспортирована.</string>
+    <string name="excel_export_failure">Не удалось экспортировать таблицу Excel.</string>
+    <string name="import_read_failure">Не удалось прочитать этот файл. Допустимые форматы: .xlsx или .csv.</string>
+    <string name="backup_intro">Сохраните всю коллекцию (данные и фото) в файл на ваш выбор (загрузки, Drive...). Этот файл останется доступным, даже если вы удалите приложение.</string>
+    <string name="backup_save_button">Сохранить коллекцию</string>
+    <string name="backup_restore_button">Восстановить резервную копию</string>
+    <string name="excel_export_intro">Экспортируйте всю коллекцию (и список желаний) в виде таблицы с одним фото на строку — читается в Excel или любой электронной таблице (Excel покажет предупреждение о формате при открытии, без последствий: нажмите «Да»).</string>
+    <string name="excel_export_button">Экспортировать в таблицу Excel</string>
+    <string name="sheet_import_intro">Импортируйте коллекцию из файла Excel (.xlsx) или CSV — даже если столбцы не соответствуют формату приложения, вы сможете сопоставить их на следующем шаге.</string>
+    <string name="sheet_import_button">Импортировать файл Excel/CSV</string>
+    <string name="backup_restore_confirm_text">Это действие полностью заменит текущую коллекцию содержимым резервной копии. Продолжить?</string>
+    <string name="restore">Восстановить</string>
+    <string name="backup_restore_success">Коллекция успешно восстановлена.</string>
+    <string name="backup_restore_failure">Не удалось восстановить: файл повреждён или недействителен.</string>
+    <string name="import_success_count">Успешно импортировано фигурок: %1$d.</string>
+    <string name="field_character">Персонаж</string>
+    <string name="field_commercial_name">Коммерческое название</string>
+    <string name="field_series">Линейка / волна WCF</string>
+    <string name="field_manufacturer">Издатель</string>
+    <string name="field_condition">Состояние</string>
+    <string name="field_has_box">С коробкой</string>
+    <string name="field_has_accessories">С аксессуарами</string>
+    <string name="field_year">Год выпуска</string>
+    <string name="field_height">Размер (см)</string>
+    <string name="field_price">Цена</string>
+    <string name="field_barcode">Штрихкод</string>
+    <string name="field_description">Описание</string>
+    <string name="no_column">Нет столбца</string>
+    <string name="match_columns_title">Сопоставить столбцы</string>
+    <string name="match_columns_help">Укажите, какому столбцу вашего файла соответствует каждое поле. Обязательно только поле «Персонаж»; остальные несопоставленные поля останутся пустыми.</string>
+    <string name="next">Далее</string>
+    <string name="import_action">Импортировать</string>
+
+    <!-- Форма добавления/редактирования фигурки -->
+    <string name="form_title_edit">Изменить фигурку</string>
+    <string name="form_title_new_wish">Новое желание</string>
+    <string name="form_title_new_figure">Новая фигурка</string>
+    <string name="search_catalog_placeholder">Поиск в каталоге (необязательно)</string>
+    <string name="no_local_catalog_results">Нет результатов в локальном каталоге.</string>
+    <string name="choose_photo_option">🖼️  Выбрать фото</string>
+    <string name="take_photo_option">📸  Сделать фото</string>
+    <string name="remove_photo">Удалить фото</string>
+    <string name="photo_gallery">Галерея фото</string>
+    <string name="field_code_hint">Код (напр. OP-427, оставьте пустым, если неизвестен)</string>
+    <string name="field_has_accessories_hint">С аксессуарами (оружие, детали...)</string>
+    <string name="field_price_hint">Цена (€, оставьте пустым, если неизвестна)</string>
+    <string name="update_action">Обновить</string>
+    <string name="add_to_wishlist">Добавить в желания</string>
+    <string name="condition_hs">Сломана</string>
+    <string name="condition_mauvais">Плохое</string>
+    <string name="condition_bon">Хорошее</string>
+    <string name="condition_tres_bon">Очень хорошее</string>
+    <string name="condition_mint">Идеальное</string>
+    <string name="condition_neuf">Новая</string>
+
+    <!-- Энциклопедия -->
+    <string name="search_character_placeholder">Поиск персонажа</string>
+    <string name="encyclo_empty_no_catalog">Встроенный каталог появится в следующем обновлении. А пока добавляйте свои карточки кнопкой +.</string>
+    <string name="selected_count">Выбрано: %1$d</string>
+    <string name="plus_collection">+ Коллекция</string>
+    <string name="plus_wishlist">+ Желания</string>
+    <string name="official_photo_coming">Официальное фото скоро появится</string>
+    <string name="change_photo">Изменить фото</string>
+    <string name="add_photo">Добавить фото</string>
+    <string name="cm_suffix">см</string>
+    <string name="upcoming_release_note">%1$s — ещё не выпущено, официальное фото скоро появится.</string>
+    <string name="indicative_price">Ориентировочная цена: %1$s</string>
+    <string name="add_to_collection">Добавить в мою коллекцию</string>
+    <string name="form_title_edit_sheet">Изменить карточку</string>
+    <string name="form_title_new_encyclo_sheet">Новая карточка энциклопедии</string>
+
+    <!-- Новости -->
+    <string name="no_news_yet">Пока нет новостей</string>
+    <string name="no_news_yet_detail">Новости WCF появятся здесь после следующей синхронизации.</string>
+    <string name="upcoming">Скоро</string>
+    <string name="past_news">Прошлые новости</string>
+    <string name="no_upcoming_news">Пока нет предстоящих новостей.</string>
+    <string name="no_past_news_for_licence">Нет прошлых новостей для этой лицензии.</string>
+    <string name="tap_to_read_enlarge">Нажмите, чтобы прочитать / увеличить фото</string>
+    <string name="tap_photo_to_enlarge">Нажмите на фото, чтобы увеличить его</string>
+    <string name="figures_label">Фигурки</string>
+    <string name="view_official_page">Открыть официальную страницу</string>
+
+    <!-- Оценка цены ИИ -->
+    <string name="ai_estimate_label_tavily">Оценка ИИ (веб-поиск) — не найдено сопоставимых лотов на eBay, квота Gemini недоступна</string>
+    <string name="ai_estimate_label_web">Оценка ИИ (онлайн-поиск) — не найдено сопоставимых лотов на eBay</string>
+
+    <!-- MainActivity: диалоги и навигация -->
+    <string name="add_item_dialog_title">Добавить предмет</string>
+    <string name="scan_barcode_option">📷  Сканировать штрихкод</string>
+    <string name="scan_batch_option">Сканировать партию (несколько фигурок)</string>
+    <string name="manual_entry_option">✏️  Ручной ввод</string>
+    <string name="lang_dialog_title">Язык приложения</string>
+    <string name="lang_option_checked">%1$s  ✓</string>
+    <string name="settings_content_description">Настройки</string>
+    <string name="add_content_description">Добавить</string>
+    <string name="nav_collection">Коллекция</string>
+    <string name="nav_wishlist">Желания</string>
+    <string name="nav_encyclo">Энциклопедия</string>
+    <string name="nav_total">Итого</string>
+    <string name="nav_actu">Новости</string>
+    <string name="title_collection">Моя коллекция</string>
+    <string name="scanning_batch">Анализ партии…</string>
+    <string name="scanning_recognition">Распознавание персонажа (ИИ)…</string>
+    <string name="scanning_photo">Анализ фото…</string>
+    <string name="analysis_unavailable_title">Анализ недоступен</string>
+    <string name="analysis_unavailable_text">ИИ-анализ временно недоступен (достигнут дневной лимит или проблема с подключением). Повторите попытку позже.</string>
+    <string name="no_figure_detected_title">Фигурка не обнаружена</string>
+    <string name="no_figure_detected_text">На этом фото не обнаружено фигурок.</string>
+    <string name="adding_figures_in_progress">Добавление фигурок: %1$d…</string>
+    <string name="currency_option">💱 Валюта</string>
+    <string name="language_option">🌐 Язык</string>
+    <string name="backup_option">💾 Резервная копия</string>
+    <string name="replay_tutorial_option">❓ Повторить обучение</string>
+    <string name="tips_option">💡 Советы</string>
+    <string name="background_image_option">🖼️ Фоновое изображение</string>
+    <string name="default_background_option">↩️ Фон по умолчанию</string>
+    <string name="theme_option">🎨 Тема</string>
+    <string name="theme_dialog_title">Тема приложения</string>
+    <string name="theme_dialog_help">Выберите тему по лицензии. Все они бесплатны и применяются немедленно.</string>
+    <string name="currency_dialog_help">Валюта отображения и ввода цен (всегда конвертируется из евро по последнему курсу, полученному при запуске).</string>
+    <string name="tips_framing_title">📸 Правильное кадрирование фото</string>
+    <string name="tips_framing_text">Кадрируйте фото вплотную к фигурке или её коробке, ровно и анфас, при хорошем освещении без бликов и размытости: чем чётче и разборчивее текст на коробке, тем надёжнее автоматическое определение названия.</string>
+    <string name="tips_fields_title">🏷️ Правильное заполнение фигурки</string>
+    <string name="tips_fields_text">Укажите персонажа, лицензию и, по возможности, точную линейку/волну WCF (указана на коробке): это поможет найти нужную карточку в Энциклопедии и позже получить более точную оценку цены.</string>
+    <string name="tips_price_title">💰 Цена, введённая вручную</string>
+    <string name="tips_price_text">Пока автоматическая оценка недоступна, вводите цену самостоятельно в каждой карточке (кнопка «Изменить цену»), чтобы общая стоимость коллекции оставалась актуальной.</string>
+    <string name="multi_select_content_description">Множественный выбор</string>
+
+    <!-- Названия языков на родном языке (выбор языка) -->
+    <string name="lang_name_fr">Français</string>
+    <string name="lang_name_en">English</string>
+    <string name="lang_name_es">Español</string>
+    <string name="lang_name_it">Italiano</string>
+    <string name="lang_name_de">Deutsch</string>
+    <string name="lang_name_pt">Português</string>
+    <string name="lang_name_ru">Русский</string>
+    <string name="lang_name_el">Ελληνικά</string>
+    <string name="lang_name_tr">Türkçe</string>
+    <string name="lang_name_ja">日本語</string>
+    <string name="lang_name_zh">中文</string>
+</resources>

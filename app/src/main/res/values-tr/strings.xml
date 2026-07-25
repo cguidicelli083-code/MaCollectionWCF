@@ -1,0 +1,215 @@
+<resources>
+    <string name="app_name">Ma Collection WCF</string>
+
+    <!-- Onboarding (ilk açılış eğitimi) -->
+    <string name="onboarding_page1_title">Ma Collection WCF\'ye hoş geldin 🎎</string>
+    <string name="onboarding_page1_text">Bu uygulama, World Collectable Figure koleksiyonunu (One Piece, Bleach, Dragon Ball, Naruto...) fiyat tahminleriyle birlikte kataloglamana yardımcı olur.</string>
+    <string name="onboarding_page2_title">📷 Figür ekle</string>
+    <string name="onboarding_page2_text">Bir figür eklemek için + düğmesine bas: barkod tara, fotoğraf çek, galerinden seç veya her şeyi elle gir.</string>
+    <string name="onboarding_page3_title">📚 Ansiklopedi</string>
+    <string name="onboarding_page3_text">Figür kataloğuna göz at ve doğrudan koleksiyonuna veya istek listene bir kayıt ekle. Yerleşik katalog zamanla genişler; bu arada + düğmesiyle kendi kayıtlarını (fotoğraflı) ekle.</string>
+    <string name="onboarding_page4_title">❤️ İstek Listesi &amp; 💎 Toplam</string>
+    <string name="onboarding_page4_text">İstek Listesi sekmesi gelecekteki alımlarını listeler. Toplam sekmesi tüm koleksiyonunun tahmini değerini gösterir.</string>
+    <string name="onboarding_page5_title">💾 Yedekleme</string>
+    <string name="onboarding_page5_text">Tüm koleksiyonunu (veriler ve fotoğraflar) seçtiğin bir dosyaya yedekle ve istediğin zaman geri yükle — yeniden kurulum veya telefon değişikliğinde işe yarar. Ayarlarda (dişli simgesi) uygulamanın arka plan resmini de değiştirebilirsin.</string>
+    <string name="onboarding_page6_title">💡 İpuçları</string>
+    <string name="onboarding_page6_text">Ayarlarda (dişli simgesi), «İpuçları» sekmesi fotoğraflarını iyi çerçevelemek ve figürlerini elle iyi doldurmak için tavsiyeleri özetler.</string>
+    <string name="onboarding_skip">Atla</string>
+    <string name="onboarding_next">İleri</string>
+    <string name="onboarding_start">Başla</string>
+
+    <!-- Koleksiyon / İstek Listesi -->
+    <string name="search_placeholder_wishlist">İstek listesinde ara</string>
+    <string name="search_placeholder_collection">Koleksiyonda ara</string>
+    <string name="wave_volume_label">Dalga/Cilt</string>
+    <string name="all_waves">Tüm dalgalar</string>
+    <string name="no_search_results">Bu arama için sonuç yok.</string>
+    <string name="empty_wishlist_message">Henüz istek yok. + düğmesiyle istediğin bir figürü ekle.</string>
+    <string name="empty_collection_message">Koleksiyonun boş. + düğmesiyle ilk figürünü ekle.</string>
+    <string name="unnamed_figure">İsimsiz figür</string>
+    <string name="tag_box">Kutu</string>
+    <string name="tag_accessories">Aksesuarlar</string>
+    <string name="ai_estimate_suffix">(AI)</string>
+    <string name="edit_content_description">Düzenle</string>
+    <string name="delete_content_description">Sil</string>
+    <string name="sort_label">Sırala</string>
+    <string name="all_licences">Tüm lisanslar</string>
+    <string name="licence_label">Lisans</string>
+    <string name="sort_name">İsim</string>
+    <string name="sort_price_desc">Fiyat (yüksek → düşük)</string>
+    <string name="sort_price_asc">Fiyat (düşük → yüksek)</string>
+    <string name="sort_release_asc">Çıkış tarihi (eski → yeni)</string>
+    <string name="sort_release_desc">Çıkış tarihi (yeni → eski)</string>
+
+    <!-- Ortak -->
+    <string name="cancel">İptal</string>
+    <string name="close">Kapat</string>
+
+    <!-- Toplu tarama -->
+    <string name="batch_scan_title">%1$d figür tespit edildi</string>
+    <string name="batch_scan_selected_count">%1$d / %2$d seçildi</string>
+    <string name="batch_scan_confirm">Toplu eklemeyi onayla</string>
+
+    <!-- Detay sayfası -->
+    <string name="back_content_description">Geri</string>
+    <string name="search_ebay_sold">🔍 eBay\'de ara (satılmış ilanlar)</string>
+    <string name="size_cm">Boyut: %1$s cm</string>
+    <string name="edit_price">Fiyatı düzenle</string>
+    <string name="move_to_collection">Koleksiyona taşı</string>
+    <string name="gallery_count">Galeri (%1$d)</string>
+    <string name="price_euro_label">Fiyat (€)</string>
+    <string name="save">Kaydet</string>
+
+    <!-- Toplam -->
+    <string name="collection_value">Koleksiyon değeri</string>
+    <string name="figure_count">%1$d figür</string>
+    <string name="completion_by_series">Seriye göre tamamlanma</string>
+    <string name="completion_placeholder">Seriye göre tamamlanma, Ansiklopedi kataloğunda referans alınan WCF dalgaları olduğunda görünecek.</string>
+    <string name="completion_sort_percent_desc">% (yüksek → düşük)</string>
+    <string name="completion_sort_percent_asc">% (düşük → yüksek)</string>
+
+    <!-- Yedekleme / Dışa aktarma / İçe aktarma -->
+    <string name="backup_export_success">Yedekleme başarıyla kaydedildi.</string>
+    <string name="backup_export_failure">Yedekleme başarısız oldu.</string>
+    <string name="excel_export_success">Excel tablosu başarıyla dışa aktarıldı.</string>
+    <string name="excel_export_failure">Excel tablosu dışa aktarma başarısız oldu.</string>
+    <string name="import_read_failure">Bu dosya okunamıyor. Kabul edilen formatlar: .xlsx veya .csv.</string>
+    <string name="backup_intro">Tüm koleksiyonunu (veriler ve fotoğraflar) seçtiğin bir dosyaya kaydet (indirilenler, Drive...). Bu dosya, uygulamayı kaldırsan bile kullanılabilir olmaya devam eder.</string>
+    <string name="backup_save_button">Koleksiyonu yedekle</string>
+    <string name="backup_restore_button">Bir yedeği geri yükle</string>
+    <string name="excel_export_intro">Tüm koleksiyonunu (ve isteklerini) her satırda bir fotoğraf olacak şekilde tablo olarak dışa aktar — Excel veya herhangi bir elektronik tabloda okunabilir (Excel açılırken bir format uyarısı gösterecek, sonucu yok: «Evet»e tıkla).</string>
+    <string name="excel_export_button">Excel tablosu olarak dışa aktar</string>
+    <string name="sheet_import_intro">Bir Excel (.xlsx) veya CSV dosyasından koleksiyon içe aktar — sütunları uygulamanın formatıyla eşleşmese bile, bir sonraki adımda eşleştirebileceksin.</string>
+    <string name="sheet_import_button">Bir Excel/CSV dosyası içe aktar</string>
+    <string name="backup_restore_confirm_text">Bu işlem, mevcut koleksiyonunu tamamen yedeğin içeriğiyle değiştirir. Devam edilsin mi?</string>
+    <string name="restore">Geri yükle</string>
+    <string name="backup_restore_success">Koleksiyon başarıyla geri yüklendi.</string>
+    <string name="backup_restore_failure">Geri yükleme başarısız oldu: geçersiz veya bozuk dosya.</string>
+    <string name="import_success_count">%1$d figür başarıyla içe aktarıldı.</string>
+    <string name="field_character">Karakter</string>
+    <string name="field_commercial_name">Ticari isim</string>
+    <string name="field_series">Seri / WCF dalgası</string>
+    <string name="field_manufacturer">Üretici</string>
+    <string name="field_condition">Durum</string>
+    <string name="field_has_box">Kutulu</string>
+    <string name="field_has_accessories">Aksesuarlı</string>
+    <string name="field_year">Çıkış yılı</string>
+    <string name="field_height">Boyut (cm)</string>
+    <string name="field_price">Fiyat</string>
+    <string name="field_barcode">Barkod</string>
+    <string name="field_description">Açıklama</string>
+    <string name="no_column">Sütun yok</string>
+    <string name="match_columns_title">Sütunları eşleştir</string>
+    <string name="match_columns_help">Dosyandaki hangi sütunun hangi alana karşılık geldiğini belirt. Sadece Karakter zorunludur; eşleşmeyen diğer alanlar boş kalacaktır.</string>
+    <string name="next">İleri</string>
+    <string name="import_action">İçe aktar</string>
+
+    <!-- Figür ekleme/düzenleme formu -->
+    <string name="form_title_edit">Figürü düzenle</string>
+    <string name="form_title_new_wish">Yeni istek</string>
+    <string name="form_title_new_figure">Yeni figür</string>
+    <string name="search_catalog_placeholder">Katalogda ara (isteğe bağlı)</string>
+    <string name="no_local_catalog_results">Yerel katalogda sonuç yok.</string>
+    <string name="choose_photo_option">🖼️  Fotoğraf seç</string>
+    <string name="take_photo_option">📸  Fotoğraf çek</string>
+    <string name="remove_photo">Fotoğrafı kaldır</string>
+    <string name="photo_gallery">Fotoğraf galerisi</string>
+    <string name="field_code_hint">Kod (örn. OP-427, bilinmiyorsa boş bırak)</string>
+    <string name="field_has_accessories_hint">Aksesuarlı (silahlar, parçalar...)</string>
+    <string name="field_price_hint">Fiyat (€, bilinmiyorsa boş bırak)</string>
+    <string name="update_action">Güncelle</string>
+    <string name="add_to_wishlist">İstek listesine ekle</string>
+    <string name="condition_hs">Kırık</string>
+    <string name="condition_mauvais">Kötü</string>
+    <string name="condition_bon">İyi</string>
+    <string name="condition_tres_bon">Çok iyi</string>
+    <string name="condition_mint">Mükemmel</string>
+    <string name="condition_neuf">Yeni</string>
+
+    <!-- Ansiklopedi -->
+    <string name="search_character_placeholder">Bir karakter ara</string>
+    <string name="encyclo_empty_no_catalog">Yerleşik katalog gelecek bir güncellemede gelecek. Bu arada, + düğmesiyle kendi kayıtlarını ekle.</string>
+    <string name="selected_count">%1$d seçildi</string>
+    <string name="plus_collection">+ Koleksiyon</string>
+    <string name="plus_wishlist">+ İstek Listesi</string>
+    <string name="official_photo_coming">Resmi fotoğraf yakında</string>
+    <string name="change_photo">Fotoğrafı değiştir</string>
+    <string name="add_photo">Fotoğraf ekle</string>
+    <string name="cm_suffix">cm</string>
+    <string name="upcoming_release_note">%1$s — henüz piyasaya sürülmedi, resmi fotoğraf yakında.</string>
+    <string name="indicative_price">Yaklaşık fiyat: %1$s</string>
+    <string name="add_to_collection">Koleksiyonuma ekle</string>
+    <string name="form_title_edit_sheet">Kaydı düzenle</string>
+    <string name="form_title_new_encyclo_sheet">Yeni Ansiklopedi kaydı</string>
+
+    <!-- Haberler -->
+    <string name="no_news_yet">Henüz haber yok</string>
+    <string name="no_news_yet_detail">WCF haberleri bir sonraki senkronizasyondan sonra burada görünecek.</string>
+    <string name="upcoming">Yakında</string>
+    <string name="past_news">Eski haberler</string>
+    <string name="no_upcoming_news">Şu anda yaklaşan haber yok.</string>
+    <string name="no_past_news_for_licence">Bu lisans için eski haber yok.</string>
+    <string name="tap_to_read_enlarge">Okumak / fotoğrafı büyütmek için dokun</string>
+    <string name="tap_photo_to_enlarge">Büyütmek için fotoğrafa dokun</string>
+    <string name="figures_label">Figürler</string>
+    <string name="view_official_page">Resmi sayfayı görüntüle</string>
+
+    <!-- AI fiyat tahmini -->
+    <string name="ai_estimate_label_tavily">AI tahmini (web araması) — karşılaştırılabilir eBay ilanı bulunamadı, Gemini kotası mevcut değil</string>
+    <string name="ai_estimate_label_web">AI tahmini (çevrimiçi arama) — karşılaştırılabilir eBay ilanı bulunamadı</string>
+
+    <!-- MainActivity: diyaloglar ve gezinme -->
+    <string name="add_item_dialog_title">Bir öğe ekle</string>
+    <string name="scan_barcode_option">📷  Barkod tara</string>
+    <string name="scan_batch_option">Toplu tarama (birden fazla figür)</string>
+    <string name="manual_entry_option">✏️  Elle giriş</string>
+    <string name="lang_dialog_title">Uygulama dili</string>
+    <string name="lang_option_checked">%1$s  ✓</string>
+    <string name="settings_content_description">Ayarlar</string>
+    <string name="add_content_description">Ekle</string>
+    <string name="nav_collection">Koleksiyon</string>
+    <string name="nav_wishlist">İstek Listesi</string>
+    <string name="nav_encyclo">Ansiklopedi</string>
+    <string name="nav_total">Toplam</string>
+    <string name="nav_actu">Haberler</string>
+    <string name="title_collection">Koleksiyonum</string>
+    <string name="scanning_batch">Toplu tarama analiz ediliyor…</string>
+    <string name="scanning_recognition">Karakter tanınıyor (AI)…</string>
+    <string name="scanning_photo">Fotoğraf analiz ediliyor…</string>
+    <string name="analysis_unavailable_title">Analiz kullanılamıyor</string>
+    <string name="analysis_unavailable_text">AI analizi geçici olarak kullanılamıyor (günlük limit doldu veya bağlantı sorunu). Daha sonra tekrar dene.</string>
+    <string name="no_figure_detected_title">Figür tespit edilmedi</string>
+    <string name="no_figure_detected_text">Bu fotoğrafta figür tespit edilmedi.</string>
+    <string name="adding_figures_in_progress">%1$d figür ekleniyor…</string>
+    <string name="currency_option">💱 Para birimi</string>
+    <string name="language_option">🌐 Dil</string>
+    <string name="backup_option">💾 Yedekleme</string>
+    <string name="replay_tutorial_option">❓ Eğitimi tekrar izle</string>
+    <string name="tips_option">💡 İpuçları</string>
+    <string name="background_image_option">🖼️ Arka plan resmi</string>
+    <string name="default_background_option">↩️ Varsayılan arka plan</string>
+    <string name="theme_option">🎨 Tema</string>
+    <string name="theme_dialog_title">Uygulama teması</string>
+    <string name="theme_dialog_help">Lisansa göre bir tema seç. Hepsi ücretsizdir ve hemen uygulanır.</string>
+    <string name="currency_dialog_help">Fiyatların görüntülenme ve giriş para birimi (her zaman euro\'dan, açılışta alınan en son kura göre dönüştürülür).</string>
+    <string name="tips_framing_title">📸 Fotoğrafı iyi çerçevelemek</string>
+    <string name="tips_framing_text">Fotoğrafı figürün veya kutusunun üzerinde sıkıca, düz ve önden, parlama veya bulanıklık olmadan iyi ışıkta çerçevele: kutu metni ne kadar net ve okunaklıysa, otomatik isim önerisi o kadar güvenilir olur.</string>
+    <string name="tips_fields_title">🏷️ Bir figürü iyi doldurmak</string>
+    <string name="tips_fields_text">Karakteri, lisansı ve mümkünse tam WCF serisini/dalgasını (kutuda görünür) belirt: bu, Ansiklopedi\'de doğru kaydı bulmana ve daha sonra daha doğru bir fiyat elde etmene yardımcı olacak.</string>
+    <string name="tips_price_title">💰 Elle girilen fiyat</string>
+    <string name="tips_price_text">Otomatik tahmin kullanılabilir olana kadar, koleksiyonunun toplam değerinin güncel kalması için her kayıtta fiyatı kendin gir («Fiyatı düzenle» düğmesi).</string>
+    <string name="multi_select_content_description">Çoklu seçim</string>
+
+    <!-- Dillerin kendi dillerindeki adları (dil seçici) -->
+    <string name="lang_name_fr">Français</string>
+    <string name="lang_name_en">English</string>
+    <string name="lang_name_es">Español</string>
+    <string name="lang_name_it">Italiano</string>
+    <string name="lang_name_de">Deutsch</string>
+    <string name="lang_name_pt">Português</string>
+    <string name="lang_name_ru">Русский</string>
+    <string name="lang_name_el">Ελληνικά</string>
+    <string name="lang_name_tr">Türkçe</string>
+    <string name="lang_name_ja">日本語</string>
+    <string name="lang_name_zh">中文</string>
+</resources>

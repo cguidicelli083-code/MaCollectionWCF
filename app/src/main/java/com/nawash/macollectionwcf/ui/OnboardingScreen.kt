@@ -26,37 +26,21 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.nawash.macollectionwcf.R
 import com.nawash.macollectionwcf.ui.theme.NeonCyan
 import kotlinx.coroutines.launch
 
-private data class OnboardingPage(val title: String, val text: String)
+private data class OnboardingPage(val titleRes: Int, val textRes: Int)
 
 private val onboardingPages = listOf(
-    OnboardingPage(
-        "Bienvenue dans Ma Collection WCF 🎎",
-        "Cette appli t'aide à cataloguer ta collection de figurines World Collectable Figure (One Piece, Bleach, Dragon Ball, Naruto...), avec estimation des cotes."
-    ),
-    OnboardingPage(
-        "📷 Ajouter une figurine",
-        "Appuie sur le bouton + pour ajouter une figurine : scanne un code-barres, prends une photo, choisis-en une dans ta galerie, ou saisis tout à la main."
-    ),
-    OnboardingPage(
-        "📚 Encyclo",
-        "Consulte le catalogue des figurines et ajoute directement une fiche à ta collection ou à tes souhaits. Le catalogue intégré s'enrichit progressivement ; en attendant, ajoute tes propres fiches (avec photo) via le bouton +."
-    ),
-    OnboardingPage(
-        "❤️ Souhaits & 💎 Total",
-        "L'onglet Souhaits liste tes futures acquisitions. L'onglet Total affiche la valeur estimée de toute ta collection."
-    ),
-    OnboardingPage(
-        "💾 Sauvegarde",
-        "Sauvegarde toute ta collection (données et photos) dans un fichier que tu choisis où enregistrer, et restaure-la à tout moment — utile en cas de réinstallation ou de changement de téléphone. Dans les réglages (engrenage), tu peux aussi changer l'image de fond de toute l'application."
-    ),
-    OnboardingPage(
-        "💡 Astuces",
-        "Dans les réglages (engrenage), un onglet « Astuces » résume les conseils pour bien cadrer tes photos et bien renseigner tes figurines en saisie manuelle."
-    )
+    OnboardingPage(R.string.onboarding_page1_title, R.string.onboarding_page1_text),
+    OnboardingPage(R.string.onboarding_page2_title, R.string.onboarding_page2_text),
+    OnboardingPage(R.string.onboarding_page3_title, R.string.onboarding_page3_text),
+    OnboardingPage(R.string.onboarding_page4_title, R.string.onboarding_page4_text),
+    OnboardingPage(R.string.onboarding_page5_title, R.string.onboarding_page5_text),
+    OnboardingPage(R.string.onboarding_page6_title, R.string.onboarding_page6_text)
 )
 
 @Composable
@@ -73,7 +57,7 @@ fun OnboardingScreen(onFinish: () -> Unit) {
                     verticalArrangement = Arrangement.Center
                 ) {
                     Text(
-                        onboardingPages[page].title,
+                        stringResource(onboardingPages[page].titleRes),
                         style = MaterialTheme.typography.headlineSmall,
                         fontWeight = FontWeight.Bold,
                         color = Color.White,
@@ -81,7 +65,7 @@ fun OnboardingScreen(onFinish: () -> Unit) {
                     )
                     Spacer(Modifier.height(16.dp))
                     Text(
-                        onboardingPages[page].text,
+                        stringResource(onboardingPages[page].textRes),
                         style = MaterialTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         textAlign = TextAlign.Center
@@ -99,7 +83,7 @@ fun OnboardingScreen(onFinish: () -> Unit) {
                 }
             }
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                TextButton(onClick = onFinish) { Text("Passer") }
+                TextButton(onClick = onFinish) { Text(stringResource(R.string.onboarding_skip)) }
                 Button(onClick = {
                     if (pagerState.currentPage < onboardingPages.lastIndex) {
                         scope.launch { pagerState.animateScrollToPage(pagerState.currentPage + 1) }
@@ -107,7 +91,7 @@ fun OnboardingScreen(onFinish: () -> Unit) {
                         onFinish()
                     }
                 }) {
-                    Text(if (pagerState.currentPage < onboardingPages.lastIndex) "Suivant" else "Commencer")
+                    Text(stringResource(if (pagerState.currentPage < onboardingPages.lastIndex) R.string.onboarding_next else R.string.onboarding_start))
                 }
             }
         }

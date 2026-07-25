@@ -37,11 +37,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.nawash.macollectionwcf.R
 import com.nawash.macollectionwcf.data.CollectionItem
 import com.nawash.macollectionwcf.data.Licence
 import com.nawash.macollectionwcf.data.selectableLicences
@@ -77,17 +79,18 @@ fun CollectionScreen(
         ThemedSearchField(
             value = searchQuery,
             onValueChange = { searchQuery = it },
-            placeholder = if (wishlist) "Rechercher dans les souhaits" else "Rechercher dans la collection"
+            placeholder = stringResource(if (wishlist) R.string.search_placeholder_wishlist else R.string.search_placeholder_collection)
         )
         Spacer(Modifier.height(8.dp))
         LicenceFilterDropdown(filter) { vm.setLicenceFilter(it) }
         if (seriesOptions.isNotEmpty()) {
             Spacer(Modifier.height(8.dp))
+            val allWaves = stringResource(R.string.all_waves)
             ThemedChoiceDropdown(
-                leading = "Vague/Volume",
-                selectedLabel = seriesFilter ?: "Toutes les vagues",
+                leading = stringResource(R.string.wave_volume_label),
+                selectedLabel = seriesFilter ?: allWaves,
                 options = listOf(null) + seriesOptions,
-                optionLabel = { it ?: "Toutes les vagues" },
+                optionLabel = { it ?: allWaves },
                 onSelect = { vm.setSeriesFilter(it) }
             )
         }
@@ -97,9 +100,9 @@ fun CollectionScreen(
 
         if (items.isEmpty()) {
             val message = when {
-                searchQuery.isNotBlank() -> "Aucun résultat pour cette recherche."
-                wishlist -> "Aucun souhait pour l'instant. Ajoute une figurine que tu vises avec le bouton +."
-                else -> "Ta collection est vide. Ajoute ta première figurine avec le bouton +."
+                searchQuery.isNotBlank() -> stringResource(R.string.no_search_results)
+                wishlist -> stringResource(R.string.empty_wishlist_message)
+                else -> stringResource(R.string.empty_collection_message)
             }
             EmptyState(message)
         } else {
@@ -153,7 +156,7 @@ private fun CollectionCard(
                 Spacer(Modifier.width(12.dp))
                 Column(Modifier.weight(1f)) {
                     Text(
-                        item.character.ifBlank { "Figurine sans nom" },
+                        item.character.ifBlank { stringResource(R.string.unnamed_figure) },
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold,
                         color = Color.White
@@ -167,12 +170,12 @@ private fun CollectionCard(
                     Spacer(Modifier.height(8.dp))
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         ConditionBadge(item.condition)
-                        Spacer(Modifier.width(6.dp)); TinyTag("Boîte", filled = item.hasBox)
-                        Spacer(Modifier.width(6.dp)); TinyTag("Accessoires", filled = item.hasAccessories)
+                        Spacer(Modifier.width(6.dp)); TinyTag(stringResource(R.string.tag_box), filled = item.hasBox)
+                        Spacer(Modifier.width(6.dp)); TinyTag(stringResource(R.string.tag_accessories), filled = item.hasAccessories)
                     }
                     Spacer(Modifier.height(8.dp))
                     Text(
-                        formatPrice(item.priceCents) + if (item.priceIsAiEstimate) " (IA)" else "",
+                        formatPrice(item.priceCents) + if (item.priceIsAiEstimate) " " + stringResource(R.string.ai_estimate_suffix) else "",
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold,
                         color = NeonCyan
@@ -190,20 +193,20 @@ private fun CollectionCard(
                 }
             }
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-                IconButton(onClick = onEdit) { Icon(Icons.Filled.Edit, contentDescription = "Modifier", tint = NeonPurple) }
-                IconButton(onClick = onDelete) { Icon(Icons.Filled.Delete, contentDescription = "Supprimer", tint = NeonPink) }
+                IconButton(onClick = onEdit) { Icon(Icons.Filled.Edit, contentDescription = stringResource(R.string.edit_content_description), tint = NeonPurple) }
+                IconButton(onClick = onDelete) { Icon(Icons.Filled.Delete, contentDescription = stringResource(R.string.delete_content_description), tint = NeonPink) }
             }
         }
     }
 }
 
 @Composable
-private fun sortOptionLabel(option: SortOption): String = option.label
+private fun sortOptionLabel(option: SortOption): String = stringResource(option.labelRes)
 
 @Composable
 fun SortDropdown(current: SortOption, onSelect: (SortOption) -> Unit) {
     ThemedChoiceDropdown(
-        leading = "Trier",
+        leading = stringResource(R.string.sort_label),
         selectedLabel = sortOptionLabel(current),
         options = SortOption.values().toList(),
         optionLabel = { sortOptionLabel(it) },
@@ -213,12 +216,12 @@ fun SortDropdown(current: SortOption, onSelect: (SortOption) -> Unit) {
 
 @Composable
 private fun licenceFilterLabel(l: Licence?): String =
-    if (l == null) "Toutes les licences" else "${licenceEmoji(l)} ${l.label}"
+    if (l == null) stringResource(R.string.all_licences) else "${licenceEmoji(l)} ${l.label}"
 
 @Composable
 fun LicenceFilterDropdown(current: Licence?, onSelect: (Licence?) -> Unit) {
     ThemedChoiceDropdown(
-        leading = "Licence",
+        leading = stringResource(R.string.licence_label),
         selectedLabel = licenceFilterLabel(current),
         options = listOf(null) + selectableLicences,
         optionLabel = { licenceFilterLabel(it) },

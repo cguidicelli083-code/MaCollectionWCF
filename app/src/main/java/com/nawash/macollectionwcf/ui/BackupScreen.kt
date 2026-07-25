@@ -36,9 +36,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.nawash.macollectionwcf.R
 import com.nawash.macollectionwcf.data.AppPrefs
 import com.nawash.macollectionwcf.data.CollectionItem
 import com.nawash.macollectionwcf.data.SpreadsheetImport
@@ -67,7 +69,7 @@ fun BackupScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
                 val ok = vm.exportBackup(uri)
                 working = false
                 if (ok) AppPrefs.setLastBackupUri(context, uri.toString())
-                resultMessage = if (ok) "Sauvegarde enregistrée avec succès." else "Échec de la sauvegarde."
+                resultMessage = context.getString(if (ok) R.string.backup_export_success else R.string.backup_export_failure)
             }
         }
     }
@@ -82,7 +84,7 @@ fun BackupScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
             scope.launch {
                 val ok = vm.exportExcel(uri)
                 working = false
-                resultMessage = if (ok) "Tableau Excel exporté avec succès." else "Échec de l'export du tableau Excel."
+                resultMessage = context.getString(if (ok) R.string.excel_export_success else R.string.excel_export_failure)
             }
         }
     }
@@ -92,7 +94,7 @@ fun BackupScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
             scope.launch {
                 val sheet = withContext(Dispatchers.IO) { SpreadsheetImport.parseFile(context, uri) }
                 working = false
-                resultMessage = if (sheet != null) null else "Impossible de lire ce fichier. Formats acceptés : .xlsx ou .csv."
+                resultMessage = if (sheet != null) null else context.getString(R.string.import_read_failure)
                 pendingSheet = sheet
             }
         }
@@ -104,7 +106,7 @@ fun BackupScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
     ) {
         Spacer(Modifier.height(8.dp))
         Text(
-            "Sauvegarde toute ta collection (données et photos) dans un fichier que tu choisis (téléchargements, Drive...). Ce fichier reste disponible même si tu désinstalles l'application.",
+            stringResource(R.string.backup_intro),
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center
         )
@@ -113,17 +115,17 @@ fun BackupScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
             onClick = { exportLauncher.launch("macollectionwcf-${System.currentTimeMillis()}.zip") },
             enabled = !working,
             modifier = Modifier.fillMaxWidth()
-        ) { Text("Sauvegarder la collection") }
+        ) { Text(stringResource(R.string.backup_save_button)) }
         Spacer(Modifier.height(12.dp))
         OutlinedButton(
             onClick = { importLauncher.launch(arrayOf("application/zip")) },
             enabled = !working,
             modifier = Modifier.fillMaxWidth()
-        ) { Text("Restaurer une sauvegarde") }
+        ) { Text(stringResource(R.string.backup_restore_button)) }
 
         Spacer(Modifier.height(20.dp))
         Text(
-            "Exporte toute ta collection (et tes souhaits) sous forme de tableau avec une photo par ligne — lisible dans Excel ou tout tableur (Excel affichera un avertissement de format à l'ouverture, sans conséquence : clique sur « Oui »).",
+            stringResource(R.string.excel_export_intro),
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center
         )
@@ -132,11 +134,11 @@ fun BackupScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
             onClick = { excelExportLauncher.launch("macollectionwcf-${System.currentTimeMillis()}.xls") },
             enabled = !working,
             modifier = Modifier.fillMaxWidth()
-        ) { Text("Exporter en tableau Excel") }
+        ) { Text(stringResource(R.string.excel_export_button)) }
 
         Spacer(Modifier.height(20.dp))
         Text(
-            "Importer une collection depuis un fichier Excel (.xlsx) ou CSV — même si ses colonnes ne correspondent pas au format de l'appli, tu pourras les faire correspondre à l'étape suivante.",
+            stringResource(R.string.sheet_import_intro),
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center
         )
@@ -145,7 +147,7 @@ fun BackupScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
             onClick = { importSheetLauncher.launch(arrayOf("*/*")) },
             enabled = !working,
             modifier = Modifier.fillMaxWidth()
-        ) { Text("Importer un fichier Excel/CSV") }
+        ) { Text(stringResource(R.string.sheet_import_button)) }
 
         if (working) {
             Spacer(Modifier.height(20.dp))
@@ -160,8 +162,8 @@ fun BackupScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
     confirmRestoreUri?.let { uri ->
         AlertDialog(
             onDismissRequest = { confirmRestoreUri = null },
-            title = { Text("Restaurer une sauvegarde") },
-            text = { Text("Cette action remplace entièrement ta collection actuelle par le contenu de la sauvegarde. Continuer ?") },
+            title = { Text(stringResource(R.string.backup_restore_button)) },
+            text = { Text(stringResource(R.string.backup_restore_confirm_text)) },
             confirmButton = {
                 TextButton(onClick = {
                     confirmRestoreUri = null
@@ -169,11 +171,11 @@ fun BackupScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
                     scope.launch {
                         val ok = vm.importBackup(uri)
                         working = false
-                        resultMessage = if (ok) "Collection restaurée avec succès." else "Échec de la restauration : fichier invalide ou endommagé."
+                        resultMessage = context.getString(if (ok) R.string.backup_restore_success else R.string.backup_restore_failure)
                     }
-                }) { Text("Restaurer") }
+                }) { Text(stringResource(R.string.restore)) }
             },
-            dismissButton = { TextButton(onClick = { confirmRestoreUri = null }) { Text("Annuler") } }
+            dismissButton = { TextButton(onClick = { confirmRestoreUri = null }) { Text(stringResource(R.string.cancel)) } }
         )
     }
 
@@ -197,7 +199,7 @@ fun BackupScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
             items = items,
             onConfirm = { selected ->
                 vm.importSpreadsheet(selected)
-                resultMessage = "${selected.size} figurine(s) importée(s) avec succès."
+                resultMessage = context.getString(R.string.import_success_count, selected.size)
                 pendingPreviewItems = null
             },
             onDismiss = { pendingPreviewItems = null }
@@ -215,28 +217,29 @@ private fun ImportMappingDialog(
     val mapping = remember { mutableStateMapOf<SpreadsheetImport.ImportField, Int?>().apply { putAll(initialMapping) } }
     val columnOptions = remember(headers) { listOf<Int?>(null) + headers.indices.toList() }
     val fieldLabels = mapOf(
-        SpreadsheetImport.ImportField.CHARACTER to "Personnage",
-        SpreadsheetImport.ImportField.NAME to "Nom commercial",
-        SpreadsheetImport.ImportField.LICENCE to "Licence",
-        SpreadsheetImport.ImportField.SERIES to "Gamme / vague WCF",
-        SpreadsheetImport.ImportField.MANUFACTURER to "Éditeur",
-        SpreadsheetImport.ImportField.CONDITION to "État",
-        SpreadsheetImport.ImportField.HAS_BOX to "Avec boîte",
-        SpreadsheetImport.ImportField.HAS_ACCESSORIES to "Avec accessoires",
-        SpreadsheetImport.ImportField.YEAR to "Année de sortie",
-        SpreadsheetImport.ImportField.HEIGHT to "Taille (cm)",
-        SpreadsheetImport.ImportField.PRICE to "Prix",
-        SpreadsheetImport.ImportField.BARCODE to "Code-barres",
-        SpreadsheetImport.ImportField.DESCRIPTION to "Description"
+        SpreadsheetImport.ImportField.CHARACTER to stringResource(R.string.field_character),
+        SpreadsheetImport.ImportField.NAME to stringResource(R.string.field_commercial_name),
+        SpreadsheetImport.ImportField.LICENCE to stringResource(R.string.licence_label),
+        SpreadsheetImport.ImportField.SERIES to stringResource(R.string.field_series),
+        SpreadsheetImport.ImportField.MANUFACTURER to stringResource(R.string.field_manufacturer),
+        SpreadsheetImport.ImportField.CONDITION to stringResource(R.string.field_condition),
+        SpreadsheetImport.ImportField.HAS_BOX to stringResource(R.string.field_has_box),
+        SpreadsheetImport.ImportField.HAS_ACCESSORIES to stringResource(R.string.field_has_accessories),
+        SpreadsheetImport.ImportField.YEAR to stringResource(R.string.field_year),
+        SpreadsheetImport.ImportField.HEIGHT to stringResource(R.string.field_height),
+        SpreadsheetImport.ImportField.PRICE to stringResource(R.string.field_price),
+        SpreadsheetImport.ImportField.BARCODE to stringResource(R.string.field_barcode),
+        SpreadsheetImport.ImportField.DESCRIPTION to stringResource(R.string.field_description)
     )
+    val noColumnLabel = stringResource(R.string.no_column)
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("Faire correspondre les colonnes") },
+        title = { Text(stringResource(R.string.match_columns_title)) },
         text = {
             Column(Modifier.heightIn(max = 420.dp).verticalScroll(rememberScrollState())) {
                 Text(
-                    "Indique à quelle colonne de ton fichier correspond chaque champ. Seul le Personnage est obligatoire ; les autres champs non trouvés resteront vides.",
+                    stringResource(R.string.match_columns_help),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -246,7 +249,7 @@ private fun ImportMappingDialog(
                         label = fieldLabels[field].orEmpty(),
                         options = columnOptions,
                         selected = mapping[field],
-                        optionLabel = { idx -> if (idx == null) "Aucune colonne" else headers.getOrElse(idx) { "?" } },
+                        optionLabel = { idx -> if (idx == null) noColumnLabel else headers.getOrElse(idx) { "?" } },
                         onSelect = { mapping[field] = it }
                     )
                     Spacer(Modifier.height(8.dp))
@@ -257,9 +260,9 @@ private fun ImportMappingDialog(
             TextButton(
                 onClick = { onConfirm(mapping.toMap()) },
                 enabled = mapping[SpreadsheetImport.ImportField.CHARACTER] != null
-            ) { Text("Suivant") }
+            ) { Text(stringResource(R.string.next)) }
         },
-        dismissButton = { TextButton(onClick = onDismiss) { Text("Annuler") } }
+        dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.cancel)) } }
     )
 }
 
@@ -273,11 +276,11 @@ private fun ImportPreviewDialog(
     val selectedCount = checked.count { it }
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("${items.size} figurine(s) détectée(s)") },
+        title = { Text(stringResource(R.string.batch_scan_title, items.size)) },
         text = {
             Column {
                 Text(
-                    "$selectedCount / ${items.size} sélectionnée(s)",
+                    stringResource(R.string.batch_scan_selected_count, selectedCount, items.size),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -302,8 +305,8 @@ private fun ImportPreviewDialog(
             TextButton(
                 onClick = { onConfirm(items.filterIndexed { i, _ -> checked[i] }) },
                 enabled = checked.any { it }
-            ) { Text("Importer") }
+            ) { Text(stringResource(R.string.import_action)) }
         },
-        dismissButton = { TextButton(onClick = onDismiss) { Text("Annuler") } }
+        dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.cancel)) } }
     )
 }

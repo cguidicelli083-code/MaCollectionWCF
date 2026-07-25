@@ -1,0 +1,215 @@
+<resources>
+    <string name="app_name">Ma Collection WCF</string>
+
+    <!-- 引导（首次启动教程） -->
+    <string name="onboarding_page1_title">欢迎使用 Ma Collection WCF 🎎</string>
+    <string name="onboarding_page1_text">这款应用可帮助你整理 World Collectable Figure 手办收藏（海贼王、死神、龙珠、火影忍者等），并提供价格估算。</string>
+    <string name="onboarding_page2_title">📷 添加一个手办</string>
+    <string name="onboarding_page2_text">点击 + 按钮添加手办：扫描条形码、拍照、从相册中选择照片，或手动输入所有信息。</string>
+    <string name="onboarding_page3_title">📚 百科</string>
+    <string name="onboarding_page3_text">浏览手办目录，直接将条目添加到你的收藏或愿望清单。内置目录会逐步扩充；与此同时，你也可以通过 + 按钮添加自己的条目（附照片）。</string>
+    <string name="onboarding_page4_title">❤️ 愿望清单 &amp; 💎 总计</string>
+    <string name="onboarding_page4_text">「愿望清单」标签页列出你未来想入手的手办。「总计」标签页显示你整个收藏的估计价值。</string>
+    <string name="onboarding_page5_title">💾 备份</string>
+    <string name="onboarding_page5_text">将你的整个收藏（数据和照片）备份到你自选保存位置的文件中，并可随时恢复 — 在重新安装或更换手机时很有用。在设置（齿轮图标）中，你还可以更改整个应用的背景图片。</string>
+    <string name="onboarding_page6_title">💡 小贴士</string>
+    <string name="onboarding_page6_text">在设置（齿轮图标）中，「小贴士」标签页总结了如何拍好照片以及如何手动准确填写手办信息的建议。</string>
+    <string name="onboarding_skip">跳过</string>
+    <string name="onboarding_next">下一步</string>
+    <string name="onboarding_start">开始使用</string>
+
+    <!-- 收藏 / 愿望清单 -->
+    <string name="search_placeholder_wishlist">在愿望清单中搜索</string>
+    <string name="search_placeholder_collection">在收藏中搜索</string>
+    <string name="wave_volume_label">波/卷</string>
+    <string name="all_waves">所有波次</string>
+    <string name="no_search_results">未找到相关结果。</string>
+    <string name="empty_wishlist_message">暂无愿望。点击 + 按钮添加你想要的手办。</string>
+    <string name="empty_collection_message">你的收藏是空的。点击 + 按钮添加第一个手办。</string>
+    <string name="unnamed_figure">未命名手办</string>
+    <string name="tag_box">盒子</string>
+    <string name="tag_accessories">配件</string>
+    <string name="ai_estimate_suffix">（AI）</string>
+    <string name="edit_content_description">编辑</string>
+    <string name="delete_content_description">删除</string>
+    <string name="sort_label">排序</string>
+    <string name="all_licences">所有系列</string>
+    <string name="licence_label">系列</string>
+    <string name="sort_name">名称</string>
+    <string name="sort_price_desc">价格（高→低）</string>
+    <string name="sort_price_asc">价格（低→高）</string>
+    <string name="sort_release_asc">发售日期（旧→新）</string>
+    <string name="sort_release_desc">发售日期（新→旧）</string>
+
+    <!-- 通用 -->
+    <string name="cancel">取消</string>
+    <string name="close">关闭</string>
+
+    <!-- 批量扫描 -->
+    <string name="batch_scan_title">检测到 %1$d 个手办</string>
+    <string name="batch_scan_selected_count">已选 %1$d / %2$d</string>
+    <string name="batch_scan_confirm">确认批量添加</string>
+
+    <!-- 详情页 -->
+    <string name="back_content_description">返回</string>
+    <string name="search_ebay_sold">🔍 在 eBay 上搜索（已成交）</string>
+    <string name="size_cm">尺寸：%1$s 厘米</string>
+    <string name="edit_price">编辑价格</string>
+    <string name="move_to_collection">移入收藏</string>
+    <string name="gallery_count">相册（%1$d）</string>
+    <string name="price_euro_label">价格（€）</string>
+    <string name="save">保存</string>
+
+    <!-- 总计 -->
+    <string name="collection_value">收藏价值</string>
+    <string name="figure_count">%1$d 个手办</string>
+    <string name="completion_by_series">按系列统计收集进度</string>
+    <string name="completion_placeholder">一旦百科目录中有已收录的 WCF 波次，将在此显示按系列统计的收集进度。</string>
+    <string name="completion_sort_percent_desc">%（高→低）</string>
+    <string name="completion_sort_percent_asc">%（低→高）</string>
+
+    <!-- 备份 / 导出 / 导入 -->
+    <string name="backup_export_success">备份保存成功。</string>
+    <string name="backup_export_failure">备份失败。</string>
+    <string name="excel_export_success">Excel 表格导出成功。</string>
+    <string name="excel_export_failure">Excel 表格导出失败。</string>
+    <string name="import_read_failure">无法读取此文件。可接受的格式：.xlsx 或 .csv。</string>
+    <string name="backup_intro">将你的整个收藏（数据和照片）备份到你自选的文件中（下载目录、Drive 等）。即使卸载本应用，此文件仍会保留。</string>
+    <string name="backup_save_button">备份收藏</string>
+    <string name="backup_restore_button">恢复备份</string>
+    <string name="excel_export_intro">将你的整个收藏（及愿望清单）导出为表格，每行附一张照片 — 可在 Excel 或任何电子表格软件中读取（Excel 打开时会显示格式警告，无影响：点击「是」即可）。</string>
+    <string name="excel_export_button">导出为 Excel 表格</string>
+    <string name="sheet_import_intro">从 Excel（.xlsx）或 CSV 文件导入收藏 — 即使其列与应用格式不匹配，你也可以在下一步进行对应设置。</string>
+    <string name="sheet_import_button">导入 Excel/CSV 文件</string>
+    <string name="backup_restore_confirm_text">此操作将用备份内容完全替换你当前的收藏。是否继续？</string>
+    <string name="restore">恢复</string>
+    <string name="backup_restore_success">收藏恢复成功。</string>
+    <string name="backup_restore_failure">恢复失败：文件无效或已损坏。</string>
+    <string name="import_success_count">成功导入 %1$d 个手办。</string>
+    <string name="field_character">角色</string>
+    <string name="field_commercial_name">商品名称</string>
+    <string name="field_series">系列 / WCF 波次</string>
+    <string name="field_manufacturer">厂商</string>
+    <string name="field_condition">状态</string>
+    <string name="field_has_box">含盒子</string>
+    <string name="field_has_accessories">含配件</string>
+    <string name="field_year">发售年份</string>
+    <string name="field_height">尺寸（厘米）</string>
+    <string name="field_price">价格</string>
+    <string name="field_barcode">条形码</string>
+    <string name="field_description">描述</string>
+    <string name="no_column">无对应列</string>
+    <string name="match_columns_title">匹配列</string>
+    <string name="match_columns_help">指定文件中的哪一列对应每个字段。只有「角色」是必填项；其他未匹配的字段将保持为空。</string>
+    <string name="next">下一步</string>
+    <string name="import_action">导入</string>
+
+    <!-- 添加/编辑手办表单 -->
+    <string name="form_title_edit">编辑手办</string>
+    <string name="form_title_new_wish">新愿望</string>
+    <string name="form_title_new_figure">新手办</string>
+    <string name="search_catalog_placeholder">在目录中搜索（可选）</string>
+    <string name="no_local_catalog_results">本地目录中无结果。</string>
+    <string name="choose_photo_option">🖼️  选择照片</string>
+    <string name="take_photo_option">📸  拍照</string>
+    <string name="remove_photo">移除照片</string>
+    <string name="photo_gallery">照片相册</string>
+    <string name="field_code_hint">编号（如 OP-427，未知可留空）</string>
+    <string name="field_has_accessories_hint">含配件（武器、零件等）</string>
+    <string name="field_price_hint">价格（€，未知可留空）</string>
+    <string name="update_action">更新</string>
+    <string name="add_to_wishlist">加入愿望清单</string>
+    <string name="condition_hs">损坏</string>
+    <string name="condition_mauvais">较差</string>
+    <string name="condition_bon">良好</string>
+    <string name="condition_tres_bon">很好</string>
+    <string name="condition_mint">完美</string>
+    <string name="condition_neuf">全新</string>
+
+    <!-- 百科 -->
+    <string name="search_character_placeholder">搜索一个角色</string>
+    <string name="encyclo_empty_no_catalog">内置目录将在未来的更新中推出。与此同时，你可以通过 + 按钮添加自己的条目。</string>
+    <string name="selected_count">已选 %1$d 个</string>
+    <string name="plus_collection">+ 收藏</string>
+    <string name="plus_wishlist">+ 愿望清单</string>
+    <string name="official_photo_coming">官方照片即将上线</string>
+    <string name="change_photo">更换照片</string>
+    <string name="add_photo">添加照片</string>
+    <string name="cm_suffix">厘米</string>
+    <string name="upcoming_release_note">%1$s — 尚未发售，官方照片即将上线。</string>
+    <string name="indicative_price">参考价格：%1$s</string>
+    <string name="add_to_collection">加入我的收藏</string>
+    <string name="form_title_edit_sheet">编辑条目</string>
+    <string name="form_title_new_encyclo_sheet">新百科条目</string>
+
+    <!-- 资讯 -->
+    <string name="no_news_yet">暂无资讯</string>
+    <string name="no_news_yet_detail">下次同步后，WCF 的最新资讯将显示在这里。</string>
+    <string name="upcoming">即将推出</string>
+    <string name="past_news">往期资讯</string>
+    <string name="no_upcoming_news">目前没有即将推出的资讯。</string>
+    <string name="no_past_news_for_licence">该系列没有往期资讯。</string>
+    <string name="tap_to_read_enlarge">点击阅读 / 放大照片</string>
+    <string name="tap_photo_to_enlarge">点击照片以放大</string>
+    <string name="figures_label">手办</string>
+    <string name="view_official_page">查看官方页面</string>
+
+    <!-- AI 价格估算 -->
+    <string name="ai_estimate_label_tavily">AI 估算（网络搜索）— 未找到可比的 eBay 商品，Gemini 配额不可用</string>
+    <string name="ai_estimate_label_web">AI 估算（在线搜索）— 未找到可比的 eBay 商品</string>
+
+    <!-- MainActivity：对话框与导航 -->
+    <string name="add_item_dialog_title">添加物品</string>
+    <string name="scan_barcode_option">📷  扫描条形码</string>
+    <string name="scan_batch_option">批量扫描（多个手办）</string>
+    <string name="manual_entry_option">✏️  手动输入</string>
+    <string name="lang_dialog_title">应用语言</string>
+    <string name="lang_option_checked">%1$s  ✓</string>
+    <string name="settings_content_description">设置</string>
+    <string name="add_content_description">添加</string>
+    <string name="nav_collection">收藏</string>
+    <string name="nav_wishlist">愿望清单</string>
+    <string name="nav_encyclo">百科</string>
+    <string name="nav_total">总计</string>
+    <string name="nav_actu">资讯</string>
+    <string name="title_collection">我的收藏</string>
+    <string name="scanning_batch">正在分析批量照片…</string>
+    <string name="scanning_recognition">正在识别角色（AI）…</string>
+    <string name="scanning_photo">正在分析照片…</string>
+    <string name="analysis_unavailable_title">分析不可用</string>
+    <string name="analysis_unavailable_text">AI 分析暂时不可用（已达每日限额或连接问题）。请稍后再试。</string>
+    <string name="no_figure_detected_title">未检测到手办</string>
+    <string name="no_figure_detected_text">这张照片中未检测到手办。</string>
+    <string name="adding_figures_in_progress">正在添加 %1$d 个手办…</string>
+    <string name="currency_option">💱 货币</string>
+    <string name="language_option">🌐 语言</string>
+    <string name="backup_option">💾 备份</string>
+    <string name="replay_tutorial_option">❓ 重新查看教程</string>
+    <string name="tips_option">💡 小贴士</string>
+    <string name="background_image_option">🖼️ 背景图片</string>
+    <string name="default_background_option">↩️ 默认背景</string>
+    <string name="theme_option">🎨 主题</string>
+    <string name="theme_dialog_title">应用主题</string>
+    <string name="theme_dialog_help">按系列选择一个主题。全部免费，可立即应用。</string>
+    <string name="currency_dialog_help">用于显示和输入价格的货币（始终从欧元按启动时获取的最新汇率换算）。</string>
+    <string name="tips_framing_title">📸 拍好照片的技巧</string>
+    <string name="tips_framing_text">将照片紧密地对准手办或其包装盒，平放并正面拍摄，光线充足且无反光或模糊：包装盒上的文字越清晰易读，自动名称建议就越可靠。</string>
+    <string name="tips_fields_title">🏷️ 填写手办信息的技巧</string>
+    <string name="tips_fields_text">填写角色、系列，并尽可能填写包装盒上标明的确切 WCF 系列/波次：这有助于在百科中找到正确的条目，日后也能获得更准确的价格。</string>
+    <string name="tips_price_title">💰 手动输入的价格</string>
+    <string name="tips_price_text">在自动估算功能可用之前，请自行在每个条目上输入价格（「编辑价格」按钮），以保持收藏总价值的更新。</string>
+    <string name="multi_select_content_description">多选</string>
+
+    <!-- 各语言的本地名称（语言选择器） -->
+    <string name="lang_name_fr">Français</string>
+    <string name="lang_name_en">English</string>
+    <string name="lang_name_es">Español</string>
+    <string name="lang_name_it">Italiano</string>
+    <string name="lang_name_de">Deutsch</string>
+    <string name="lang_name_pt">Português</string>
+    <string name="lang_name_ru">Русский</string>
+    <string name="lang_name_el">Ελληνικά</string>
+    <string name="lang_name_tr">Türkçe</string>
+    <string name="lang_name_ja">日本語</string>
+    <string name="lang_name_zh">中文</string>
+</resources>

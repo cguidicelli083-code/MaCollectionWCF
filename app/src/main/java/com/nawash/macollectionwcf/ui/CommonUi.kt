@@ -54,6 +54,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -194,6 +195,20 @@ fun conditionColor(c: Condition): Color = when (c) {
     Condition.NEUF -> Color(0xFF69F0AE)
 }
 
+/** Libellé affiché à l'écran (traduit) — distinct de [Condition.label] qui reste en français
+ * pour les prompts IA/recherche eBay (ne doit jamais changer selon la langue de l'appli). */
+@Composable
+fun Condition.displayLabel(): String = stringResource(
+    when (this) {
+        Condition.HS -> com.nawash.macollectionwcf.R.string.condition_hs
+        Condition.MAUVAIS -> com.nawash.macollectionwcf.R.string.condition_mauvais
+        Condition.BON -> com.nawash.macollectionwcf.R.string.condition_bon
+        Condition.TRES_BON -> com.nawash.macollectionwcf.R.string.condition_tres_bon
+        Condition.MINT -> com.nawash.macollectionwcf.R.string.condition_mint
+        Condition.NEUF -> com.nawash.macollectionwcf.R.string.condition_neuf
+    }
+)
+
 @Composable
 fun ConditionBadge(condition: Condition) {
     val color = conditionColor(condition)
@@ -204,7 +219,7 @@ fun ConditionBadge(condition: Condition) {
             .border(1.dp, color, RoundedCornerShape(8.dp))
             .padding(horizontal = 8.dp, vertical = 3.dp)
     ) {
-        Text(condition.label, color = color, fontSize = 11.sp, fontWeight = FontWeight.Bold)
+        Text(condition.displayLabel(), color = color, fontSize = 11.sp, fontWeight = FontWeight.Bold)
     }
 }
 
@@ -354,7 +369,7 @@ fun <T> LabeledDropdown(
     label: String,
     options: List<T>,
     selected: T,
-    optionLabel: (T) -> String,
+    optionLabel: @Composable (T) -> String,
     onSelect: (T) -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }

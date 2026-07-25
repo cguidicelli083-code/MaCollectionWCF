@@ -59,8 +59,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.window.Dialog
 import coil.compose.AsyncImage
+import com.nawash.macollectionwcf.R
 import com.nawash.macollectionwcf.data.CollectionItem
 import com.nawash.macollectionwcf.ui.theme.CardGradient
 import com.nawash.macollectionwcf.ui.theme.NeonBorder
@@ -86,10 +88,10 @@ fun ItemDetailScreen(
             containerColor = Color.Transparent,
             topBar = {
                 TopAppBar(
-                    title = { Text(item.character.ifBlank { "Figurine sans nom" }, fontWeight = FontWeight.Bold) },
+                    title = { Text(item.character.ifBlank { stringResource(R.string.unnamed_figure) }, fontWeight = FontWeight.Bold) },
                     navigationIcon = {
                         IconButton(onClick = onBack) {
-                            Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Retour", tint = Color.White)
+                            Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.back_content_description), tint = Color.White)
                         }
                     },
                     colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent, titleContentColor = Color.White)
@@ -113,7 +115,7 @@ fun ItemDetailScreen(
                         vm.recheckPrice(item)
                     },
                     modifier = Modifier.fillMaxWidth()
-                ) { Text("🔍 Rechercher sur eBay (ventes réussies)") }
+                ) { Text(stringResource(R.string.search_ebay_sold)) }
                 Spacer(Modifier.height(12.dp))
                 Box(Modifier.fillMaxWidth().height(260.dp), contentAlignment = Alignment.Center) {
                     Box(
@@ -142,16 +144,16 @@ fun ItemDetailScreen(
                 Spacer(Modifier.height(10.dp))
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     ConditionBadge(item.condition)
-                    Spacer(Modifier.width(6.dp)); TinyTag("Boîte", filled = item.hasBox)
-                    Spacer(Modifier.width(6.dp)); TinyTag("Accessoires", filled = item.hasAccessories)
+                    Spacer(Modifier.width(6.dp)); TinyTag(stringResource(R.string.tag_box), filled = item.hasBox)
+                    Spacer(Modifier.width(6.dp)); TinyTag(stringResource(R.string.tag_accessories), filled = item.hasAccessories)
                 }
                 item.heightCm?.let {
                     Spacer(Modifier.height(6.dp))
-                    Text("Taille : ${it} cm", color = Color.White)
+                    Text(stringResource(R.string.size_cm, it), color = Color.White)
                 }
                 Spacer(Modifier.height(12.dp))
                 Text(
-                    formatPrice(item.priceCents) + if (item.priceIsAiEstimate) " (IA)" else "",
+                    formatPrice(item.priceCents) + if (item.priceIsAiEstimate) " " + stringResource(R.string.ai_estimate_suffix) else "",
                     fontSize = 34.sp,
                     fontWeight = FontWeight.Black,
                     color = NeonCyan
@@ -162,13 +164,13 @@ fun ItemDetailScreen(
                 }
                 Spacer(Modifier.height(8.dp))
                 TextButton(onClick = { editingPrice = true }, modifier = Modifier.fillMaxWidth()) {
-                    Text("Modifier le prix")
+                    Text(stringResource(R.string.edit_price))
                 }
                 if (item.isWishlist) {
                     Button(
                         onClick = { vm.saveCollectionItem(item.copy(isWishlist = false)); onBack() },
                         modifier = Modifier.fillMaxWidth()
-                    ) { Text("Passer en collection") }
+                    ) { Text(stringResource(R.string.move_to_collection)) }
                 }
 
                 item.description?.takeIf { it.isNotBlank() }?.let {
@@ -183,7 +185,7 @@ fun ItemDetailScreen(
 
                 if (galleryPhotos.isNotEmpty()) {
                     Spacer(Modifier.height(18.dp))
-                    Text("Galerie (${galleryPhotos.size})", modifier = Modifier.fillMaxWidth(), style = MaterialTheme.typography.labelLarge, color = Color.White)
+                    Text(stringResource(R.string.gallery_count, galleryPhotos.size), modifier = Modifier.fillMaxWidth(), style = MaterialTheme.typography.labelLarge, color = Color.White)
                     Spacer(Modifier.height(8.dp))
                     LazyRow(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                         items(galleryPhotos, key = { it.id }) { photo ->
@@ -202,10 +204,10 @@ fun ItemDetailScreen(
                 Spacer(Modifier.height(14.dp))
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                     Button(onClick = onEdit, modifier = Modifier.weight(1f)) {
-                        Icon(Icons.Filled.Edit, null); Spacer(Modifier.width(6.dp)); Text("Modifier")
+                        Icon(Icons.Filled.Edit, null); Spacer(Modifier.width(6.dp)); Text(stringResource(R.string.edit_content_description))
                     }
                     OutlinedButton(onClick = onDelete, modifier = Modifier.weight(1f)) {
-                        Icon(Icons.Filled.Delete, null, tint = NeonPink); Spacer(Modifier.width(6.dp)); Text("Supprimer")
+                        Icon(Icons.Filled.Delete, null, tint = NeonPink); Spacer(Modifier.width(6.dp)); Text(stringResource(R.string.delete_content_description))
                     }
                 }
                 Spacer(Modifier.height(24.dp))
@@ -218,7 +220,7 @@ fun ItemDetailScreen(
             Box(Modifier.fillMaxSize().background(Color.Black.copy(alpha = 0.92f)), contentAlignment = Alignment.Center) {
                 ZoomableImage(uri = uri, modifier = Modifier.fillMaxWidth().padding(16.dp))
                 IconButton(onClick = { fullscreenUri = null }, modifier = Modifier.align(Alignment.TopEnd).padding(8.dp)) {
-                    Icon(Icons.Filled.Close, contentDescription = "Fermer", tint = Color.White)
+                    Icon(Icons.Filled.Close, contentDescription = stringResource(R.string.close), tint = Color.White)
                 }
             }
         }
@@ -228,12 +230,12 @@ fun ItemDetailScreen(
         var priceText by remember { mutableStateOf(item.priceCents?.let { centsToText(it) } ?: "") }
         AlertDialog(
             onDismissRequest = { editingPrice = false },
-            title = { Text("Modifier le prix") },
+            title = { Text(stringResource(R.string.edit_price)) },
             text = {
                 OutlinedTextField(
                     value = priceText,
                     onValueChange = { priceText = it },
-                    label = { Text("Prix (€)") },
+                    label = { Text(stringResource(R.string.price_euro_label)) },
                     singleLine = true,
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
                     modifier = Modifier.fillMaxWidth()
@@ -244,9 +246,9 @@ fun ItemDetailScreen(
                     val cents = parsePriceToCents(priceText)
                     vm.saveCollectionItem(item.copy(priceCents = cents, priceIsManual = cents != null, priceIsAiEstimate = false))
                     editingPrice = false
-                }) { Text("Enregistrer") }
+                }) { Text(stringResource(R.string.save)) }
             },
-            dismissButton = { TextButton(onClick = { editingPrice = false }) { Text("Annuler") } }
+            dismissButton = { TextButton(onClick = { editingPrice = false }) { Text(stringResource(R.string.cancel)) } }
         )
     }
 }

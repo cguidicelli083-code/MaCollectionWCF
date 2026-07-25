@@ -1,0 +1,215 @@
+<resources>
+    <string name="app_name">Ma Collection WCF</string>
+
+    <!-- Onboarding (οδηγός πρώτης εκκίνησης) -->
+    <string name="onboarding_page1_title">Καλώς ήρθες στο Ma Collection WCF 🎎</string>
+    <string name="onboarding_page1_text">Αυτή η εφαρμογή σε βοηθά να καταλογογραφήσεις τη συλλογή σου από φιγούρες World Collectable Figure (One Piece, Bleach, Dragon Ball, Naruto...), με εκτίμηση τιμών.</string>
+    <string name="onboarding_page2_title">📷 Προσθήκη φιγούρας</string>
+    <string name="onboarding_page2_text">Πάτησε το κουμπί + για να προσθέσεις μια φιγούρα: σάρωσε ένα barcode, τράβηξε φωτογραφία, διάλεξε μία από τη συλλογή σου, ή συμπλήρωσε τα πάντα χειροκίνητα.</string>
+    <string name="onboarding_page3_title">📚 Εγκυκλοπαίδεια</string>
+    <string name="onboarding_page3_text">Περιήγησου στον κατάλογο φιγούρων και πρόσθεσε μια καρτέλα απευθείας στη συλλογή σου ή στις επιθυμίες σου. Ο ενσωματωμένος κατάλογος εμπλουτίζεται σταδιακά· στο μεταξύ, πρόσθεσε τις δικές σου καρτέλες (με φωτογραφία) μέσω του κουμπιού +.</string>
+    <string name="onboarding_page4_title">❤️ Επιθυμίες &amp; 💎 Σύνολο</string>
+    <string name="onboarding_page4_text">Η καρτέλα Επιθυμίες παραθέτει τις μελλοντικές σου αποκτήσεις. Η καρτέλα Σύνολο δείχνει την εκτιμώμενη αξία όλης σου της συλλογής.</string>
+    <string name="onboarding_page5_title">💾 Αντίγραφο ασφαλείας</string>
+    <string name="onboarding_page5_text">Αποθήκευσε όλη τη συλλογή σου (δεδομένα και φωτογραφίες) σε ένα αρχείο που εσύ επιλέγεις πού να αποθηκεύσεις, και επανάφερέ την οποιαδήποτε στιγμή — χρήσιμο σε περίπτωση επανεγκατάστασης ή αλλαγής τηλεφώνου. Στις ρυθμίσεις (γρανάζι), μπορείς επίσης να αλλάξεις την εικόνα φόντου όλης της εφαρμογής.</string>
+    <string name="onboarding_page6_title">💡 Συμβουλές</string>
+    <string name="onboarding_page6_text">Στις ρυθμίσεις (γρανάζι), μια καρτέλα «Συμβουλές» συνοψίζει τις συμβουλές για σωστή πλαισίωση των φωτογραφιών σου και σωστή χειροκίνητη συμπλήρωση των φιγούρων σου.</string>
+    <string name="onboarding_skip">Παράλειψη</string>
+    <string name="onboarding_next">Επόμενο</string>
+    <string name="onboarding_start">Έναρξη</string>
+
+    <!-- Συλλογή / Επιθυμίες -->
+    <string name="search_placeholder_wishlist">Αναζήτηση στις επιθυμίες</string>
+    <string name="search_placeholder_collection">Αναζήτηση στη συλλογή</string>
+    <string name="wave_volume_label">Κύμα/Τόμος</string>
+    <string name="all_waves">Όλα τα κύματα</string>
+    <string name="no_search_results">Κανένα αποτέλεσμα για αυτήν την αναζήτηση.</string>
+    <string name="empty_wishlist_message">Καμία επιθυμία προς το παρόν. Πρόσθεσε μια φιγούρα που θέλεις με το κουμπί +.</string>
+    <string name="empty_collection_message">Η συλλογή σου είναι άδεια. Πρόσθεσε την πρώτη σου φιγούρα με το κουμπί +.</string>
+    <string name="unnamed_figure">Φιγούρα χωρίς όνομα</string>
+    <string name="tag_box">Κουτί</string>
+    <string name="tag_accessories">Αξεσουάρ</string>
+    <string name="ai_estimate_suffix">(AI)</string>
+    <string name="edit_content_description">Επεξεργασία</string>
+    <string name="delete_content_description">Διαγραφή</string>
+    <string name="sort_label">Ταξινόμηση</string>
+    <string name="all_licences">Όλες οι άδειες</string>
+    <string name="licence_label">Άδεια</string>
+    <string name="sort_name">Όνομα</string>
+    <string name="sort_price_desc">Τιμή (υψηλή → χαμηλή)</string>
+    <string name="sort_price_asc">Τιμή (χαμηλή → υψηλή)</string>
+    <string name="sort_release_asc">Ημερομηνία κυκλοφορίας (παλιά → πρόσφατη)</string>
+    <string name="sort_release_desc">Ημερομηνία κυκλοφορίας (πρόσφατη → παλιά)</string>
+
+    <!-- Κοινά -->
+    <string name="cancel">Ακύρωση</string>
+    <string name="close">Κλείσιμο</string>
+
+    <!-- Μαζική σάρωση -->
+    <string name="batch_scan_title">%1$d φιγούρα/ες εντοπίστηκε/αν</string>
+    <string name="batch_scan_selected_count">%1$d / %2$d επιλεγμένες</string>
+    <string name="batch_scan_confirm">Επιβεβαίωση μαζικής προσθήκης</string>
+
+    <!-- Καρτέλα λεπτομερειών -->
+    <string name="back_content_description">Πίσω</string>
+    <string name="search_ebay_sold">🔍 Αναζήτηση στο eBay (ολοκληρωμένες πωλήσεις)</string>
+    <string name="size_cm">Μέγεθος: %1$s εκ.</string>
+    <string name="edit_price">Επεξεργασία τιμής</string>
+    <string name="move_to_collection">Μεταφορά στη συλλογή</string>
+    <string name="gallery_count">Συλλογή φωτογραφιών (%1$d)</string>
+    <string name="price_euro_label">Τιμή (€)</string>
+    <string name="save">Αποθήκευση</string>
+
+    <!-- Σύνολο -->
+    <string name="collection_value">Αξία συλλογής</string>
+    <string name="figure_count">%1$d φιγούρα/ες</string>
+    <string name="completion_by_series">Ολοκλήρωση ανά σειρά</string>
+    <string name="completion_placeholder">Η ολοκλήρωση ανά σειρά θα εμφανιστεί μόλις ο κατάλογος Εγκυκλοπαίδειας έχει καταχωρημένα κύματα WCF.</string>
+    <string name="completion_sort_percent_desc">% (υψηλό → χαμηλό)</string>
+    <string name="completion_sort_percent_asc">% (χαμηλό → υψηλό)</string>
+
+    <!-- Αντίγραφο ασφαλείας / Εξαγωγή / Εισαγωγή -->
+    <string name="backup_export_success">Το αντίγραφο ασφαλείας αποθηκεύτηκε με επιτυχία.</string>
+    <string name="backup_export_failure">Αποτυχία δημιουργίας αντιγράφου ασφαλείας.</string>
+    <string name="excel_export_success">Ο πίνακας Excel εξήχθη με επιτυχία.</string>
+    <string name="excel_export_failure">Αποτυχία εξαγωγής του πίνακα Excel.</string>
+    <string name="import_read_failure">Αδύνατη η ανάγνωση αυτού του αρχείου. Αποδεκτές μορφές: .xlsx ή .csv.</string>
+    <string name="backup_intro">Αποθήκευσε όλη τη συλλογή σου (δεδομένα και φωτογραφίες) σε ένα αρχείο της επιλογής σου (λήψεις, Drive...). Αυτό το αρχείο παραμένει διαθέσιμο ακόμα κι αν απεγκαταστήσεις την εφαρμογή.</string>
+    <string name="backup_save_button">Αποθήκευση συλλογής</string>
+    <string name="backup_restore_button">Επαναφορά αντιγράφου ασφαλείας</string>
+    <string name="excel_export_intro">Εξήγαγε όλη τη συλλογή σου (και τις επιθυμίες σου) ως πίνακα με μία φωτογραφία ανά γραμμή — αναγνώσιμο σε Excel ή οποιοδήποτε λογιστικό φύλλο (το Excel θα εμφανίσει προειδοποίηση μορφής κατά το άνοιγμα, χωρίς συνέπειες: κάνε κλικ στο «Ναι»).</string>
+    <string name="excel_export_button">Εξαγωγή ως πίνακα Excel</string>
+    <string name="sheet_import_intro">Εισήγαγε μια συλλογή από αρχείο Excel (.xlsx) ή CSV — ακόμα κι αν οι στήλες του δεν αντιστοιχούν στη μορφή της εφαρμογής, θα μπορέσεις να τις αντιστοιχίσεις στο επόμενο βήμα.</string>
+    <string name="sheet_import_button">Εισαγωγή αρχείου Excel/CSV</string>
+    <string name="backup_restore_confirm_text">Αυτή η ενέργεια αντικαθιστά πλήρως την τρέχουσα συλλογή σου με το περιεχόμενο του αντιγράφου ασφαλείας. Συνέχεια;</string>
+    <string name="restore">Επαναφορά</string>
+    <string name="backup_restore_success">Η συλλογή επαναφέρθηκε με επιτυχία.</string>
+    <string name="backup_restore_failure">Αποτυχία επαναφοράς: μη έγκυρο ή κατεστραμμένο αρχείο.</string>
+    <string name="import_success_count">%1$d φιγούρα/ες εισήχθη/σαν με επιτυχία.</string>
+    <string name="field_character">Χαρακτήρας</string>
+    <string name="field_commercial_name">Εμπορική ονομασία</string>
+    <string name="field_series">Σειρά / κύμα WCF</string>
+    <string name="field_manufacturer">Εκδότης</string>
+    <string name="field_condition">Κατάσταση</string>
+    <string name="field_has_box">Με κουτί</string>
+    <string name="field_has_accessories">Με αξεσουάρ</string>
+    <string name="field_year">Έτος κυκλοφορίας</string>
+    <string name="field_height">Μέγεθος (εκ.)</string>
+    <string name="field_price">Τιμή</string>
+    <string name="field_barcode">Barcode</string>
+    <string name="field_description">Περιγραφή</string>
+    <string name="no_column">Καμία στήλη</string>
+    <string name="match_columns_title">Αντιστοίχιση στηλών</string>
+    <string name="match_columns_help">Υπόδειξε σε ποια στήλη του αρχείου σου αντιστοιχεί κάθε πεδίο. Μόνο ο Χαρακτήρας είναι υποχρεωτικός· τα υπόλοιπα μη αντιστοιχισμένα πεδία θα παραμείνουν κενά.</string>
+    <string name="next">Επόμενο</string>
+    <string name="import_action">Εισαγωγή</string>
+
+    <!-- Φόρμα προσθήκης/επεξεργασίας φιγούρας -->
+    <string name="form_title_edit">Επεξεργασία φιγούρας</string>
+    <string name="form_title_new_wish">Νέα επιθυμία</string>
+    <string name="form_title_new_figure">Νέα φιγούρα</string>
+    <string name="search_catalog_placeholder">Αναζήτηση στον κατάλογο (προαιρετικό)</string>
+    <string name="no_local_catalog_results">Κανένα αποτέλεσμα στον τοπικό κατάλογο.</string>
+    <string name="choose_photo_option">🖼️  Επιλογή φωτογραφίας</string>
+    <string name="take_photo_option">📸  Λήψη φωτογραφίας</string>
+    <string name="remove_photo">Αφαίρεση φωτογραφίας</string>
+    <string name="photo_gallery">Συλλογή φωτογραφιών</string>
+    <string name="field_code_hint">Κωδικός (π.χ. OP-427, άφησέ το κενό αν είναι άγνωστος)</string>
+    <string name="field_has_accessories_hint">Με αξεσουάρ (όπλα, κομμάτια...)</string>
+    <string name="field_price_hint">Τιμή (€, άφησέ το κενό αν είναι άγνωστη)</string>
+    <string name="update_action">Ενημέρωση</string>
+    <string name="add_to_wishlist">Προσθήκη στις επιθυμίες</string>
+    <string name="condition_hs">Χαλασμένη</string>
+    <string name="condition_mauvais">Κακή</string>
+    <string name="condition_bon">Καλή</string>
+    <string name="condition_tres_bon">Πολύ καλή</string>
+    <string name="condition_mint">Άριστη</string>
+    <string name="condition_neuf">Καινούργια</string>
+
+    <!-- Εγκυκλοπαίδεια -->
+    <string name="search_character_placeholder">Αναζήτηση χαρακτήρα</string>
+    <string name="encyclo_empty_no_catalog">Ο ενσωματωμένος κατάλογος θα φτάσει σε μελλοντική ενημέρωση. Στο μεταξύ, πρόσθεσε τις δικές σου καρτέλες με το κουμπί +.</string>
+    <string name="selected_count">%1$d επιλεγμένες</string>
+    <string name="plus_collection">+ Συλλογή</string>
+    <string name="plus_wishlist">+ Επιθυμίες</string>
+    <string name="official_photo_coming">Επίσημη φωτογραφία σύντομα</string>
+    <string name="change_photo">Αλλαγή φωτογραφίας</string>
+    <string name="add_photo">Προσθήκη φωτογραφίας</string>
+    <string name="cm_suffix">εκ.</string>
+    <string name="upcoming_release_note">%1$s — δεν κυκλοφόρησε ακόμα, επίσημη φωτογραφία σύντομα.</string>
+    <string name="indicative_price">Ενδεικτική τιμή: %1$s</string>
+    <string name="add_to_collection">Προσθήκη στη συλλογή μου</string>
+    <string name="form_title_edit_sheet">Επεξεργασία καρτέλας</string>
+    <string name="form_title_new_encyclo_sheet">Νέα καρτέλα Εγκυκλοπαίδειας</string>
+
+    <!-- Νέα -->
+    <string name="no_news_yet">Κανένα νέο προς το παρόν</string>
+    <string name="no_news_yet_detail">Τα νέα WCF θα εμφανιστούν εδώ μετά τον επόμενο συγχρονισμό.</string>
+    <string name="upcoming">Προσεχώς</string>
+    <string name="past_news">Παλιά νέα</string>
+    <string name="no_upcoming_news">Κανένα προσεχές νέο προς το παρόν.</string>
+    <string name="no_past_news_for_licence">Κανένα παλιό νέο για αυτήν την άδεια.</string>
+    <string name="tap_to_read_enlarge">Πάτησε για ανάγνωση / μεγέθυνση της φωτογραφίας</string>
+    <string name="tap_photo_to_enlarge">Πάτησε τη φωτογραφία για να τη μεγεθύνεις</string>
+    <string name="figures_label">Φιγούρες</string>
+    <string name="view_official_page">Προβολή επίσημης σελίδας</string>
+
+    <!-- Εκτίμηση τιμής AI -->
+    <string name="ai_estimate_label_tavily">Εκτίμηση AI (αναζήτηση στον ιστό) — δεν βρέθηκε συγκρίσιμη αγγελία eBay, το όριο Gemini δεν είναι διαθέσιμο</string>
+    <string name="ai_estimate_label_web">Εκτίμηση AI (διαδικτυακή αναζήτηση) — δεν βρέθηκε συγκρίσιμη αγγελία eBay</string>
+
+    <!-- MainActivity: διάλογοι και πλοήγηση -->
+    <string name="add_item_dialog_title">Προσθήκη αντικειμένου</string>
+    <string name="scan_barcode_option">📷  Σάρωση barcode</string>
+    <string name="scan_batch_option">Σάρωση παρτίδας (πολλές φιγούρες)</string>
+    <string name="manual_entry_option">✏️  Χειροκίνητη καταχώρηση</string>
+    <string name="lang_dialog_title">Γλώσσα εφαρμογής</string>
+    <string name="lang_option_checked">%1$s  ✓</string>
+    <string name="settings_content_description">Ρυθμίσεις</string>
+    <string name="add_content_description">Προσθήκη</string>
+    <string name="nav_collection">Συλλογή</string>
+    <string name="nav_wishlist">Επιθυμίες</string>
+    <string name="nav_encyclo">Εγκυκλοπαίδεια</string>
+    <string name="nav_total">Σύνολο</string>
+    <string name="nav_actu">Νέα</string>
+    <string name="title_collection">Η συλλογή μου</string>
+    <string name="scanning_batch">Ανάλυση παρτίδας σε εξέλιξη…</string>
+    <string name="scanning_recognition">Αναγνώριση χαρακτήρα (AI)…</string>
+    <string name="scanning_photo">Ανάλυση φωτογραφίας…</string>
+    <string name="analysis_unavailable_title">Η ανάλυση δεν είναι διαθέσιμη</string>
+    <string name="analysis_unavailable_text">Η ανάλυση AI είναι προσωρινά μη διαθέσιμη (επιτεύχθηκε το ημερήσιο όριο ή πρόβλημα σύνδεσης). Δοκίμασε ξανά αργότερα.</string>
+    <string name="no_figure_detected_title">Δεν εντοπίστηκε φιγούρα</string>
+    <string name="no_figure_detected_text">Δεν εντοπίστηκε φιγούρα σε αυτήν τη φωτογραφία.</string>
+    <string name="adding_figures_in_progress">Προσθήκη %1$d φιγούρας/ών σε εξέλιξη…</string>
+    <string name="currency_option">💱 Νόμισμα</string>
+    <string name="language_option">🌐 Γλώσσα</string>
+    <string name="backup_option">💾 Αντίγραφο ασφαλείας</string>
+    <string name="replay_tutorial_option">❓ Επανάληψη οδηγού</string>
+    <string name="tips_option">💡 Συμβουλές</string>
+    <string name="background_image_option">🖼️ Εικόνα φόντου</string>
+    <string name="default_background_option">↩️ Προεπιλεγμένο φόντο</string>
+    <string name="theme_option">🎨 Θέμα</string>
+    <string name="theme_dialog_title">Θέμα εφαρμογής</string>
+    <string name="theme_dialog_help">Επίλεξε ένα θέμα ανά άδεια. Όλα είναι δωρεάν και εφαρμόζονται άμεσα.</string>
+    <string name="currency_dialog_help">Νόμισμα εμφάνισης και καταχώρησης τιμών (πάντα μετατρέπεται από ευρώ, στην πιο πρόσφατη ισοτιμία που ανακτήθηκε κατά την εκκίνηση).</string>
+    <string name="tips_framing_title">📸 Σωστή πλαισίωση της φωτογραφίας</string>
+    <string name="tips_framing_text">Πλαισίωσε τη φωτογραφία στενά γύρω από τη φιγούρα ή το κουτί της, επίπεδη και μετωπική, με καλό φωτισμό χωρίς αντανακλάσεις ή θάμπωμα: όσο πιο ευκρινές και ευανάγνωστο είναι το κείμενο του κουτιού, τόσο πιο αξιόπιστη θα είναι η αυτόματη πρόταση ονόματος.</string>
+    <string name="tips_fields_title">🏷️ Σωστή συμπλήρωση μιας φιγούρας</string>
+    <string name="tips_fields_text">Υπόδειξε τον χαρακτήρα, την άδεια και, αν είναι δυνατόν, την ακριβή σειρά/κύμα WCF (ορατή στο κουτί): αυτό θα βοηθήσει να βρεθεί η σωστή καρτέλα στην Εγκυκλοπαίδεια και, αργότερα, να ληφθεί πιο ακριβής τιμή.</string>
+    <string name="tips_price_title">💰 Χειροκίνητα καταχωρημένη τιμή</string>
+    <string name="tips_price_text">Όσο η αυτόματη εκτίμηση δεν είναι διαθέσιμη, καταχώρησε ο ίδιος την τιμή σε κάθε καρτέλα (κουμπί «Επεξεργασία τιμής») ώστε η συνολική αξία της συλλογής σου να παραμένει ενημερωμένη.</string>
+    <string name="multi_select_content_description">Πολλαπλή επιλογή</string>
+
+    <!-- Ονόματα γλωσσών στη μητρική τους γλώσσα (επιλογέας γλώσσας) -->
+    <string name="lang_name_fr">Français</string>
+    <string name="lang_name_en">English</string>
+    <string name="lang_name_es">Español</string>
+    <string name="lang_name_it">Italiano</string>
+    <string name="lang_name_de">Deutsch</string>
+    <string name="lang_name_pt">Português</string>
+    <string name="lang_name_ru">Русский</string>
+    <string name="lang_name_el">Ελληνικά</string>
+    <string name="lang_name_tr">Türkçe</string>
+    <string name="lang_name_ja">日本語</string>
+    <string name="lang_name_zh">中文</string>
+</resources>

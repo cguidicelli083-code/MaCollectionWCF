@@ -1,0 +1,215 @@
+<resources>
+    <string name="app_name">Ma Collection WCF</string>
+
+    <!-- Onboarding (first launch tutorial) -->
+    <string name="onboarding_page1_title">Welcome to Ma Collection WCF 🎎</string>
+    <string name="onboarding_page1_text">This app helps you catalog your World Collectable Figure collection (One Piece, Bleach, Dragon Ball, Naruto...), with price estimates.</string>
+    <string name="onboarding_page2_title">📷 Add a figure</string>
+    <string name="onboarding_page2_text">Tap the + button to add a figure: scan a barcode, take a photo, pick one from your gallery, or enter everything manually.</string>
+    <string name="onboarding_page3_title">📚 Encyclo</string>
+    <string name="onboarding_page3_text">Browse the figure catalog and add an entry straight to your collection or wishlist. The built-in catalog grows over time; in the meantime, add your own entries (with a photo) using the + button.</string>
+    <string name="onboarding_page4_title">❤️ Wishlist &amp; 💎 Total</string>
+    <string name="onboarding_page4_text">The Wishlist tab lists what you\'re hoping to get next. The Total tab shows the estimated value of your whole collection.</string>
+    <string name="onboarding_page5_title">💾 Backup</string>
+    <string name="onboarding_page5_text">Back up your entire collection (data and photos) to a file you choose where to save, and restore it anytime — handy after a reinstall or a phone change. In settings (gear icon), you can also change the app\'s background image.</string>
+    <string name="onboarding_page6_title">💡 Tips</string>
+    <string name="onboarding_page6_text">In settings (gear icon), a "Tips" tab sums up advice for framing your photos well and filling in your figures accurately by hand.</string>
+    <string name="onboarding_skip">Skip</string>
+    <string name="onboarding_next">Next</string>
+    <string name="onboarding_start">Get started</string>
+
+    <!-- Collection / Wishlist -->
+    <string name="search_placeholder_wishlist">Search your wishlist</string>
+    <string name="search_placeholder_collection">Search your collection</string>
+    <string name="wave_volume_label">Wave/Volume</string>
+    <string name="all_waves">All waves</string>
+    <string name="no_search_results">No results for this search.</string>
+    <string name="empty_wishlist_message">No wishes yet. Add a figure you\'re after with the + button.</string>
+    <string name="empty_collection_message">Your collection is empty. Add your first figure with the + button.</string>
+    <string name="unnamed_figure">Unnamed figure</string>
+    <string name="tag_box">Box</string>
+    <string name="tag_accessories">Accessories</string>
+    <string name="ai_estimate_suffix">(AI)</string>
+    <string name="edit_content_description">Edit</string>
+    <string name="delete_content_description">Delete</string>
+    <string name="sort_label">Sort</string>
+    <string name="all_licences">All licences</string>
+    <string name="licence_label">Licence</string>
+    <string name="sort_name">Name</string>
+    <string name="sort_price_desc">Price (high → low)</string>
+    <string name="sort_price_asc">Price (low → high)</string>
+    <string name="sort_release_asc">Release date (old → recent)</string>
+    <string name="sort_release_desc">Release date (recent → old)</string>
+
+    <!-- Common -->
+    <string name="cancel">Cancel</string>
+    <string name="close">Close</string>
+
+    <!-- Batch scan -->
+    <string name="batch_scan_title">%1$d figure(s) detected</string>
+    <string name="batch_scan_selected_count">%1$d / %2$d selected</string>
+    <string name="batch_scan_confirm">Confirm batch add</string>
+
+    <!-- Detail sheet -->
+    <string name="back_content_description">Back</string>
+    <string name="search_ebay_sold">🔍 Search eBay (sold listings)</string>
+    <string name="size_cm">Size: %1$s cm</string>
+    <string name="edit_price">Edit price</string>
+    <string name="move_to_collection">Move to collection</string>
+    <string name="gallery_count">Gallery (%1$d)</string>
+    <string name="price_euro_label">Price (€)</string>
+    <string name="save">Save</string>
+
+    <!-- Total -->
+    <string name="collection_value">Collection value</string>
+    <string name="figure_count">%1$d figure(s)</string>
+    <string name="completion_by_series">Completion by series</string>
+    <string name="completion_placeholder">Completion by series will show up once the Encyclo catalog has referenced WCF waves.</string>
+    <string name="completion_sort_percent_desc">% (high → low)</string>
+    <string name="completion_sort_percent_asc">% (low → high)</string>
+
+    <!-- Backup / Export / Import -->
+    <string name="backup_export_success">Backup saved successfully.</string>
+    <string name="backup_export_failure">Backup failed.</string>
+    <string name="excel_export_success">Excel spreadsheet exported successfully.</string>
+    <string name="excel_export_failure">Excel export failed.</string>
+    <string name="import_read_failure">Couldn\'t read this file. Accepted formats: .xlsx or .csv.</string>
+    <string name="backup_intro">Back up your entire collection (data and photos) to a file you choose (downloads, Drive...). This file stays available even if you uninstall the app.</string>
+    <string name="backup_save_button">Back up collection</string>
+    <string name="backup_restore_button">Restore a backup</string>
+    <string name="excel_export_intro">Export your entire collection (and wishlist) as a spreadsheet with one photo per row — readable in Excel or any spreadsheet app (Excel will show a format warning on opening, harmless: click "Yes").</string>
+    <string name="excel_export_button">Export as Excel spreadsheet</string>
+    <string name="sheet_import_intro">Import a collection from an Excel (.xlsx) or CSV file — even if its columns don\'t match the app\'s format, you\'ll be able to match them up in the next step.</string>
+    <string name="sheet_import_button">Import an Excel/CSV file</string>
+    <string name="backup_restore_confirm_text">This will completely replace your current collection with the backup\'s content. Continue?</string>
+    <string name="restore">Restore</string>
+    <string name="backup_restore_success">Collection restored successfully.</string>
+    <string name="backup_restore_failure">Restore failed: invalid or damaged file.</string>
+    <string name="import_success_count">%1$d figure(s) imported successfully.</string>
+    <string name="field_character">Character</string>
+    <string name="field_commercial_name">Commercial name</string>
+    <string name="field_series">Range / WCF wave</string>
+    <string name="field_manufacturer">Manufacturer</string>
+    <string name="field_condition">Condition</string>
+    <string name="field_has_box">With box</string>
+    <string name="field_has_accessories">With accessories</string>
+    <string name="field_year">Release year</string>
+    <string name="field_height">Size (cm)</string>
+    <string name="field_price">Price</string>
+    <string name="field_barcode">Barcode</string>
+    <string name="field_description">Description</string>
+    <string name="no_column">No column</string>
+    <string name="match_columns_title">Match the columns</string>
+    <string name="match_columns_help">Indicate which column of your file matches each field. Only Character is required; other unmatched fields will stay empty.</string>
+    <string name="next">Next</string>
+    <string name="import_action">Import</string>
+
+    <!-- Add/edit figure form -->
+    <string name="form_title_edit">Edit figure</string>
+    <string name="form_title_new_wish">New wish</string>
+    <string name="form_title_new_figure">New figure</string>
+    <string name="search_catalog_placeholder">Search the catalog (optional)</string>
+    <string name="no_local_catalog_results">No results in the local catalog.</string>
+    <string name="choose_photo_option">🖼️  Choose a photo</string>
+    <string name="take_photo_option">📸  Take a photo</string>
+    <string name="remove_photo">Remove photo</string>
+    <string name="photo_gallery">Photo gallery</string>
+    <string name="field_code_hint">Code (e.g. OP-427, leave blank if unknown)</string>
+    <string name="field_has_accessories_hint">With accessories (weapons, parts...)</string>
+    <string name="field_price_hint">Price (€, leave blank if unknown)</string>
+    <string name="update_action">Update</string>
+    <string name="add_to_wishlist">Add to wishlist</string>
+    <string name="condition_hs">Broken</string>
+    <string name="condition_mauvais">Poor</string>
+    <string name="condition_bon">Good</string>
+    <string name="condition_tres_bon">Very good</string>
+    <string name="condition_mint">Mint</string>
+    <string name="condition_neuf">New</string>
+
+    <!-- Encyclo -->
+    <string name="search_character_placeholder">Search a character</string>
+    <string name="encyclo_empty_no_catalog">The built-in catalog is coming in a future update. In the meantime, add your own entries with the + button.</string>
+    <string name="selected_count">%1$d selected</string>
+    <string name="plus_collection">+ Collection</string>
+    <string name="plus_wishlist">+ Wishlist</string>
+    <string name="official_photo_coming">Official photo coming soon</string>
+    <string name="change_photo">Change photo</string>
+    <string name="add_photo">Add a photo</string>
+    <string name="cm_suffix">cm</string>
+    <string name="upcoming_release_note">%1$s — not released yet, official photo coming soon.</string>
+    <string name="indicative_price">Indicative price: %1$s</string>
+    <string name="add_to_collection">Add to my collection</string>
+    <string name="form_title_edit_sheet">Edit entry</string>
+    <string name="form_title_new_encyclo_sheet">New Encyclo entry</string>
+
+    <!-- News -->
+    <string name="no_news_yet">No news yet</string>
+    <string name="no_news_yet_detail">WCF news will show up here after the next sync.</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="past_news">Past news</string>
+    <string name="no_upcoming_news">No upcoming news for now.</string>
+    <string name="no_past_news_for_licence">No past news for this licence.</string>
+    <string name="tap_to_read_enlarge">Tap to read / enlarge the photo</string>
+    <string name="tap_photo_to_enlarge">Tap the photo to enlarge it</string>
+    <string name="figures_label">Figures</string>
+    <string name="view_official_page">View official page</string>
+
+    <!-- AI price estimate -->
+    <string name="ai_estimate_label_tavily">AI estimate (web search) — no comparable eBay listing found, Gemini quota unavailable</string>
+    <string name="ai_estimate_label_web">AI estimate (online search) — no comparable eBay listing found</string>
+
+    <!-- MainActivity: dialogs and nav -->
+    <string name="add_item_dialog_title">Add an item</string>
+    <string name="scan_barcode_option">📷  Scan a barcode</string>
+    <string name="scan_batch_option">Scan a batch (multiple figures)</string>
+    <string name="manual_entry_option">✏️  Manual entry</string>
+    <string name="lang_dialog_title">App language</string>
+    <string name="lang_option_checked">%1$s  ✓</string>
+    <string name="settings_content_description">Settings</string>
+    <string name="add_content_description">Add</string>
+    <string name="nav_collection">Collection</string>
+    <string name="nav_wishlist">Wishlist</string>
+    <string name="nav_encyclo">Encyclo</string>
+    <string name="nav_total">Total</string>
+    <string name="nav_actu">News</string>
+    <string name="title_collection">My Collection</string>
+    <string name="scanning_batch">Scanning the batch…</string>
+    <string name="scanning_recognition">Recognizing the character (AI)…</string>
+    <string name="scanning_photo">Scanning the photo…</string>
+    <string name="analysis_unavailable_title">Analysis unavailable</string>
+    <string name="analysis_unavailable_text">AI analysis is temporarily unavailable (daily limit reached or connection issue). Try again later.</string>
+    <string name="no_figure_detected_title">No figure detected</string>
+    <string name="no_figure_detected_text">No figure detected in this photo.</string>
+    <string name="adding_figures_in_progress">Adding %1$d figure(s)…</string>
+    <string name="currency_option">💱 Currency</string>
+    <string name="language_option">🌐 Language</string>
+    <string name="backup_option">💾 Backup</string>
+    <string name="replay_tutorial_option">❓ Replay tutorial</string>
+    <string name="tips_option">💡 Tips</string>
+    <string name="background_image_option">🖼️ Background image</string>
+    <string name="default_background_option">↩️ Default background</string>
+    <string name="theme_option">🎨 Theme</string>
+    <string name="theme_dialog_title">App theme</string>
+    <string name="theme_dialog_help">Choose a theme by licence. All are free and apply immediately.</string>
+    <string name="currency_dialog_help">Display and entry currency for prices (always converted from euros, at the most recent rate fetched at launch).</string>
+    <string name="tips_framing_title">📸 Framing the photo well</string>
+    <string name="tips_framing_text">Frame the photo tightly on the figure or its box, flat and facing forward, in good light without glare or blur: the sharper and more readable the box text, the more reliable the automatic name suggestion will be.</string>
+    <string name="tips_fields_title">🏷️ Filling in a figure well</string>
+    <string name="tips_fields_text">Enter the character, the licence and, if possible, the exact WCF range/wave (visible on the box): this will help you find the right entry in Encyclo and, later, get a more accurate price estimate.</string>
+    <string name="tips_price_title">💰 Manually entered price</string>
+    <string name="tips_price_text">As long as automatic estimation isn\'t available, enter the price yourself on each entry ("Edit price" button) so your collection\'s total value stays up to date.</string>
+    <string name="multi_select_content_description">Multi-select</string>
+
+    <!-- Native language names (language picker) -->
+    <string name="lang_name_fr">Français</string>
+    <string name="lang_name_en">English</string>
+    <string name="lang_name_es">Español</string>
+    <string name="lang_name_it">Italiano</string>
+    <string name="lang_name_de">Deutsch</string>
+    <string name="lang_name_pt">Português</string>
+    <string name="lang_name_ru">Русский</string>
+    <string name="lang_name_el">Ελληνικά</string>
+    <string name="lang_name_tr">Türkçe</string>
+    <string name="lang_name_ja">日本語</string>
+    <string name="lang_name_zh">中文</string>
+</resources>

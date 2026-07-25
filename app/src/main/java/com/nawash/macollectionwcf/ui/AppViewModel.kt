@@ -39,12 +39,12 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 /** Critères de tri proposés dans les onglets Collection/Souhaits. */
-enum class SortOption(val label: String) {
-    NAME("Nom"),
-    PRICE_DESC("Prix (élevé → bas)"),
-    PRICE_ASC("Prix (bas → élevé)"),
-    RELEASE("Date de sortie (ancien → récent)"),
-    RELEASE_DESC("Date de sortie (récent → ancien)")
+enum class SortOption(@androidx.annotation.StringRes val labelRes: Int) {
+    NAME(com.nawash.macollectionwcf.R.string.sort_name),
+    PRICE_DESC(com.nawash.macollectionwcf.R.string.sort_price_desc),
+    PRICE_ASC(com.nawash.macollectionwcf.R.string.sort_price_asc),
+    RELEASE(com.nawash.macollectionwcf.R.string.sort_release_asc),
+    RELEASE_DESC(com.nawash.macollectionwcf.R.string.sort_release_desc)
 }
 
 /** Taux de complétion d'un coffret/vague WCF (ex. "MHA Vol.1 : 4/6 - 66%") — voir [AppViewModel.seriesCompletion]. */
@@ -495,11 +495,10 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
             val ai = aiEstimatePrice(licence, character, name, condition, hasBox, hasAccessories)
             return if (ai != null) {
                 val (priceCents, viaTavily) = ai
-                val label = if (viaTavily) {
-                    "Estimation par IA (recherche web) — aucune annonce eBay comparable trouvée, quota Gemini indisponible"
-                } else {
-                    "Estimation par IA (recherche en ligne) — aucune annonce eBay comparable trouvée"
-                }
+                val label = getApplication<Application>().getString(
+                    if (viaTavily) com.nawash.macollectionwcf.R.string.ai_estimate_label_tavily
+                    else com.nawash.macollectionwcf.R.string.ai_estimate_label_web
+                )
                 PriceResolution(priceCents, true, label, imageUrl)
             } else {
                 PriceResolution(null, false, r.info, imageUrl)

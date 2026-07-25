@@ -21,8 +21,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.nawash.macollectionwcf.R
 import com.nawash.macollectionwcf.data.GeminiVision
 
 /** Aperçu (cases à cocher) des figurines détectées sur une photo de lot, avant ajout en masse. */
@@ -36,11 +38,11 @@ fun BatchScanDialog(
     val selectedCount = checked.count { it }
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("${items.size} figurine(s) détectée(s)") },
+        title = { Text(stringResource(R.string.batch_scan_title, items.size)) },
         text = {
             Column {
                 Text(
-                    "$selectedCount / ${items.size} sélectionnée(s)",
+                    stringResource(R.string.batch_scan_selected_count, selectedCount, items.size),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -69,8 +71,8 @@ fun BatchScanDialog(
             TextButton(
                 onClick = { onConfirm(items.filterIndexed { i, _ -> checked[i] }) },
                 enabled = checked.any { it }
-            ) { Text("Valider l'ajout au lot") }
+            ) { Text(stringResource(R.string.batch_scan_confirm)) }
         },
-        dismissButton = { TextButton(onClick = onDismiss) { Text("Annuler") } }
+        dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.cancel)) } }
     )
 }

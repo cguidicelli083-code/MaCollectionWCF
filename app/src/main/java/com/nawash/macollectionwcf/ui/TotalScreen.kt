@@ -25,10 +25,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.nawash.macollectionwcf.R
 import com.nawash.macollectionwcf.data.Licence
 import com.nawash.macollectionwcf.ui.theme.CardGradient
 import com.nawash.macollectionwcf.ui.theme.NeonBorder
@@ -36,9 +38,9 @@ import com.nawash.macollectionwcf.ui.theme.NeonCyan
 import com.nawash.macollectionwcf.ui.theme.NeonPurple
 
 /** Critères de tri proposés pour la complétion par gamme de l'onglet Total. */
-private enum class CompletionSort(val label: String) {
-    PERCENT_DESC("% (élevé → bas)"),
-    PERCENT_ASC("% (bas → élevé)")
+private enum class CompletionSort(@androidx.annotation.StringRes val labelRes: Int) {
+    PERCENT_DESC(R.string.completion_sort_percent_desc),
+    PERCENT_ASC(R.string.completion_sort_percent_asc)
 }
 
 @Composable
@@ -75,20 +77,20 @@ fun TotalScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(
-                    "Valeur de la collection",
+                    stringResource(R.string.collection_value),
                     style = MaterialTheme.typography.labelLarge,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 Spacer(Modifier.height(6.dp))
                 Text(formatPrice(total), fontSize = 30.sp, fontWeight = FontWeight.Black, color = NeonCyan)
                 Spacer(Modifier.height(4.dp))
-                Text("${items.size} figurine(s)", style = MaterialTheme.typography.bodyMedium, color = Color.White)
+                Text(stringResource(R.string.figure_count, items.size), style = MaterialTheme.typography.bodyMedium, color = Color.White)
             }
         }
         if (completion.isNotEmpty()) {
             Spacer(Modifier.height(20.dp))
             Text(
-                "Complétion par gamme",
+                stringResource(R.string.completion_by_series),
                 style = MaterialTheme.typography.labelLarge,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -96,10 +98,10 @@ fun TotalScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
             LicenceFilterDropdown(completionLicenceFilter) { completionLicenceFilter = it }
             Spacer(Modifier.height(8.dp))
             ThemedChoiceDropdown(
-                leading = "Trier",
-                selectedLabel = completionSort.label,
+                leading = stringResource(R.string.sort_label),
+                selectedLabel = stringResource(completionSort.labelRes),
                 options = CompletionSort.entries.toList(),
-                optionLabel = { it.label },
+                optionLabel = { stringResource(it.labelRes) },
                 onSelect = { completionSort = it }
             )
             Spacer(Modifier.height(10.dp))
@@ -111,7 +113,7 @@ fun TotalScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
         } else {
             Spacer(Modifier.height(20.dp))
             Text(
-                "La complétion par gamme s'affichera dès que le catalogue Encyclo aura des vagues WCF référencées.",
+                stringResource(R.string.completion_placeholder),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 textAlign = TextAlign.Center

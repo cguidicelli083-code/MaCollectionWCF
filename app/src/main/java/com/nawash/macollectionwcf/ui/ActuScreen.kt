@@ -41,6 +41,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -49,6 +50,7 @@ import androidx.compose.ui.window.Dialog
 import coil.compose.AsyncImage
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.nawash.macollectionwcf.R
 import com.nawash.macollectionwcf.data.Licence
 import com.nawash.macollectionwcf.data.WcfNewsEntry
 import com.nawash.macollectionwcf.ui.theme.NeonCyan
@@ -128,10 +130,10 @@ fun ActuScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
     if (allNews.isEmpty()) {
         Box(modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                Text("Aucune actu pour le moment", fontWeight = FontWeight.Bold, color = Color.White)
+                Text(stringResource(R.string.no_news_yet), fontWeight = FontWeight.Bold, color = Color.White)
                 Spacer(Modifier.height(6.dp))
                 Text(
-                    "Les nouveautés WCF apparaîtront ici après la prochaine synchronisation.",
+                    stringResource(R.string.no_news_yet_detail),
                     fontSize = 13.sp,
                     color = Color(0xFFB5B5CC)
                 )
@@ -166,14 +168,15 @@ fun ActuScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
             Modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 8.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            NeonChip("À venir", timeFilter == ActuTimeFilter.UPCOMING) { timeFilter = ActuTimeFilter.UPCOMING }
-            NeonChip("Anciennes actus", timeFilter == ActuTimeFilter.PAST) { timeFilter = ActuTimeFilter.PAST }
+            NeonChip(stringResource(R.string.upcoming), timeFilter == ActuTimeFilter.UPCOMING) { timeFilter = ActuTimeFilter.UPCOMING }
+            NeonChip(stringResource(R.string.past_news), timeFilter == ActuTimeFilter.PAST) { timeFilter = ActuTimeFilter.PAST }
         }
+        val allLicencesLabel = stringResource(R.string.all_licences)
         ThemedChoiceDropdown(
-            leading = "Licence",
-            selectedLabel = licenceFilter?.let { "${licenceEmoji(it)} ${it.label}" } ?: "Toutes les licences",
+            leading = stringResource(R.string.licence_label),
+            selectedLabel = licenceFilter?.let { "${licenceEmoji(it)} ${it.label}" } ?: allLicencesLabel,
             options = listOf(null) + availableLicences,
-            optionLabel = { it?.let { l -> "${licenceEmoji(l)} ${l.label}" } ?: "Toutes les licences" },
+            optionLabel = { it?.let { l -> "${licenceEmoji(l)} ${l.label}" } ?: allLicencesLabel },
             onSelect = { licenceFilter = it },
             modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp)
         )
@@ -181,8 +184,7 @@ fun ActuScreen(vm: AppViewModel, modifier: Modifier = Modifier) {
         if (filtered.isEmpty()) {
             Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 Text(
-                    if (timeFilter == ActuTimeFilter.UPCOMING) "Aucune actu à venir pour le moment."
-                    else "Aucune ancienne actu pour cette licence.",
+                    stringResource(if (timeFilter == ActuTimeFilter.UPCOMING) R.string.no_upcoming_news else R.string.no_past_news_for_licence),
                     fontSize = 13.sp,
                     color = Color(0xFFB5B5CC),
                     textAlign = TextAlign.Center
@@ -243,7 +245,7 @@ private fun NewsCard(entry: WcfNewsEntry, onClick: () -> Unit) {
                     )
                 }
                 Spacer(Modifier.height(6.dp))
-                Text("Appuie pour lire / agrandir la photo", fontSize = 11.sp, color = NeonCyan)
+                Text(stringResource(R.string.tap_to_read_enlarge), fontSize = 11.sp, color = NeonCyan)
             }
         }
     }
@@ -277,7 +279,7 @@ private fun NewsDetailDialog(entry: WcfNewsEntry, onDismiss: () -> Unit) {
                             .clickable { fullscreen = true }
                     )
                     Spacer(Modifier.height(4.dp))
-                    Text("Appuie sur la photo pour l’agrandir", fontSize = 11.sp, color = Color(0xFF7A7A96))
+                    Text(stringResource(R.string.tap_photo_to_enlarge), fontSize = 11.sp, color = Color(0xFF7A7A96))
                     Spacer(Modifier.height(8.dp))
                 }
                 Text(entry.series, fontSize = 11.sp, color = Color(0xFF7A7A96))
@@ -294,7 +296,7 @@ private fun NewsDetailDialog(entry: WcfNewsEntry, onDismiss: () -> Unit) {
                 val characters = loc.characters ?: entry.characters.split("|").filter { it.isNotBlank() }
                 if (characters.isNotEmpty()) {
                     Spacer(Modifier.height(10.dp))
-                    Text("Figurines", fontSize = 12.sp, color = Color.White, fontWeight = FontWeight.Bold)
+                    Text(stringResource(R.string.figures_label), fontSize = 12.sp, color = Color.White, fontWeight = FontWeight.Bold)
                     Spacer(Modifier.height(2.dp))
                     Text(characters.joinToString("・"), fontSize = 13.sp, color = Color(0xFFB5B5CC))
                 }
@@ -310,10 +312,10 @@ private fun NewsDetailDialog(entry: WcfNewsEntry, onDismiss: () -> Unit) {
                             }
                         },
                         modifier = Modifier.fillMaxWidth()
-                    ) { Text("Voir la fiche officielle") }
+                    ) { Text(stringResource(R.string.view_official_page)) }
                 }
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-                    TextButton(onClick = onDismiss) { Text("Fermer") }
+                    TextButton(onClick = onDismiss) { Text(stringResource(R.string.close)) }
                 }
             }
         }
@@ -324,7 +326,7 @@ private fun NewsDetailDialog(entry: WcfNewsEntry, onDismiss: () -> Unit) {
             Box(Modifier.fillMaxSize().background(Color.Black.copy(alpha = 0.92f)), contentAlignment = Alignment.Center) {
                 ZoomableImage(uri = entry.imageUrl, modifier = Modifier.fillMaxWidth().padding(16.dp))
                 IconButton(onClick = { fullscreen = false }, modifier = Modifier.align(Alignment.TopEnd).padding(8.dp)) {
-                    Icon(Icons.Filled.Close, contentDescription = "Fermer", tint = Color.White)
+                    Icon(Icons.Filled.Close, contentDescription = stringResource(R.string.close), tint = Color.White)
                 }
             }
         }

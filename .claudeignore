@@ -1,0 +1,26 @@
+# Dossiers de build et caches Gradle
+.gradle/
+build/
+**/build/
+.cxx/
+.externalNativeBuild/
+
+# Configuration d'environnement locale & IDE
+.idea/
+*.iml
+local.properties
+.DS_Store
+
+# Fichiers générés et exécutables (APK, AAB, Clés)
+*.apk
+*.aab
+*.jks
+*.keystore
+
+# Médias lourds et captures
+captures/
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.gif

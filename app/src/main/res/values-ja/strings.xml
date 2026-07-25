@@ -1,0 +1,215 @@
+<resources>
+    <string name="app_name">Ma Collection WCF</string>
+
+    <!-- オンボーディング（初回起動チュートリアル） -->
+    <string name="onboarding_page1_title">Ma Collection WCFへようこそ 🎎</string>
+    <string name="onboarding_page1_text">このアプリは、ワールドコレクタブルフィギュア（ワンピース、BLEACH、ドラゴンボール、NARUTOなど）のコレクションを、相場の見積もり付きで管理するのに役立ちます。</string>
+    <string name="onboarding_page2_title">📷 フィギュアを追加</string>
+    <string name="onboarding_page2_text">+ボタンをタップしてフィギュアを追加：バーコードをスキャン、写真を撮影、ギャラリーから選択、または手動ですべて入力できます。</string>
+    <string name="onboarding_page3_title">📚 エンサイクロ</string>
+    <string name="onboarding_page3_text">フィギュアカタログを閲覧し、コレクションまたは欲しい物リストに直接登録できます。内蔵カタログは順次拡充されます。それまでは、+ボタンから自分のフィギュア（写真付き）を追加してください。</string>
+    <string name="onboarding_page4_title">❤️ 欲しい物 &amp; 💎 合計</string>
+    <string name="onboarding_page4_text">「欲しい物」タブは今後入手したいフィギュアを一覧表示します。「合計」タブはコレクション全体の推定価値を表示します。</string>
+    <string name="onboarding_page5_title">💾 バックアップ</string>
+    <string name="onboarding_page5_text">コレクション全体（データと写真）を任意の場所に保存するファイルにバックアップし、いつでも復元できます — 再インストールや機種変更時に便利です。設定（歯車アイコン）からアプリ全体の背景画像も変更できます。</string>
+    <string name="onboarding_page6_title">💡 ヒント</string>
+    <string name="onboarding_page6_text">設定（歯車アイコン）の「ヒント」タブでは、写真をうまく撮る方法や手動でフィギュア情報を入力する際のコツをまとめています。</string>
+    <string name="onboarding_skip">スキップ</string>
+    <string name="onboarding_next">次へ</string>
+    <string name="onboarding_start">始める</string>
+
+    <!-- コレクション / 欲しい物 -->
+    <string name="search_placeholder_wishlist">欲しい物リストを検索</string>
+    <string name="search_placeholder_collection">コレクションを検索</string>
+    <string name="wave_volume_label">波/巻</string>
+    <string name="all_waves">すべての波</string>
+    <string name="no_search_results">この検索結果はありません。</string>
+    <string name="empty_wishlist_message">まだ欲しい物がありません。+ボタンで欲しいフィギュアを追加してください。</string>
+    <string name="empty_collection_message">コレクションが空です。+ボタンで最初のフィギュアを追加してください。</string>
+    <string name="unnamed_figure">名前未設定のフィギュア</string>
+    <string name="tag_box">箱</string>
+    <string name="tag_accessories">付属品</string>
+    <string name="ai_estimate_suffix">（AI）</string>
+    <string name="edit_content_description">編集</string>
+    <string name="delete_content_description">削除</string>
+    <string name="sort_label">並び替え</string>
+    <string name="all_licences">すべてのライセンス</string>
+    <string name="licence_label">ライセンス</string>
+    <string name="sort_name">名前</string>
+    <string name="sort_price_desc">価格（高い→安い）</string>
+    <string name="sort_price_asc">価格（安い→高い）</string>
+    <string name="sort_release_asc">発売日（古い→新しい）</string>
+    <string name="sort_release_desc">発売日（新しい→古い）</string>
+
+    <!-- 共通 -->
+    <string name="cancel">キャンセル</string>
+    <string name="close">閉じる</string>
+
+    <!-- 一括スキャン -->
+    <string name="batch_scan_title">%1$d体のフィギュアを検出</string>
+    <string name="batch_scan_selected_count">%1$d / %2$d 件選択中</string>
+    <string name="batch_scan_confirm">一括追加を確定</string>
+
+    <!-- 詳細画面 -->
+    <string name="back_content_description">戻る</string>
+    <string name="search_ebay_sold">🔍 eBayで検索（落札済み）</string>
+    <string name="size_cm">サイズ：%1$s cm</string>
+    <string name="edit_price">価格を編集</string>
+    <string name="move_to_collection">コレクションに移動</string>
+    <string name="gallery_count">ギャラリー（%1$d）</string>
+    <string name="price_euro_label">価格（€）</string>
+    <string name="save">保存</string>
+
+    <!-- 合計 -->
+    <string name="collection_value">コレクションの価値</string>
+    <string name="figure_count">%1$d体のフィギュア</string>
+    <string name="completion_by_series">シリーズ別コンプリート率</string>
+    <string name="completion_placeholder">エンサイクロカタログにWCFの波が登録されると、シリーズ別コンプリート率が表示されます。</string>
+    <string name="completion_sort_percent_desc">％（高い→低い）</string>
+    <string name="completion_sort_percent_asc">％（低い→高い）</string>
+
+    <!-- バックアップ / エクスポート / インポート -->
+    <string name="backup_export_success">バックアップの保存に成功しました。</string>
+    <string name="backup_export_failure">バックアップに失敗しました。</string>
+    <string name="excel_export_success">Excel表のエクスポートに成功しました。</string>
+    <string name="excel_export_failure">Excel表のエクスポートに失敗しました。</string>
+    <string name="import_read_failure">このファイルを読み込めません。対応形式：.xlsxまたは.csv。</string>
+    <string name="backup_intro">コレクション全体（データと写真）を任意の場所（ダウンロード、Driveなど）に保存するファイルにバックアップします。アプリをアンインストールしてもこのファイルは残ります。</string>
+    <string name="backup_save_button">コレクションをバックアップ</string>
+    <string name="backup_restore_button">バックアップを復元</string>
+    <string name="excel_export_intro">コレクション全体（欲しい物も含む）を、1行に1枚の写真付きの表としてエクスポートします — Excelや他の表計算ソフトで読み込めます（Excelでは開く際に形式の警告が表示されますが問題ありません。「はい」をクリックしてください）。</string>
+    <string name="excel_export_button">Excel表としてエクスポート</string>
+    <string name="sheet_import_intro">Excel（.xlsx）またはCSVファイルからコレクションをインポートします — 列がアプリの形式と一致していなくても、次のステップで対応付けできます。</string>
+    <string name="sheet_import_button">Excel/CSVファイルをインポート</string>
+    <string name="backup_restore_confirm_text">この操作を行うと、現在のコレクションがバックアップの内容に完全に置き換わります。続けますか？</string>
+    <string name="restore">復元</string>
+    <string name="backup_restore_success">コレクションの復元に成功しました。</string>
+    <string name="backup_restore_failure">復元に失敗しました：無効または破損したファイルです。</string>
+    <string name="import_success_count">%1$d体のフィギュアのインポートに成功しました。</string>
+    <string name="field_character">キャラクター</string>
+    <string name="field_commercial_name">商品名</string>
+    <string name="field_series">シリーズ / WCFの波</string>
+    <string name="field_manufacturer">メーカー</string>
+    <string name="field_condition">状態</string>
+    <string name="field_has_box">箱あり</string>
+    <string name="field_has_accessories">付属品あり</string>
+    <string name="field_year">発売年</string>
+    <string name="field_height">サイズ（cm）</string>
+    <string name="field_price">価格</string>
+    <string name="field_barcode">バーコード</string>
+    <string name="field_description">説明</string>
+    <string name="no_column">列なし</string>
+    <string name="match_columns_title">列を対応付け</string>
+    <string name="match_columns_help">ファイルのどの列がどの項目に対応するか指定してください。必須なのはキャラクターのみで、対応付けられなかった他の項目は空欄になります。</string>
+    <string name="next">次へ</string>
+    <string name="import_action">インポート</string>
+
+    <!-- フィギュア追加/編集フォーム -->
+    <string name="form_title_edit">フィギュアを編集</string>
+    <string name="form_title_new_wish">新しい欲しい物</string>
+    <string name="form_title_new_figure">新しいフィギュア</string>
+    <string name="search_catalog_placeholder">カタログを検索（任意）</string>
+    <string name="no_local_catalog_results">ローカルカタログに結果がありません。</string>
+    <string name="choose_photo_option">🖼️  写真を選ぶ</string>
+    <string name="take_photo_option">📸  写真を撮る</string>
+    <string name="remove_photo">写真を削除</string>
+    <string name="photo_gallery">写真ギャラリー</string>
+    <string name="field_code_hint">コード（例：OP-427、不明な場合は空欄）</string>
+    <string name="field_has_accessories_hint">付属品あり（武器、パーツなど）</string>
+    <string name="field_price_hint">価格（€、不明な場合は空欄）</string>
+    <string name="update_action">更新</string>
+    <string name="add_to_wishlist">欲しい物リストに追加</string>
+    <string name="condition_hs">故障</string>
+    <string name="condition_mauvais">悪い</string>
+    <string name="condition_bon">良い</string>
+    <string name="condition_tres_bon">とても良い</string>
+    <string name="condition_mint">未使用に近い</string>
+    <string name="condition_neuf">新品</string>
+
+    <!-- エンサイクロ -->
+    <string name="search_character_placeholder">キャラクターを検索</string>
+    <string name="encyclo_empty_no_catalog">内蔵カタログは今後のアップデートで追加されます。それまでは、+ボタンで自分のフィギュアを追加してください。</string>
+    <string name="selected_count">%1$d件選択中</string>
+    <string name="plus_collection">+ コレクション</string>
+    <string name="plus_wishlist">+ 欲しい物</string>
+    <string name="official_photo_coming">公式写真は近日公開予定</string>
+    <string name="change_photo">写真を変更</string>
+    <string name="add_photo">写真を追加</string>
+    <string name="cm_suffix">cm</string>
+    <string name="upcoming_release_note">%1$s — まだ発売されていません。公式写真は近日公開予定です。</string>
+    <string name="indicative_price">参考価格：%1$s</string>
+    <string name="add_to_collection">コレクションに追加</string>
+    <string name="form_title_edit_sheet">情報を編集</string>
+    <string name="form_title_new_encyclo_sheet">新しいエンサイクロ情報</string>
+
+    <!-- 最新情報 -->
+    <string name="no_news_yet">現在お知らせはありません</string>
+    <string name="no_news_yet_detail">次回の同期後、WCFの最新情報がここに表示されます。</string>
+    <string name="upcoming">発売予定</string>
+    <string name="past_news">過去のお知らせ</string>
+    <string name="no_upcoming_news">現在発売予定のお知らせはありません。</string>
+    <string name="no_past_news_for_licence">このライセンスの過去のお知らせはありません。</string>
+    <string name="tap_to_read_enlarge">タップして読む／写真を拡大</string>
+    <string name="tap_photo_to_enlarge">写真をタップして拡大</string>
+    <string name="figures_label">フィギュア</string>
+    <string name="view_official_page">公式ページを見る</string>
+
+    <!-- AI価格見積もり -->
+    <string name="ai_estimate_label_tavily">AIによる見積もり（ウェブ検索）— 比較可能なeBay出品が見つからず、Geminiのクォータも利用不可</string>
+    <string name="ai_estimate_label_web">AIによる見積もり（オンライン検索）— 比較可能なeBay出品が見つかりません</string>
+
+    <!-- MainActivity：ダイアログとナビゲーション -->
+    <string name="add_item_dialog_title">アイテムを追加</string>
+    <string name="scan_barcode_option">📷  バーコードをスキャン</string>
+    <string name="scan_batch_option">複数のフィギュアを一括スキャン</string>
+    <string name="manual_entry_option">✏️  手動入力</string>
+    <string name="lang_dialog_title">アプリの言語</string>
+    <string name="lang_option_checked">%1$s  ✓</string>
+    <string name="settings_content_description">設定</string>
+    <string name="add_content_description">追加</string>
+    <string name="nav_collection">コレクション</string>
+    <string name="nav_wishlist">欲しい物</string>
+    <string name="nav_encyclo">エンサイクロ</string>
+    <string name="nav_total">合計</string>
+    <string name="nav_actu">最新情報</string>
+    <string name="title_collection">マイコレクション</string>
+    <string name="scanning_batch">一括分析中…</string>
+    <string name="scanning_recognition">キャラクター認識中（AI）…</string>
+    <string name="scanning_photo">写真を分析中…</string>
+    <string name="analysis_unavailable_title">分析を利用できません</string>
+    <string name="analysis_unavailable_text">AI分析は一時的に利用できません（1日の上限に達したか、接続の問題）。後でもう一度お試しください。</string>
+    <string name="no_figure_detected_title">フィギュアが検出されませんでした</string>
+    <string name="no_figure_detected_text">この写真からフィギュアが検出されませんでした。</string>
+    <string name="adding_figures_in_progress">%1$d体のフィギュアを追加中…</string>
+    <string name="currency_option">💱 通貨</string>
+    <string name="language_option">🌐 言語</string>
+    <string name="backup_option">💾 バックアップ</string>
+    <string name="replay_tutorial_option">❓ チュートリアルをもう一度見る</string>
+    <string name="tips_option">💡 ヒント</string>
+    <string name="background_image_option">🖼️ 背景画像</string>
+    <string name="default_background_option">↩️ デフォルトの背景</string>
+    <string name="theme_option">🎨 テーマ</string>
+    <string name="theme_dialog_title">アプリのテーマ</string>
+    <string name="theme_dialog_help">ライセンスごとのテーマを選択できます。すべて無料で、すぐに適用されます。</string>
+    <string name="currency_dialog_help">価格の表示・入力に使う通貨（起動時に取得した最新レートで常にユーロから換算されます）。</string>
+    <string name="tips_framing_title">📸 写真をうまく撮るコツ</string>
+    <string name="tips_framing_text">フィギュアやその箱にしっかり寄って、平らに正面から、反射やブレのない十分な明るさで撮影してください。箱の文字が鮮明で読みやすいほど、自動的な名前の提案がより正確になります。</string>
+    <string name="tips_fields_title">🏷️ フィギュア情報をうまく入力するコツ</string>
+    <string name="tips_fields_text">キャラクター名、ライセンス、可能であれば箱に記載された正確なWCFシリーズ／波を入力してください。これによりエンサイクロで正しい情報を見つけやすくなり、後でより正確な価格を得られます。</string>
+    <string name="tips_price_title">💰 手動入力の価格</string>
+    <string name="tips_price_text">自動見積もりが利用できない間は、コレクションの合計額を最新に保つため、各フィギュアの「価格を編集」ボタンから自分で価格を入力してください。</string>
+    <string name="multi_select_content_description">複数選択</string>
+
+    <!-- 各言語のネイティブ表記（言語選択） -->
+    <string name="lang_name_fr">Français</string>
+    <string name="lang_name_en">English</string>
+    <string name="lang_name_es">Español</string>
+    <string name="lang_name_it">Italiano</string>
+    <string name="lang_name_de">Deutsch</string>
+    <string name="lang_name_pt">Português</string>
+    <string name="lang_name_ru">Русский</string>
+    <string name="lang_name_el">Ελληνικά</string>
+    <string name="lang_name_tr">Türkçe</string>
+    <string name="lang_name_ja">日本語</string>
+    <string name="lang_name_zh">中文</string>
+</resources>

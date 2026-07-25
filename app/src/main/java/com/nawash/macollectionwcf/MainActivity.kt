@@ -66,11 +66,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
+import androidx.core.os.LocaleListCompat
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.canhub.cropper.CropImageContract
 import com.canhub.cropper.CropImageContractOptions
@@ -164,6 +167,8 @@ fun AppRoot(vm: AppViewModel = viewModel()) {
     var batchError by remember { mutableStateOf(false) }
     var showOptionsMenu by remember { mutableStateOf(false) }
     var showCurrencyDialog by remember { mutableStateOf(false) }
+    var showLangDialog by remember { mutableStateOf(false) }
+    var currentLang by remember { mutableStateOf(AppPrefs.language) }
     var showTipsDialog by remember { mutableStateOf(false) }
     var showThemeDialog by remember { mutableStateOf(false) }
 
@@ -260,11 +265,13 @@ fun AppRoot(vm: AppViewModel = viewModel()) {
                 CircularProgressIndicator()
                 Spacer(Modifier.height(12.dp))
                 Text(
-                    when {
-                        batchScanning -> "Analyse du lot en cours…"
-                        deepScanning -> "Reconnaissance du personnage (IA)…"
-                        else -> "Analyse de la photo…"
-                    },
+                    stringResource(
+                        when {
+                            batchScanning -> R.string.scanning_batch
+                            deepScanning -> R.string.scanning_recognition
+                            else -> R.string.scanning_photo
+                        }
+                    ),
                     color = Color.White
                 )
             }
@@ -325,9 +332,9 @@ fun AppRoot(vm: AppViewModel = viewModel()) {
     if (showChooser) {
         AlertDialog(
             onDismissRequest = { showChooser = false },
-            title = { Text(if (chooserForWishlist) "Nouveau souhait" else "Ajouter une figurine") },
+            title = { Text(stringResource(if (chooserForWishlist) R.string.form_title_new_wish else R.string.add_item_dialog_title)) },
             confirmButton = {},
-            dismissButton = { TextButton(onClick = { showChooser = false }) { Text("Annuler") } },
+            dismissButton = { TextButton(onClick = { showChooser = false }) { Text(stringResource(R.string.cancel)) } },
             text = {
                 Column {
                     TextButton(
@@ -341,26 +348,26 @@ fun AppRoot(vm: AppViewModel = viewModel()) {
                             }
                         },
                         modifier = Modifier.fillMaxWidth()
-                    ) { Text("Scanner un code-barres") }
+                    ) { Text(stringResource(R.string.scan_barcode_option)) }
                     TextButton(
                         onClick = { showChooser = false; photoLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)) },
                         modifier = Modifier.fillMaxWidth()
-                    ) { Text("Choisir une photo") }
+                    ) { Text(stringResource(R.string.choose_photo_option)) }
                     TextButton(
                         onClick = { showChooser = false; launchCamera() },
                         modifier = Modifier.fillMaxWidth()
-                    ) { Text("Prendre une photo") }
+                    ) { Text(stringResource(R.string.take_photo_option)) }
                     TextButton(
                         onClick = {
                             showChooser = false
                             batchPhotoLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
                         },
                         modifier = Modifier.fillMaxWidth()
-                    ) { Text("Scanner un lot (plusieurs figurines)") }
+                    ) { Text(stringResource(R.string.scan_batch_option)) }
                     TextButton(
                         onClick = { showChooser = false; editor = CollectionEditor(isWishlist = chooserForWishlist) },
                         modifier = Modifier.fillMaxWidth()
-                    ) { Text("Saisie manuelle") }
+                    ) { Text(stringResource(R.string.manual_entry_option)) }
                 }
             }
         )
@@ -369,9 +376,9 @@ fun AppRoot(vm: AppViewModel = viewModel()) {
     if (batchError) {
         AlertDialog(
             onDismissRequest = { batchError = false },
-            title = { Text("Analyse indisponible") },
-            text = { Text("Analyse IA momentanément indisponible (limite quotidienne atteinte ou connexion). Réessaie plus tard.") },
-            confirmButton = { TextButton(onClick = { batchError = false }) { Text("Fermer") } }
+            title = { Text(stringResource(R.string.analysis_unavailable_title)) },
+            text = { Text(stringResource(R.string.analysis_unavailable_text)) },
+            confirmButton = { TextButton(onClick = { batchError = false }) { Text(stringResource(R.string.close)) } }
         )
     }
 
@@ -379,9 +386,9 @@ fun AppRoot(vm: AppViewModel = viewModel()) {
         if (res.isEmpty()) {
             AlertDialog(
                 onDismissRequest = { batchResults = null },
-                title = { Text("Aucune figurine détectée") },
-                text = { Text("Aucune figurine détectée sur cette photo.") },
-                confirmButton = { TextButton(onClick = { batchResults = null }) { Text("Fermer") } }
+                title = { Text(stringResource(R.string.no_figure_detected_title)) },
+                text = { Text(stringResource(R.string.no_figure_detected_text)) },
+                confirmButton = { TextButton(onClick = { batchResults = null }) { Text(stringResource(R.string.close)) } }
             )
         } else {
             BatchScanDialog(
@@ -400,7 +407,7 @@ fun AppRoot(vm: AppViewModel = viewModel()) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     CircularProgressIndicator(modifier = Modifier.size(24.dp))
                     Spacer(Modifier.width(12.dp))
-                    Text("Ajout de $count figurine(s) en cours…")
+                    Text(stringResource(R.string.adding_figures_in_progress, count))
                 }
             },
             confirmButton = {}
@@ -410,44 +417,74 @@ fun AppRoot(vm: AppViewModel = viewModel()) {
     if (showOptionsMenu) {
         AlertDialog(
             onDismissRequest = { showOptionsMenu = false },
-            title = { Text("Réglages") },
+            title = { Text(stringResource(R.string.settings_content_description)) },
             confirmButton = {},
-            dismissButton = { TextButton(onClick = { showOptionsMenu = false }) { Text("Fermer") } },
+            dismissButton = { TextButton(onClick = { showOptionsMenu = false }) { Text(stringResource(R.string.close)) } },
             text = {
                 Column {
                     TextButton(
                         onClick = { showOptionsMenu = false; showCurrencyDialog = true },
                         modifier = Modifier.fillMaxWidth()
-                    ) { Text("💱 Devise") }
+                    ) { Text(stringResource(R.string.currency_option)) }
+                    TextButton(
+                        onClick = { showOptionsMenu = false; showLangDialog = true },
+                        modifier = Modifier.fillMaxWidth()
+                    ) { Text(stringResource(R.string.language_option)) }
                     TextButton(
                         onClick = { showOptionsMenu = false; tab = Tab.BACKUP },
                         modifier = Modifier.fillMaxWidth()
-                    ) { Text("💾 Sauvegarde") }
+                    ) { Text(stringResource(R.string.backup_option)) }
                     TextButton(
                         onClick = { showOptionsMenu = false; showOnboarding = true },
                         modifier = Modifier.fillMaxWidth()
-                    ) { Text("❓ Revoir le tutoriel") }
+                    ) { Text(stringResource(R.string.replay_tutorial_option)) }
                     TextButton(
                         onClick = { showOptionsMenu = false; showTipsDialog = true },
                         modifier = Modifier.fillMaxWidth()
-                    ) { Text("💡 Astuces") }
+                    ) { Text(stringResource(R.string.tips_option)) }
                     TextButton(
                         onClick = {
                             showOptionsMenu = false
                             backgroundPicker.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
                         },
                         modifier = Modifier.fillMaxWidth()
-                    ) { Text("🖼️ Image de fond") }
+                    ) { Text(stringResource(R.string.background_image_option)) }
                     if (AppPrefs.backgroundImageUri.value != null) {
                         TextButton(
                             onClick = { showOptionsMenu = false; AppPrefs.setBackgroundImageUri(context, null) },
                             modifier = Modifier.fillMaxWidth()
-                        ) { Text("↩️ Fond par défaut") }
+                        ) { Text(stringResource(R.string.default_background_option)) }
                     }
                     TextButton(
                         onClick = { showOptionsMenu = false; showThemeDialog = true },
                         modifier = Modifier.fillMaxWidth()
-                    ) { Text("🎨 Thème") }
+                    ) { Text(stringResource(R.string.theme_option)) }
+                }
+            }
+        )
+    }
+
+    if (showLangDialog) {
+        AlertDialog(
+            onDismissRequest = { showLangDialog = false },
+            title = { Text(stringResource(R.string.lang_dialog_title)) },
+            confirmButton = {},
+            dismissButton = { TextButton(onClick = { showLangDialog = false }) { Text(stringResource(R.string.close)) } },
+            text = {
+                Column(modifier = Modifier.heightIn(max = 360.dp).verticalScroll(rememberScrollState())) {
+                    supportedLanguages.forEach { (tag, flag, nameRes) ->
+                        val name = "$flag  ${stringResource(nameRes)}"
+                        TextButton(
+                            onClick = {
+                                setAppLanguage(context, tag)
+                                currentLang = tag
+                                showLangDialog = false
+                            },
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Text(if (currentLang == tag) stringResource(R.string.lang_option_checked, name) else name)
+                        }
+                    }
                 }
             }
         )
@@ -457,13 +494,13 @@ fun AppRoot(vm: AppViewModel = viewModel()) {
         val currentThemeId = AppPrefs.selectedTheme.value
         AlertDialog(
             onDismissRequest = { showThemeDialog = false },
-            title = { Text("Thème de l'application") },
+            title = { Text(stringResource(R.string.theme_dialog_title)) },
             confirmButton = {},
-            dismissButton = { TextButton(onClick = { showThemeDialog = false }) { Text("Fermer") } },
+            dismissButton = { TextButton(onClick = { showThemeDialog = false }) { Text(stringResource(R.string.close)) } },
             text = {
                 Column {
                     Text(
-                        "Choisis un thème par licence. Tous sont gratuits et applicables immédiatement.",
+                        stringResource(R.string.theme_dialog_help),
                         style = MaterialTheme.typography.bodySmall
                     )
                     Spacer(Modifier.height(8.dp))
@@ -476,7 +513,7 @@ fun AppRoot(vm: AppViewModel = viewModel()) {
                             Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                                 Text(theme.emoji, fontSize = 20.sp)
                                 Spacer(Modifier.width(10.dp))
-                                Text(if (selected) "${theme.label}  ✓" else theme.label, modifier = Modifier.weight(1f))
+                                Text(if (selected) stringResource(R.string.lang_option_checked, theme.label) else theme.label, modifier = Modifier.weight(1f))
                                 Box(Modifier.size(16.dp).background(theme.accent, androidx.compose.foundation.shape.CircleShape))
                                 Spacer(Modifier.width(4.dp))
                                 Box(Modifier.size(16.dp).background(theme.accentAlt, androidx.compose.foundation.shape.CircleShape))
@@ -492,13 +529,13 @@ fun AppRoot(vm: AppViewModel = viewModel()) {
         val currentCurrency = AppPrefs.currency.value
         AlertDialog(
             onDismissRequest = { showCurrencyDialog = false },
-            title = { Text("💱 Devise") },
+            title = { Text(stringResource(R.string.currency_option)) },
             confirmButton = {},
-            dismissButton = { TextButton(onClick = { showCurrencyDialog = false }) { Text("Fermer") } },
+            dismissButton = { TextButton(onClick = { showCurrencyDialog = false }) { Text(stringResource(R.string.close)) } },
             text = {
                 Column {
                     Text(
-                        "Devise d'affichage et de saisie des cotes (toujours convertie depuis l'euro, au taux le plus récent récupéré au lancement).",
+                        stringResource(R.string.currency_dialog_help),
                         style = MaterialTheme.typography.bodySmall
                     )
                     Spacer(Modifier.height(8.dp))
@@ -508,7 +545,7 @@ fun AppRoot(vm: AppViewModel = viewModel()) {
                             TextButton(
                                 onClick = { AppPrefs.setCurrency(context, option.code); showCurrencyDialog = false },
                                 modifier = Modifier.fillMaxWidth()
-                            ) { Text(if (currentCurrency == option.code) "$name  ✓" else name) }
+                            ) { Text(if (currentCurrency == option.code) stringResource(R.string.lang_option_checked, name) else name) }
                         }
                     }
                 }
@@ -519,29 +556,29 @@ fun AppRoot(vm: AppViewModel = viewModel()) {
     if (showTipsDialog) {
         AlertDialog(
             onDismissRequest = { showTipsDialog = false },
-            title = { Text("💡 Astuces") },
+            title = { Text(stringResource(R.string.tips_option)) },
             confirmButton = {},
-            dismissButton = { TextButton(onClick = { showTipsDialog = false }) { Text("Fermer") } },
+            dismissButton = { TextButton(onClick = { showTipsDialog = false }) { Text(stringResource(R.string.close)) } },
             text = {
                 Column(modifier = Modifier.heightIn(max = 420.dp).verticalScroll(rememberScrollState())) {
-                    Text("📸 Bien cadrer la photo", fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleSmall)
+                    Text(stringResource(R.string.tips_framing_title), fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleSmall)
                     Spacer(Modifier.height(4.dp))
                     Text(
-                        "Cadre la photo bien serrée sur la figurine ou sa boîte, à plat et de face, en pleine lumière sans reflet ni flou : plus le texte de la boîte est net et lisible, plus la suggestion de nom automatique sera fiable.",
+                        stringResource(R.string.tips_framing_text),
                         style = MaterialTheme.typography.bodyMedium
                     )
                     Spacer(Modifier.height(16.dp))
-                    Text("🏷️ Bien renseigner une figurine", fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleSmall)
+                    Text(stringResource(R.string.tips_fields_title), fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleSmall)
                     Spacer(Modifier.height(4.dp))
                     Text(
-                        "Indique le personnage, la licence et si possible la gamme/vague WCF exacte (visible sur la boîte) : ça aidera à retrouver la bonne fiche dans l'Encyclo et, plus tard, à obtenir une cote plus précise.",
+                        stringResource(R.string.tips_fields_text),
                         style = MaterialTheme.typography.bodyMedium
                     )
                     Spacer(Modifier.height(16.dp))
-                    Text("💰 Prix saisi à la main", fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleSmall)
+                    Text(stringResource(R.string.tips_price_title), fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleSmall)
                     Spacer(Modifier.height(4.dp))
                     Text(
-                        "Tant que l'estimation automatique n'est pas disponible, saisis toi-même le prix sur chaque fiche (bouton « Modifier le prix ») pour que la valeur totale de ta collection reste à jour.",
+                        stringResource(R.string.tips_price_text),
                         style = MaterialTheme.typography.bodyMedium
                     )
                 }
@@ -560,13 +597,13 @@ fun AppRoot(vm: AppViewModel = viewModel()) {
                             IconButton(onClick = { encycloSelectionMode = !encycloSelectionMode }) {
                                 Icon(
                                     Icons.Filled.ChecklistRtl,
-                                    contentDescription = "Sélection multiple",
+                                    contentDescription = stringResource(R.string.multi_select_content_description),
                                     tint = if (encycloSelectionMode) NeonPurple else Color.White
                                 )
                             }
                         }
                         IconButton(onClick = { showOptionsMenu = true }) {
-                            Icon(Icons.Filled.Settings, contentDescription = "Réglages", tint = Color.White)
+                            Icon(Icons.Filled.Settings, contentDescription = stringResource(R.string.settings_content_description), tint = Color.White)
                         }
                     },
                     colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent, titleContentColor = Color.White)
@@ -584,21 +621,21 @@ fun AppRoot(vm: AppViewModel = viewModel()) {
                             selected = tab == Tab.COLLECTION,
                             onClick = { tab = Tab.COLLECTION },
                             icon = { ThemedNavIcon(navTheme, 0, Icons.Filled.Star) },
-                            label = { NavLabel("Collection") },
+                            label = { NavLabel(stringResource(R.string.nav_collection)) },
                             colors = navColors()
                         )
                         NavigationBarItem(
                             selected = tab == Tab.WISHLIST,
                             onClick = { tab = Tab.WISHLIST },
                             icon = { ThemedNavIcon(navTheme, 1, Icons.Filled.Favorite) },
-                            label = { NavLabel("Souhaits") },
+                            label = { NavLabel(stringResource(R.string.nav_wishlist)) },
                             colors = navColors()
                         )
                         NavigationBarItem(
                             selected = tab == Tab.ENCYCLO,
                             onClick = { tab = Tab.ENCYCLO },
                             icon = { ThemedNavIcon(navTheme, 2, Icons.Filled.MenuBook) },
-                            label = { NavLabel("Encyclo") },
+                            label = { NavLabel(stringResource(R.string.nav_encyclo)) },
                             colors = navColors()
                         )
                         NavigationBarItem(
@@ -609,14 +646,14 @@ fun AppRoot(vm: AppViewModel = viewModel()) {
                                 (context as? android.app.Activity)?.let { AdsManager.showInterstitialOnTotal(it) }
                             },
                             icon = { ThemedNavIcon(navTheme, 3, Icons.Filled.Euro) },
-                            label = { NavLabel("Total") },
+                            label = { NavLabel(stringResource(R.string.nav_total)) },
                             colors = navColors()
                         )
                         NavigationBarItem(
                             selected = tab == Tab.ACTU,
                             onClick = { tab = Tab.ACTU },
                             icon = { ThemedNavIcon(navTheme, 4, Icons.Filled.Campaign) },
-                            label = { NavLabel("Actu") },
+                            label = { NavLabel(stringResource(R.string.nav_actu)) },
                             colors = navColors()
                         )
                     }
@@ -635,7 +672,7 @@ fun AppRoot(vm: AppViewModel = viewModel()) {
                         containerColor = NeonPurple,
                         contentColor = Color.White
                     ) {
-                        Icon(Icons.Filled.Add, contentDescription = "Ajouter")
+                        Icon(Icons.Filled.Add, contentDescription = stringResource(R.string.add_content_description))
                     }
                 }
             }
@@ -729,11 +766,36 @@ private fun navColors() = NavigationBarItemDefaults.colors(
 )
 
 @Composable
-private fun titleFor(tab: Tab): String = when (tab) {
-    Tab.COLLECTION -> "Ma collection"
-    Tab.WISHLIST -> "Souhaits"
-    Tab.ENCYCLO -> "Encyclo"
-    Tab.TOTAL -> "Total"
-    Tab.ACTU -> "Actu"
-    Tab.BACKUP -> "Sauvegarde"
+private fun titleFor(tab: Tab): String = stringResource(
+    when (tab) {
+        Tab.COLLECTION -> R.string.title_collection
+        Tab.WISHLIST -> R.string.nav_wishlist
+        Tab.ENCYCLO -> R.string.nav_encyclo
+        Tab.TOTAL -> R.string.nav_total
+        Tab.ACTU -> R.string.nav_actu
+        Tab.BACKUP -> R.string.backup_option
+    }
+)
+
+/** Liste des langues prises en charge : (tag BCP-47, drapeau emoji, ressource du nom natif). */
+private val supportedLanguages: List<Triple<String, String, Int>> = listOf(
+    Triple("fr", "🇫🇷", R.string.lang_name_fr),
+    Triple("en", "🇬🇧", R.string.lang_name_en),
+    Triple("es", "🇪🇸", R.string.lang_name_es),
+    Triple("it", "🇮🇹", R.string.lang_name_it),
+    Triple("de", "🇩🇪", R.string.lang_name_de),
+    Triple("pt", "🇵🇹", R.string.lang_name_pt),
+    Triple("ru", "🇷🇺", R.string.lang_name_ru),
+    Triple("el", "🇬🇷", R.string.lang_name_el),
+    Triple("tr", "🇹🇷", R.string.lang_name_tr),
+    Triple("ja", "🇯🇵", R.string.lang_name_ja),
+    Triple("zh", "🇨🇳", R.string.lang_name_zh)
+)
+
+/** Change la langue d'affichage de toute l'app via AppCompat (persistance automatique),
+ * et garde AppPrefs synchronisé (devise par défaut selon la langue). */
+private fun setAppLanguage(context: android.content.Context, tag: String) {
+    AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(tag))
+    AppPrefs.setLanguage(context, tag)
+    AppPrefs.applyLanguageCurrencyDefault(context, tag)
 }

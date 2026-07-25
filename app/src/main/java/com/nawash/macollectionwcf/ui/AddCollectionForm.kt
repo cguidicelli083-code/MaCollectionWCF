@@ -39,6 +39,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
@@ -46,6 +47,7 @@ import coil.compose.AsyncImage
 import com.canhub.cropper.CropImageContract
 import com.canhub.cropper.CropImageContractOptions
 import com.canhub.cropper.CropImageOptions
+import com.nawash.macollectionwcf.R
 import com.nawash.macollectionwcf.data.CollectionItem
 import com.nawash.macollectionwcf.data.Condition
 import com.nawash.macollectionwcf.data.Licence
@@ -151,14 +153,14 @@ fun AddCollectionForm(
         }
     }
 
-    FormScaffold(title = if (isEdit) "Modifier la figurine" else if (isWishlist) "Nouveau souhait" else "Nouvelle figurine", onCancel = onCancel) {
+    FormScaffold(title = stringResource(if (isEdit) R.string.form_title_edit else if (isWishlist) R.string.form_title_new_wish else R.string.form_title_new_figure), onCancel = onCancel) {
         if (!isEdit && !fromEncyclo) {
             val customPresets by vm.customPresets.collectAsState()
             var searchQuery by remember { mutableStateOf("") }
             OutlinedTextField(
                 value = searchQuery,
                 onValueChange = { searchQuery = it },
-                label = { Text("Rechercher dans le catalogue (facultatif)") },
+                label = { Text(stringResource(R.string.search_catalog_placeholder)) },
                 modifier = Modifier.fillMaxWidth()
             )
             val q = searchQuery.trim().lowercase()
@@ -167,7 +169,7 @@ fun AddCollectionForm(
                     .filter { it.character.lowercase().contains(q) || it.name.lowercase().contains(q) }
                     .take(8)
                 if (matches.isEmpty()) {
-                    Text("Aucun résultat dans le catalogue local.", style = MaterialTheme.typography.bodySmall)
+                    Text(stringResource(R.string.no_local_catalog_results), style = MaterialTheme.typography.bodySmall)
                 } else {
                     matches.forEach { match ->
                         OutlinedButton(
@@ -205,9 +207,9 @@ fun AddCollectionForm(
         OutlinedButton(
             onClick = { photoPicker.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)) },
             modifier = Modifier.fillMaxWidth()
-        ) { Text("Choisir une photo") }
+        ) { Text(stringResource(R.string.choose_photo_option)) }
         OutlinedButton(onClick = { launchCamera(forGallery = coverUrl != null) }, modifier = Modifier.fillMaxWidth()) {
-            Text("Prendre une photo")
+            Text(stringResource(R.string.take_photo_option))
         }
         coverUrl?.let { uri ->
             AsyncImage(
@@ -217,11 +219,11 @@ fun AddCollectionForm(
                 modifier = Modifier.fillMaxWidth().height(160.dp).clip(RoundedCornerShape(16.dp))
             )
             Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState())) {
-                TextButton(onClick = { coverUrl = null }) { Text("Retirer la photo") }
+                TextButton(onClick = { coverUrl = null }) { Text(stringResource(R.string.remove_photo)) }
             }
         }
         Spacer(Modifier.height(4.dp))
-        Text("Galerie de photos", style = MaterialTheme.typography.labelLarge)
+        Text(stringResource(R.string.photo_gallery), style = MaterialTheme.typography.labelLarge)
         Spacer(Modifier.height(8.dp))
         LazyRow(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
             items(savedGalleryPhotos, key = { "saved_${it.id}" }) { photo ->
@@ -234,13 +236,13 @@ fun AddCollectionForm(
         Spacer(Modifier.height(8.dp))
 
         ThemedChoiceDropdown(
-            leading = "Licence",
+            leading = stringResource(R.string.licence_label),
             selectedLabel = "${licenceEmoji(licence)} ${licence.label}",
             options = selectableLicences,
             optionLabel = { "${licenceEmoji(it)} ${it.label}" },
             onSelect = { licence = it }
         )
-        Field(character, "Personnage") { character = it; if (name.isBlank() || name == character) name = it }
+        Field(character, stringResource(R.string.field_character)) { character = it; if (name.isBlank() || name == character) name = it }
 
         var seriesExpanded by remember { mutableStateOf(false) }
         val seriesOptions = remember(catalogEntries, licence) {
@@ -250,20 +252,20 @@ fun AddCollectionForm(
             if (series.isBlank()) seriesOptions.take(10) else seriesOptions.filter { it.contains(series, ignoreCase = true) }.take(10)
         }
         Box {
-            Field(series, "Gamme / vague WCF") { series = it; seriesExpanded = true }
+            Field(series, stringResource(R.string.field_series)) { series = it; seriesExpanded = true }
             DropdownMenu(expanded = seriesExpanded && seriesSuggestions.isNotEmpty(), onDismissRequest = { seriesExpanded = false }) {
                 seriesSuggestions.forEach { opt ->
                     DropdownMenuItem(text = { Text(opt) }, onClick = { series = opt; seriesExpanded = false })
                 }
             }
         }
-        Field(numero, "Code (ex. OP-427, laisser vide si inconnu)") { numero = it }
-        Field(year, "Année de sortie", KeyboardType.Number) { year = it.filter { c -> c.isDigit() }.take(4) }
-        Field(heightCm, "Taille (cm)", KeyboardType.Decimal) { heightCm = it }
-        LabeledDropdown("État", Condition.entries.toList(), condition, { it.label }) { condition = it }
-        SwitchRow("Avec boîte", hasBox) { hasBox = it }
-        SwitchRow("Avec accessoires (armes, pièces...)", hasAccessories) { hasAccessories = it }
-        Field(price, "Prix (€, laisser vide si inconnu)", KeyboardType.Decimal) { price = it }
+        Field(numero, stringResource(R.string.field_code_hint)) { numero = it }
+        Field(year, stringResource(R.string.field_year), KeyboardType.Number) { year = it.filter { c -> c.isDigit() }.take(4) }
+        Field(heightCm, stringResource(R.string.field_height), KeyboardType.Decimal) { heightCm = it }
+        LabeledDropdown(stringResource(R.string.field_condition), Condition.entries.toList(), condition, { it.displayLabel() }) { condition = it }
+        SwitchRow(stringResource(R.string.field_has_box), hasBox) { hasBox = it }
+        SwitchRow(stringResource(R.string.field_has_accessories_hint), hasAccessories) { hasAccessories = it }
+        Field(price, stringResource(R.string.field_price_hint), KeyboardType.Decimal) { price = it }
 
         Spacer(Modifier.height(6.dp))
         var isSaving by remember { mutableStateOf(false) }
@@ -303,7 +305,7 @@ fun AddCollectionForm(
             if (isSaving) {
                 CircularProgressIndicator(modifier = Modifier.size(20.dp), strokeWidth = 2.dp, color = androidx.compose.ui.graphics.Color.White)
             } else {
-                Text(if (isEdit) "Mettre à jour" else if (isWishlist) "Ajouter aux souhaits" else "Enregistrer")
+                Text(stringResource(if (isEdit) R.string.update_action else if (isWishlist) R.string.add_to_wishlist else R.string.save))
             }
         }
     }
