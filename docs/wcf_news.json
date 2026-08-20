@@ -104,6 +104,86 @@
     "scrapedAt": "2026-07-21T09:23:19.222909+00:00"
   },
   {
+    "id": "2844767",
+    "series": "【プレミアムバンダイ】ワンピース ギガワールドコレクタブルフィギュア ロキ",
+    "licence": "ONE_PIECE",
+    "characters": [],
+    "releaseDateRaw": "2027年1月発送予定",
+    "priceRaw": "販売価格:22,000円(税込)",
+    "translations": {
+      "ja": {
+        "series": "【プレミアムバンダイ】ワンピース ギガワールドコレクタブルフィギュア ロキ",
+        "releaseDate": "2027年1月発送予定",
+        "price": "販売価格:22,000円(税込)",
+        "characters": []
+      },
+      "fr": {
+        "series": "[Premium Bandai] Figurine à collectionner One Piece Giga World Loki",
+        "releaseDate": "Expédition prévue en janvier 2027",
+        "price": "Prix ​​de vente : 22 000 yens (taxes incluses)",
+        "characters": []
+      },
+      "en": {
+        "series": "【プレミアムバンダイ】ワンピース ギガワールドコレクタブルフィギュア ロキ",
+        "releaseDate": "2027年1月発送予定",
+        "price": "販売価格:22,000円(税込)",
+        "characters": []
+      },
+      "es": {
+        "series": "[Premium Bandai] Figura coleccionable de One Piece Giga World Loki",
+        "releaseDate": "Programado para enviarse en enero de 2027",
+        "price": "Precio de venta: 22.000 yenes (impuestos incluidos)",
+        "characters": []
+      },
+      "it": {
+        "series": "[Premium Bandai] Figura da collezione Loki di One Piece Giga World",
+        "releaseDate": "La spedizione è prevista per gennaio 2027",
+        "price": "Prezzo di vendita: 22.000 yen (tasse incluse)",
+        "characters": []
+      },
+      "de": {
+        "series": "[Premium Bandai] One Piece Giga World Sammelfigur Loki",
+        "releaseDate": "Geplanter Versand im Januar 2027",
+        "price": "Verkaufspreis: 22.000 Yen (inkl. Steuern)",
+        "characters": []
+      },
+      "pt": {
+        "series": "[Bandai Premium] Figura colecionável One Piece Giga World Loki",
+        "releaseDate": "Programado para envio em janeiro de 2027",
+        "price": "Preço de venda: 22.000 ienes (impostos incluídos)",
+        "characters": []
+      },
+      "ru": {
+        "series": "[Премиум Bandai] Коллекционная фигурка Локи One Piece Giga World",
+        "releaseDate": "Отгрузка запланирована на январь 2027 г.",
+        "price": "Цена продажи: 22 000 иен (включая налоги).",
+        "characters": []
+      },
+      "el": {
+        "series": "[Premium Bandai] Συλλεκτική φιγούρα Loki One Piece Giga World",
+        "releaseDate": "Έχει προγραμματιστεί να αποσταλεί τον Ιανουάριο του 2027",
+        "price": "Τιμή πώλησης: 22.000 γιεν (συμπεριλαμβανομένου του φόρου)",
+        "characters": []
+      },
+      "tr": {
+        "series": "[Premium Bandai] Tek Parça Giga World Koleksiyon Figürü Loki",
+        "releaseDate": "Ocak 2027'de gönderilmesi planlanıyor",
+        "price": "Satış fiyatı: 22.000 yen (vergi dahil)",
+        "characters": []
+      },
+      "zh": {
+        "series": "[Premium Bandai] 海贼王 Giga World 收藏品 洛基",
+        "releaseDate": "预计2027年1月发货",
+        "price": "售价：22,000日元（含税）",
+        "characters": []
+      }
+    },
+    "imageUrl": "https://cguidicelli083-code.github.io/MaCollectionWCF/images/wcf/2844767.jpg",
+    "itemUrl": "https://bsp-prize.jp/item/2844767/",
+    "localImagePath": "docs/images/wcf/2844767.jpg",
+    "scrapedAt": "2026-08-20T03:41:09.780941+00:00"
+  },
+  {
     "id": "2839972",
     "series": "ドラゴンボール ワールドコレクタブルフィギュア-少年期編5-",
     "licence": "DRAGON_BALL",
